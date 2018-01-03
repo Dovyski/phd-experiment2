@@ -60,16 +60,9 @@ FTG.Experiment.prototype.init = function() {
 
     console.log('[Experiment] Init with user uid:' + this.mUid + ', rest: ' + this.mRestTime + ', sorting: ' + this.mSorting + ' [' + this.mGamesSorting[this.mSorting].join(',') + ']');
 
-    // Warn the user before leaving the page
-    window.onbeforeunload = function() {
-        return 'You did something that will stop the study before it is over. Please, click "Stay on this Page" to resume your study.';
-    };
-
-    // Disable mouse right-click (prevent problems during the experiment)
-    document.addEventListener('contextmenu', function(theEvent) {
-        theEvent.preventDefault();
-    	return false;
-    }, false);
+    // try to protect the experiment against unintended user actions
+    // that will terminate the experiment, e.g. page refresh
+    this.preventAbruptSessionEnd();
 
     if(this.mUid == null) {
         alert('User id not informed! Append ?user=DDD to the URL.');
@@ -80,6 +73,39 @@ FTG.Experiment.prototype.init = function() {
         }
         this.greetings();
     }
+};
+
+FTG.Experiment.prototype.disableRefresh = function(e) {
+    var aKey = e.which || e.keyCode;
+
+    if (aKey == 116 || aKey == 82) {
+        console.warn('Page refresh has been prevented.');
+        e.preventDefault();
+    }
+};
+
+FTG.Experiment.prototype.preventAbruptSessionEnd = function() {
+    // Warn the user before leaving the page
+    window.addEventListener("beforeunload", function(e) {
+        var aMessage = 'You did something that will stop the study before it is over. Please, click "Stay on this Page" to resume your study.';
+
+        e.preventDefault();
+        e.returnValue = aMessage;
+
+        return aMessage;
+    });
+
+    // Disable mouse right-click (prevent problems during the experiment)
+    document.addEventListener('contextmenu', function(theEvent) {
+        theEvent.preventDefault();
+        return false;
+    }, false);
+
+    var aSelf = this;
+
+    $(document).ready(function() {
+        $(document).on("keydown", aSelf.disableRefresh);
+    });
 };
 
 FTG.Experiment.prototype.enableCalmMusic = function(theStatus) {
