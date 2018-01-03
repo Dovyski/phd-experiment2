@@ -308,6 +308,7 @@ FTG.Experiment.prototype.sendSubjectHome = function() {
     $('#info').html('<div class="rest-container"><div><h1>The end!</h1><p>You are good to go. Thank you for helping us help you help us all! :)</p></div></div>');
 
     this.mData.logMilestone(this.mUid, -1, 'experiment_end');
+    this.playBipSound();
 };
 
 FTG.Experiment.prototype.getCurrentGame = function() {
