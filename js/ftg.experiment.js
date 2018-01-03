@@ -18,18 +18,19 @@
      this.mCalmSound;
 
      this.mGames = [
-         {id: 1, name: 'card-flipper', url: '../card-flipper/', width: 1300, height: 975, paddingLeft: 300},
-         {id: 2, name: 'tetris', url: '../tetris/', width: 640, height: 960, paddingLeft: 600},
-         {id: 3, name: 'platformer', url: '../platformer/', width: 1300, height: 975, paddingLeft: 300}
+         {id: 1, name: 'card-flipper', url: '../card-flipper/', width: 1300, height: 975, paddingLeft: 300, cots: false},
+         {id: 2, name: 'tetris', url: '../tetris/', width: 640, height: 960, paddingLeft: 600, cots: false},
+         {id: 3, name: 'platformer', url: '../platformer/', width: 1300, height: 975, paddingLeft: 300, cots: false},
+         {id: 4, name: 'cots', url: '../cots/', width: 640, height: 960, paddingLeft: 600, cots: true}
      ];
 
      this.mGamesSorting = [
-         [0, 1, 2],
-         [0, 2, 1],
-         [1, 0, 2],
-         [1, 2, 0],
-         [2, 1, 0],
-         [2, 0, 1],
+         [0, 1, 2, 3],
+         [0, 2, 1, 3],
+         [1, 0, 2, 3],
+         [1, 2, 0, 3],
+         [2, 1, 0, 3],
+         [2, 0, 1, 3]
      ];
      this.mSorting;
 
@@ -245,7 +246,7 @@ FTG.Experiment.prototype.concludeCurrentGame = function() {
         'questions',
         this.mUid,
         aGame.id,
-        FTG.Questions.Game,
+        aGame.cots ? FTG.Questions.COTS : FTG.Questions.Game,
         this.concludeCurrentQuestionnaire,
         this
     );

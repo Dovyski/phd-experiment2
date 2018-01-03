@@ -16,9 +16,10 @@ $aDb->query('CREATE INDEX idx_logs_fk_game ON logs (fk_game)');
 $aDb->query('CREATE INDEX idx_questionnaire_fk_game ON questionnaires (fk_game)');
 
 // TODO: move this to config
-$aDb->query('INSERT INTO games (id, name) VALUES (1, \'Card Flipper\')');
+$aDb->query('INSERT INTO games (id, name) VALUES (1, \'Mushroom\')');
 $aDb->query('INSERT INTO games (id, name) VALUES (2, \'Tetris\')');
 $aDb->query('INSERT INTO games (id, name) VALUES (3, \'Platformer\')');
+$aDb->query('INSERT INTO games (id, name) VALUES (4, \'COTS\')');
 
 echo 'Ok, database initialized';
 
