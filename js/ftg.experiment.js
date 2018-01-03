@@ -9,7 +9,7 @@
  FTG.Experiment = function() {
      this.mUid;
      this.mCurrentGame;
-     this.mRestTime;
+     this.mRestTime = 2; // in minutes
      this.mDebug;
      this.mFinished;
      this.mData;
@@ -46,7 +46,7 @@ FTG.Experiment.prototype.init = function() {
     this.mUid = FTG.Utils.getURLParamByName('user');
 
     this.mCurrentGame = -1; // TODO: get from URL.
-    this.mRestTime = FTG.Utils.getURLParamByName('rest') || 3;
+    this.mRestTime = FTG.Utils.getURLParamByName('rest') || this.mRestTime;
     this.mDebug = FTG.Utils.getURLParamByName('debug') || false;
     this.mBipSound = document.getElementById('bip');
     this.mTanSound = document.getElementById('tan');
@@ -58,7 +58,7 @@ FTG.Experiment.prototype.init = function() {
 
     this.mRestTime *= 60 * 1000;
 
-    console.log('[Experiment] Init with user uid:' + this.mUid + ', rest: ' + this.mRestTime + ', sorting: ' + this.mSorting + ' [' + this.mGamesSorting[this.mSorting].join(',') + ']');
+    console.log('[Experiment] Init with user uid:' + this.mUid + ', rest: ' + this.mRestTime + 'ms, sorting: ' + this.mSorting + ' [' + this.mGamesSorting[this.mSorting].join(',') + ']');
 
     // try to protect the experiment against unintended user actions
     // that will terminate the experiment, e.g. page refresh
