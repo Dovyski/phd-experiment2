@@ -1,0 +1,84 @@
+body {
+    margin: 0;
+}
+
+#info {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width : 100%;
+    text-align: left;
+    font-size: 2em;
+}
+
+#info iframe {
+    overflow: none;
+}
+
+.greetings,
+.questionnaire {
+    padding: 0 50px 10px 50px;
+}
+
+#info button {
+    width: 200px;
+    height: 60px;
+    background-color: green;
+    color: white;
+    font-size: 30px;
+}
+
+#heart {
+    background-color: red !important;
+    margin-left: 500px;
+}
+
+.questionnaire {
+    padding-bottom: 10px;
+}
+
+.questions {
+}
+
+.question {
+    margin-bottom: 40px;
+}
+
+.question p {
+    font-weight: bold;
+    line-height: 30px;
+    margin: 0 0 5px 0;
+}
+
+.question p.error {
+    color: red;
+}
+
+.question label {
+    margin-right: 20px;
+}
+
+.question input[type="radio"]:checked + label{
+    font-weight: bold;
+    text-decoration: underline;
+    color: magenta;
+}
+
+.question input[type="text"] {
+    width: 600px;
+    height: 30px;
+    font-size: 0.8em;
+}
+
+.rest-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 350px;
+    width: 100%;
+    text-align: center;
+}
+
+.rest-container p,
+.rest-container h1 {
+    margin: 0;
+}
