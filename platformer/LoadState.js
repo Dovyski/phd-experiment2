@@ -43,15 +43,7 @@ var LoadState = function() {
 		this.game.load.audio('sfx-dash', 'assets/sfx/rustle13.mp3'); // qubodup, CC-0, http://opengameart.org/content/20-rustles-dry-leaves
 		this.game.load.audio('sfx-music', 'assets/sfx/music.mp3'); // RevampedPRO, CC-BY 3.0, http://opengameart.org/content/platformer-game-music-pack
 
-		// Load all JS required to make the face tracking thing work.
-		this.game.load.script('camera.js', '../js/ftg.camera.js');
-		this.game.load.script('ftg.expression.js', '../js/ftg.expression.js?2');
+		// Load all JS required to make the experiment work
 		this.game.load.script('ftg.collector.js', '../js/ftg.collector.js?1');
-		this.game.load.script('utils.js', '../js/3rdparty/clmtrackr/js/utils.js');
-		this.game.load.script('clmtrackr.js', '../js/3rdparty/clmtrackr/js/clmtrackr.js');
-		this.game.load.script('Stats.js', '../js/3rdparty/clmtrackr/js/Stats.js');
-		this.game.load.script('model_pca_20_svm_emotionDetection.js', '../js/3rdparty/clmtrackr/models/model_pca_20_svm_emotionDetection.js');
-		this.game.load.script('emotion_classifier.js', '../js/3rdparty/clmtrackr/examples/js/emotion_classifier.js');
-		this.game.load.script('emotionmodel.js', '../js/3rdparty/clmtrackr/examples/js/emotionmodel.js');
 	};
 };

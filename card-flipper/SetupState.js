@@ -5,7 +5,6 @@
 // Define some global information that should persist
 // throughout the application.
 var GlobalInfo = {
-	expression: null,	// instance of the expression detector
 	data: null,			// instance of the data collector
 	user: null,			// User id
 	game: null,			// the game id
@@ -88,35 +87,8 @@ SetupState.prototype = {
 			overlay: 'overlay'
 		};
 
-		// Enable facial tracking only if someone told us to.
-		if(getURLParamByName('face') == 'true') {
-			GlobalInfo.expression = new FTG.ExpressionDetector(aConfig);
-		}
-
 		GlobalInfo.data = new FTG.Collector(aConfig);
-
-		if(GlobalInfo.expression) {
-			// Make the facial detector run in a loop.
-			GlobalInfo.expression.start();
-			this.mReady = true;
-
-		} else {
-			// We are not using facial tracking, so there is no need
-			// to wait here. Let's move along.
-			this.state.start('menu');
-		}
-	},
-
-	update: function() {
-		if(!this.mReady) {
-			return;
-		}
-
-		// Check if facial detection is working
-		if(this.mReady && GlobalInfo.expression.getEmotions().length > 0) {
-			// Yes, it is. Time to start the game.
-			this.state.start('menu');
-		}
+		this.state.start('menu');
 	},
 
 	adjustConstantsFromConfig: function() {

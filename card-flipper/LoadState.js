@@ -42,15 +42,7 @@ var LoadState = function() {
 		Game.load.audio('sfx-wrong', 'assets/wrong.ogg'); // ViRiX, CC-BY 3.0, http://opengameart.org/content/ui-failed-or-error, "Some of the sounds in this project were created by David McKee (ViRiX) soundcloud.com/virix"
 		Game.load.audio('sfx-new-question', 'assets/new_question.ogg'); // StumpyStrust, CC-0, http://opengameart.org/content/ui-sounds
 
-		// Load all JS required to make the face tracking thing work.
-		Game.load.script('camera.js', '../js/ftg.camera.js');
-		Game.load.script('ftg.expression.js', '../js/ftg.expression.js?2');
+		// Load all JS required to make the experiment work
 		Game.load.script('ftg.collector.js', '../js/ftg.collector.js?1');
-		Game.load.script('utils.js', '../js/3rdparty/clmtrackr/js/utils.js');
-		Game.load.script('clmtrackr.js', '../js/3rdparty/clmtrackr/js/clmtrackr.js');
-		Game.load.script('Stats.js', '../js/3rdparty/clmtrackr/js/Stats.js');
-		Game.load.script('model_pca_20_svm_emotionDetection.js', '../js/3rdparty/clmtrackr/models/model_pca_20_svm_emotionDetection.js');
-		Game.load.script('emotion_classifier.js', '../js/3rdparty/clmtrackr/examples/js/emotion_classifier.js');
-		Game.load.script('emotionmodel.js', '../js/3rdparty/clmtrackr/examples/js/emotionmodel.js');
 	};
 };

@@ -10,7 +10,6 @@
      this.mUid;
      this.mCurrentGame;
      this.mRestTime;
-     this.mEnableFaceTracking;
      this.mDebug;
      this.mFinished;
      this.mData;
@@ -48,7 +47,6 @@ FTG.Experiment.prototype.init = function() {
 
     this.mCurrentGame = -1; // TODO: get from URL.
     this.mRestTime = FTG.Utils.getURLParamByName('rest') || 3;
-    this.mEnableFaceTracking = FTG.Utils.getURLParamByName('face') || false;
     this.mDebug = FTG.Utils.getURLParamByName('debug') || false;
     this.mBipSound = document.getElementById('bip');
     this.mTanSound = document.getElementById('tan');
@@ -60,7 +58,7 @@ FTG.Experiment.prototype.init = function() {
 
     this.mRestTime *= 60 * 1000;
 
-    console.log('[Experiment] Init with user uid:' + this.mUid + ', rest: ' + this.mRestTime + ', facial tracking: ' + this.mEnableFaceTracking + ', sorting: ' + this.mSorting + ' [' + this.mGamesSorting[this.mSorting].join(',') + ']');
+    console.log('[Experiment] Init with user uid:' + this.mUid + ', rest: ' + this.mRestTime + ', sorting: ' + this.mSorting + ' [' + this.mGamesSorting[this.mSorting].join(',') + ']');
 
     // Warn the user before leaving the page
     window.onbeforeunload = function() {
@@ -131,7 +129,7 @@ FTG.Experiment.prototype.greetings = function() {
 };
 
 FTG.Experiment.prototype.generateGameURL = function(theGameInfo) {
-    return theGameInfo.url + '?user=' + this.mUid + '&game=' + theGameInfo.id + '&rand=' + Math.random() + '&face=' + this.mEnableFaceTracking;
+    return theGameInfo.url + '?user=' + this.mUid + '&game=' + theGameInfo.id + '&rand=' + Math.random();
 };
 
 FTG.Experiment.prototype.startNewGame = function() {

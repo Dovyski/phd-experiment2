@@ -364,17 +364,6 @@ Game.PlayGame.prototype = {
 		}
 
 		if(GlobalInfo) {
-			if(GlobalInfo.expression) {
-				var aEmotions = GlobalInfo.expression.getEmotions();
-				var aPoints = GlobalInfo.expression.getPoints();
-
-				// Emotions are available for reading?
-				if(aEmotions.length > 0) {
-					// Yeah, they are, collect them
-					GlobalInfo.data.log({e: aEmotions, p: aPoints});
-				}
-			}
-
 			if(ENABLE_DATA_LOG) {
 				GlobalInfo.data.send(GlobalInfo.user, GlobalInfo.game);
 			}
