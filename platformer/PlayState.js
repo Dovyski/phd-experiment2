@@ -115,7 +115,7 @@ PlayState = function() {
 
 		aKeyboard = this.game.input.keyboard;
 
-		if(aKeyboard.isDown(Phaser.Keyboard.UP, 10)) {
+		if(aKeyboard.isDown(Phaser.Keyboard.UP, 10) || aKeyboard.isDown(Phaser.Keyboard.SHIFT, 10)) {
 	        mPlayer.jump();
 
 		} else if(aKeyboard.isDown(Phaser.Keyboard.S, 10)){
