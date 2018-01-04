@@ -45,7 +45,7 @@ Mario.TitleState.prototype.Enter = function() {
 	Mario.MarioCharacter = new Mario.Character();
 	Mario.MarioCharacter.Image = Enjine.Resources.Images["smallMario"];
 
-	if(!Mario.Experiment) {
+	if(!Experiment.active) {
         Mario.PlayTitleMusic();
     }
 };
@@ -79,7 +79,7 @@ Mario.TitleState.prototype.Draw = function(context) {
 
 Mario.TitleState.prototype.CheckForChange = function(context) {
     // Go directly to the level state if running in experiment mode
-    if(Mario.Experiment) {
+    if(Experiment.active) {
         context.ChangeState(new Mario.LevelState(2, Mario.LevelType.Overground));
     }
 
