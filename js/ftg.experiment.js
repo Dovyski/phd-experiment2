@@ -182,6 +182,12 @@ FTG.Experiment.prototype.startNewGame = function() {
         $('#info').html('<iframe id="game" style="width: ' + aGame.width + 'px; height: ' + aGame.height + 'px; padding-left: ' + aGame.paddingLeft + 'px;"></iframe>');
         document.getElementById('game').src = this.generateGameURL(aGame);
 
+        if(aGame.instructions) {
+            $('#instructions').html(aGame.instructions).show();
+        } else {
+            $('#instructions').hide();
+        }
+
         if(this.mDebug) {
             var aSelf = this;
 
@@ -190,7 +196,6 @@ FTG.Experiment.prototype.startNewGame = function() {
                 aSelf.concludeCurrentGame();
             });
         }
-
     } else {
         console.log('[Experiment] No more games to play, finishing now');
         this.finish();
@@ -252,6 +257,7 @@ FTG.Experiment.prototype.concludeCurrentGame = function() {
     this.playTanSound();
     this.mData.logMilestone(this.mUid, aGame.id, 'experiment_game_end');
 
+    $('#instructions').hide();
     $('#info').html(
         '<div class="questionnaire">' +
             '<h2>Questions</h2>' +

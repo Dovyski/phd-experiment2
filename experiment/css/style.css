@@ -2,6 +2,19 @@ body {
     margin: 0;
 }
 
+#instructions {
+    display: none;
+    position: fixed;
+    top: 20px;
+    left: 0;
+    width : 250px;
+    padding: 5px;
+    text-align: left;
+    font-size: 1.5em;
+    background: black;
+    color: white;
+}
+
 #info {
     position: absolute;
     top: 0;
