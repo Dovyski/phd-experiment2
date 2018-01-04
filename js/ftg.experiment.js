@@ -21,7 +21,7 @@
          {id: 1, name: 'card-flipper', url: '../card-flipper/', width: 1300, height: 975, paddingLeft: 300, cots: false, questions: FTG.Questions.Game, hasRest: true},
          {id: 2, name: 'tetris', url: '../tetris/', width: 640, height: 960, paddingLeft: 600, cots: false, questions: FTG.Questions.Game, hasRest: true},
          {id: 3, name: 'platformer', url: '../platformer/', width: 1300, height: 975, paddingLeft: 300, cots: false, questions: FTG.Questions.Game, hasRest: true},
-         {id: 4, name: 'cots', url: '../cots/', width: 640, height: 960, paddingLeft: 600, cots: true, questions: FTG.Questions.COTS, hasRest: false}
+         {id: 4, name: 'cots-mario', url: '../cots-mario/', width: 700, height: 520, paddingLeft: 600, cots: true, questions: FTG.Questions.COTS, hasRest: false}
      ];
 
      this.mGamesSorting = [
@@ -156,7 +156,15 @@ FTG.Experiment.prototype.greetings = function() {
 };
 
 FTG.Experiment.prototype.generateGameURL = function(theGameInfo) {
-    return theGameInfo.url + '?user=' + this.mUid + '&game=' + theGameInfo.id + '&rand=' + Math.random();
+    var aGameParams = '';
+
+    if(theGameInfo.params) {
+        for(var aParam in theGameInfo.params) {
+            aGameParams += '&' + aParam + '=' + encodeURIComponent(theGameInfo.params[aParam]);
+        }
+    }
+
+    return theGameInfo.url + '?user=' + this.mUid + '&game=' + theGameInfo.id + '&rand=' + Math.random() + aGameParams;
 };
 
 FTG.Experiment.prototype.startNewGame = function() {
