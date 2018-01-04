@@ -45,9 +45,7 @@ Mario.TitleState.prototype.Enter = function() {
 	Mario.MarioCharacter = new Mario.Character();
 	Mario.MarioCharacter.Image = Enjine.Resources.Images["smallMario"];
 
-	if(!Experiment.active) {
-        Mario.PlayTitleMusic();
-    }
+    Mario.PlayTitleMusic();
 };
 
 Mario.TitleState.prototype.Exit = function() {
@@ -78,7 +76,7 @@ Mario.TitleState.prototype.Draw = function(context) {
 };
 
 Mario.TitleState.prototype.CheckForChange = function(context) {
-    if (Enjine.KeyboardInput.IsKeyDown(Enjine.Keys.S) || Experiment.active) {
+    if (Enjine.MouseInput.IsMouseDown()) {
         context.ChangeState(Mario.GlobalMapState);
     }
 };
