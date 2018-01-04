@@ -17,13 +17,14 @@ var availableMusic = {
 	"background": "music_background"
 };
 
+Mario.ActiveMusic = null;
+
 Mario.PlayMusic = function(name) {
-	if(name in availableMusic)
-	{
+	if(name in availableMusic) {
 		// Stop anything currently playing then play the requested music
-		Enjine.Resources.ResetSounds();
+		Mario.StopMusic();
 		Enjine.Resources.PlaySound(availableMusic[name], true);
-	}else{
+	} else {
 		console.error("Cannot play music track " + name + " as it has no data.");
 	}
 };
@@ -49,5 +50,8 @@ Mario.PlayCastleMusic = function() {
 };
 
 Mario.StopMusic = function() {
-	Enjine.Resources.ResetSounds();
+	for(var name in availableMusic) {
+		Enjine.Resources.PauseSound(availableMusic[name]);
+		Enjine.Resources.ResetSound(availableMusic[name]);
+	}
 };

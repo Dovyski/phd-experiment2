@@ -108,14 +108,6 @@ Enjine.Resources = {
     	return this;
     },
 
-    ResetSounds: function() {
-        for (var name in this.Sounds) {
-            this.PauseSound(name);
-            this.ResetSound(name);
-        }
-        return this;
-    },
-
     StopLoop: function(name, index) {
     	this.Sounds[name][index].removeEventListener("ended", this.LoopCallback, false);
     },
