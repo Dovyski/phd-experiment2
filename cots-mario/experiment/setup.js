@@ -5,6 +5,7 @@
 
 var Experiment = {
 	SEED: 200,
+	LEVEL_DIFFICULTY: 2,
 	active: true
 };
 
