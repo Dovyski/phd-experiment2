@@ -1,6 +1,6 @@
 /**
  * This file makes several adjustments to the original code of the game
- * to make it work in an experimental environment.
+ * to make it work in experiment mode.
  */
 
 var Experiment = {

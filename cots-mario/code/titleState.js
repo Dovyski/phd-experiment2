@@ -80,7 +80,7 @@ Mario.TitleState.prototype.Draw = function(context) {
 Mario.TitleState.prototype.CheckForChange = function(context) {
     // Go directly to the level state if running in experiment mode
     if(Experiment.active) {
-        context.ChangeState(new Mario.LevelState(2, Mario.LevelType.Overground));
+        context.ChangeState(new Mario.LevelState(2, Mario.LevelType.Overground, Experiment.SEED));
     }
 
     if (Enjine.KeyboardInput.IsKeyDown(Enjine.Keys.S)) {
