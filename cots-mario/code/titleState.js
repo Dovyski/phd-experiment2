@@ -9,6 +9,8 @@ Mario.TitleState = function() {
     this.logoY = null;
     this.bounce = null;
     this.font = null;
+    this.showFont = true;
+    this.blinkCount = 0;
 };
 
 Mario.TitleState.prototype = new Enjine.GameState();
@@ -20,7 +22,7 @@ Mario.TitleState.prototype.Enter = function() {
     var bgGenerator = new Mario.BackgroundGenerator(2048, 15, true, Mario.LevelType.Overground);
     var bgLayer0 = new Mario.BackgroundRenderer(bgGenerator.CreateLevel(), 320, 240, 2);
     bgGenerator.SetValues(2048, 15, false, Mario.LevelType.Overground);
-    var bgLayer1 = new Mario.BackgroundRenderer(bgGenerator.CreateLevel(), 320, 240, 1);
+    var bgLayer1 = new Mario.BackgroundRenderer(bgGenerator.CreateLevel(), 320, 240, 1000);
 
     this.title = new Enjine.Sprite();
     this.title.Image = Enjine.Resources.Images["title"];
@@ -31,7 +33,7 @@ Mario.TitleState.prototype.Enter = function() {
     this.logo.X = 0, this.logo.Y = 0;
 
     this.font = Mario.SpriteCuts.CreateRedFont();
-    this.font.Strings[0] = { String: "Press S to Start", X: 96, Y: 120 };
+    this.font.Strings[0] = { String: "Click HERE to start", X: 90, Y: 110 };
 
     this.logoY = 20;
 
@@ -59,7 +61,13 @@ Mario.TitleState.prototype.Exit = function() {
 
 Mario.TitleState.prototype.Update = function(delta) {
     this.bounce += delta * 2;
-    this.logoY = 20 + Math.sin(this.bounce) * 10;
+    this.logoY = 10 + Math.sin(this.bounce) * 2;
+    this.blinkCount += delta;
+
+    if(this.blinkCount >= 0.1) {
+        this.showFont = !this.showFont;
+        this.blinkCount = 0;
+    }
 
     this.camera.X += delta * 25;
 
@@ -72,7 +80,9 @@ Mario.TitleState.prototype.Draw = function(context) {
     context.drawImage(Enjine.Resources.Images["title"], 0, 120);
     context.drawImage(Enjine.Resources.Images["logo"], 0, this.logoY);
 
-    this.font.Draw(context, this.Camera);
+    if(this.showFont) {
+        this.font.Draw(context, this.Camera);
+    }
 };
 
 Mario.TitleState.prototype.CheckForChange = function(context) {
