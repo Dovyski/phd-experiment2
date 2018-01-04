@@ -18,10 +18,10 @@
      this.mCalmSound;
 
      this.mGames = [
-         {id: 1, name: 'card-flipper', url: '../card-flipper/', width: 1300, height: 975, paddingLeft: 300, cots: false, questions: FTG.Questions.Game},
-         {id: 2, name: 'tetris', url: '../tetris/', width: 640, height: 960, paddingLeft: 600, cots: false, questions: FTG.Questions.Game},
-         {id: 3, name: 'platformer', url: '../platformer/', width: 1300, height: 975, paddingLeft: 300, cots: false, questions: FTG.Questions.Game},
-         {id: 4, name: 'cots', url: '../cots/', width: 640, height: 960, paddingLeft: 600, cots: true, questions: FTG.Questions.COTS}
+         {id: 1, name: 'card-flipper', url: '../card-flipper/', width: 1300, height: 975, paddingLeft: 300, cots: false, questions: FTG.Questions.Game, hasRest: true},
+         {id: 2, name: 'tetris', url: '../tetris/', width: 640, height: 960, paddingLeft: 600, cots: false, questions: FTG.Questions.Game, hasRest: true},
+         {id: 3, name: 'platformer', url: '../platformer/', width: 1300, height: 975, paddingLeft: 300, cots: false, questions: FTG.Questions.Game, hasRest: true},
+         {id: 4, name: 'cots', url: '../cots/', width: 640, height: 960, paddingLeft: 600, cots: true, questions: FTG.Questions.COTS, hasRest: false}
      ];
 
      this.mGamesSorting = [
@@ -189,6 +189,21 @@ FTG.Experiment.prototype.startNewGame = function() {
     }
 };
 
+FTG.Experiment.prototype.proceedAfterQuestionnaireAnswered = function() {
+    var aGame = this.getCurrentGame();
+
+    if(this.anyMoreGamesToPlay()) {
+        if(aGame.hasRest) {
+            this.rest();
+        } else {
+            console.log('[Experiment] Concluded game has no rest. Moving on to next game.');
+            this.startNewGame();
+        }
+    } else {
+        this.finish();
+    }
+};
+
 FTG.Experiment.prototype.concludeCurrentQuestionnaire = function(theData) {
     var aSelf = this;
 
@@ -208,12 +223,7 @@ FTG.Experiment.prototype.concludeCurrentQuestionnaire = function(theData) {
     }).done(function(theData) {
         if(theData.success) {
             console.log('[Experiment] Questionnaire data has been saved!');
-
-            if(aSelf.anyMoreGamesToPlay()) {
-                aSelf.rest();
-            } else {
-                aSelf.finish();
-            }
+            aSelf.proceedAfterQuestionnaireAnswered();
 
         } else {
             console.error('[Experiment] Backend didn\'t like the answers: ' + theData.message);
@@ -255,10 +265,11 @@ FTG.Experiment.prototype.concludeCurrentGame = function() {
 FTG.Experiment.prototype.rest = function() {
     var aFuture = Date.now() + this.mRestTime,
         aSelf = this,
-        aId;
+        aId,
+        aGame = this.getCurrentGame();
 
     console.log('[Experiment] Resting for ' + (this.mRestTime/1000) + ' seconds...');
-    this.mData.logMilestone(this.mUid, -1, 'experiment_rest_start');
+    this.mData.logMilestone(this.mUid, aGame.id, 'experiment_rest_start');
 
     this.enableCalmMusic(true);
     $('#info').html('<div class="rest-container"><div><h1>Please, relax.</h1><p>Next game will start in a moment...</p></div></div>');
@@ -271,7 +282,7 @@ FTG.Experiment.prototype.rest = function() {
             aSelf.enableCalmMusic(false);
             aSelf.startNewGame();
         }
-    }, 200);
+    }, 1000);
 };
 
 FTG.Experiment.prototype.finish = function() {
