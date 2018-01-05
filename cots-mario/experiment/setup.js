@@ -28,4 +28,7 @@ if(GlobalInfo.experiment) {
 	Math.random = function() {
 		return gMersennem.random();
 	};
+} else {
+	// No experiment. Null all log calls
+	GlobalInfo.data = { log: function() {}, send: function() {} };
 }

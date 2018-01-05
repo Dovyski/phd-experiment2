@@ -7,10 +7,10 @@ Mario.Shell = function(world, x, y, type) {
 	this.World = world;
 	this.X = x;
 	this.Y = y;
-	
+
 	this.YPic = type;
 	this.Image = Enjine.Resources.Images["enemies"];
-	
+
 	this.XPicO = 8;
 	this.YPicO = 31;
 	this.Width = 4;
@@ -19,11 +19,11 @@ Mario.Shell = function(world, x, y, type) {
 	this.PicWidth = 16;
 	this.XPic = 4;
 	this.Ya = -5;
-	
+
 	this.Dead = false;
 	this.DeadTime = 0;
 	this.Carried = false;
-	
+
 	this.GroundInertia = 0.89;
 	this.AirInertia = 0.89;
 	this.OnGround = false;
@@ -36,16 +36,16 @@ Mario.Shell.prototype.FireballCollideCheck = function(fireball) {
 	if (this.DeadTime !== 0) {
         return false;
     }
-    
+
     var xD = fireball.X - this.X, yD = fireball.Y - this.Y;
     if (xD > -16 && xD < 16) {
         if (yD > -this.Height && yD < fireball.Height) {
 			if (this.Facing !== 0) {
 				return true;
 			}
-			
+
 			Enjine.Resources.PlaySound("kick");
-			
+
 			this.Xa = fireball.Facing * 2;
 			this.Ya = -5;
 			if (this.SpriteTemplate !== null) {
@@ -53,7 +53,7 @@ Mario.Shell.prototype.FireballCollideCheck = function(fireball) {
 			}
 			this.DeadTime = 100;
 			this.YFlip = true;
-			
+
             return true;
         }
     }
@@ -64,7 +64,7 @@ Mario.Shell.prototype.CollideCheck = function() {
 	if (this.Carried || this.Dead || this.DeadTime > 0) {
 		return;
 	}
-	
+
 	var xMarioD = Mario.MarioCharacter.X - this.X, yMarioD = Mario.MarioCharacter.Y - this.Y;
 	if (xMarioD > -16 && xMarioD < 16) {
         if (yMarioD > -this.Height && yMarioD < Mario.MarioCharacter.Height) {
@@ -78,7 +78,7 @@ Mario.Shell.prototype.CollideCheck = function() {
 				}
 			} else {
 				if (this.Facing !== 0) {
-					Mario.MarioCharacter.GetHurt();
+					Mario.MarioCharacter.GetHurt('shell');
 				} else {
 					Mario.MarioCharacter.Kick(this);
 					this.Facing = Mario.MarioCharacter.Facing;
@@ -94,10 +94,10 @@ Mario.Shell.prototype.Move = function() {
 		this.World.CheckShellCollide(this);
 		return;
 	}
-	
+
 	if (this.DeadTime > 0) {
 		this.DeadTime--;
-		
+
 		if (this.DeadTime === 0) {
 			this.DeadTime = 1;
 			for (i = 0; i < 8; i++) {
@@ -105,49 +105,49 @@ Mario.Shell.prototype.Move = function() {
             }
 			this.World.RemoveSprite(this);
 		}
-		
+
 		this.X += this.Xa;
 		this.Y += this.Ya;
 		this.Ya *= 0.95;
 		this.Ya += 1;
 		return;
 	}
-	
+
 	if (this.Facing !== 0) {
 		this.Anim++;
 	}
-	
+
 	if (this.Xa > 2) {
 		this.Facing = 1;
 	}
 	if (this.Xa < -2) {
 		this.Facing = -1;
 	}
-	
+
 	this.Xa = this.Facing * sideWaysSpeed;
-	
+
 	if (this.Facing !== 0) {
 		this.World.CheckShellCollide(this);
 	}
-	
+
 	this.XFlip = this.Facing === -1;
-	
+
 	this.XPic = ((this.Anim / 2) | 0) % 4 + 3;
-    
+
     if (!this.SubMove(this.Xa, 0)) {
         Enjine.Resources.PlaySound("bump");
         this.Facing = -this.Facing;
     }
     this.OnGround = false;
     this.SubMove(0, this.Ya);
-    
+
     this.Ya *= 0.85;
     if (this.OnGround) {
         this.Xa *= this.GroundInertia;
     } else {
         this.Xa *= this.AirInertia;
     }
-    
+
     if (!this.OnGround) {
         this.Ya += 2;
     }
@@ -155,7 +155,7 @@ Mario.Shell.prototype.Move = function() {
 
 Mario.Shell.prototype.SubMove = function(xa, ya) {
     var collide = false;
-    
+
     while (xa > 8) {
         if (!this.SubMove(8, 0)) {
             return false;
@@ -180,7 +180,7 @@ Mario.Shell.prototype.SubMove = function(xa, ya) {
         }
         ya += 8;
     }
-    
+
     if (ya > 0) {
         if (this.IsBlocking(this.X + xa - this.Width, this.Y + ya, xa, 0)) {
             collide = true;
@@ -201,7 +201,7 @@ Mario.Shell.prototype.SubMove = function(xa, ya) {
             collide = true;
         }
     }
-    
+
     if (xa > 0) {
         if (this.IsBlocking(this.X + xa + this.Width, this.Y + ya - this.Height, xa, ya)) {
             collide = true;
@@ -224,7 +224,7 @@ Mario.Shell.prototype.SubMove = function(xa, ya) {
             collide = true;
         }
     }
-    
+
     if (collide) {
         if (xa < 0) {
             this.X = (((this.X - this.Width) / 16) | 0) * 16 + this.Width;
@@ -242,7 +242,7 @@ Mario.Shell.prototype.SubMove = function(xa, ya) {
             this.Y = (((this.Y - 1) / 16 + 1) | 0) * 16 - 1;
             this.OnGround = true;
         }
-        
+
         return false;
     } else {
         this.X += xa;
@@ -254,13 +254,13 @@ Mario.Shell.prototype.SubMove = function(xa, ya) {
 Mario.Shell.prototype.IsBlocking = function(x, y, xa, ya) {
     x = (x / 16) | 0;
     y = (y / 16) | 0;
-    
+
     if (x === ((this.X / 16) | 0) && y === ((this.Y / 16) | 0)) {
         return false;
     }
-    
+
     var blocking = this.World.Level.IsBlocking(x, y, xa, ya);
-    
+
     if (blocking && ya === 0 && xa !== 0) {
         this.World.Bump(x, y, true);
     }
@@ -286,7 +286,7 @@ Mario.Shell.prototype.ShellCollideCheck = function(shell) {
     if (this.DeadTime !== 0) {
         return false;
     }
-    
+
     var xD = shell.X - this.X, yD = shell.Y - this.Y;
     if (xD > -16 && xD < 16) {
         if (yD > -this.Height && yD < shell.Height) {

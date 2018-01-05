@@ -109,6 +109,7 @@ Mario.LevelState.prototype.Update = function(delta) {
 
     this.TimeLeft -= delta;
     if ((this.TimeLeft | 0) === 0) {
+        GlobalInfo.data.log({a: 'mario_hurt', t: 'timeout'}, true);
         Mario.MarioCharacter.Die();
     }
 
@@ -425,13 +426,16 @@ Mario.LevelState.prototype.Bump = function(x, y, canBreakBricks) {
             Enjine.Resources.PlaySound("sprout");
             if (!Mario.MarioCharacter.Large) {
                 this.AddSprite(new Mario.Mushroom(this, x * 16 + 8, y * 16 + 8));
+                GlobalInfo.data.log({a: 'mario_bump', t: 'mushroom'}, true);
             } else {
                 this.AddSprite(new Mario.FireFlower(this, x * 16 + 8, y * 16 + 8));
+                GlobalInfo.data.log({a: 'mario_bump', t: 'fireflower'}, true);
             }
         } else {
             Mario.MarioCharacter.GetCoin();
             Enjine.Resources.PlaySound("coin");
             this.AddSprite(new Mario.CoinAnim(this, x, y));
+            GlobalInfo.data.log({a: 'mario_bump', t: 'coin'}, true);
         }
     }
 
@@ -439,6 +443,7 @@ Mario.LevelState.prototype.Bump = function(x, y, canBreakBricks) {
         this.BumpInto(x, y - 1);
         if (canBreakBricks) {
             Enjine.Resources.PlaySound("breakblock");
+            GlobalInfo.data.log({a: 'mario_bump', t: 'breakblock'}, true);
             this.Level.SetBlock(x, y, 0);
             for (xx = 0; xx < 2; xx++) {
                 for (yy = 0; yy < 2; yy++) {

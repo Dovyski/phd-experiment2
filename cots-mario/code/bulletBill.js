@@ -9,7 +9,7 @@ Mario.BulletBill = function(world, x, y, dir) {
 	this.X = x;
 	this.Y = y;
 	this.Facing = dir;
-	
+
 	this.XPicO = 8;
 	this.YPicO = 31;
 	this.Height = 12;
@@ -29,19 +29,19 @@ Mario.BulletBill.prototype.CollideCheck = function() {
     if (this.Dead) {
         return;
     }
-    
+
     var xMarioD = Mario.MarioCharacter.X - this.X, yMarioD = Mario.MarioCharacter.Y - this.Y;
     if (xMarioD > -16 && xMarioD < 16) {
         if (yMarioD > -this.Height && yMarioD < this.World.Mario.Height) {
             if (Mario.MarioCharacter.Y > 0 && yMarioD <= 0 && (!Mario.MarioCharacter.OnGround || !Mario.MarioCharacter.WasOnGround)) {
                 Mario.MarioCharacter.Stomp(this);
                 this.Dead = true;
-                
+
                 this.Xa = 0;
                 this.Ya = 1;
                 this.DeadTime = 100;
             } else {
-                Mario.MarioCharacter.GetHurt();
+                Mario.MarioCharacter.GetHurt('bulletbill');
             }
         }
     }
@@ -51,7 +51,7 @@ Mario.BulletBill.prototype.Move = function() {
     var i = 0, sideWaysSpeed = 4;
     if (this.DeadTime > 0) {
         this.DeadTime--;
-        
+
         if (this.DeadTime === 0) {
             this.DeadTime = 1;
             for (i = 0; i < 8; i++) {
@@ -59,15 +59,15 @@ Mario.BulletBill.prototype.Move = function() {
             }
             this.World.RemoveSprite(this);
         }
-        
+
         this.X += this.Xa;
         this.Y += this.Ya;
         this.Ya *= 0.95;
         this.Ya += 1;
-        
+
         return;
     }
-    
+
     this.Xa = this.Facing * sideWaysSpeed;
     this.XFlip = this.Facing === -1;
     this.Move(this.Xa, 0);
@@ -82,7 +82,7 @@ Mario.BulletBill.prototype.FireballCollideCheck = function(fireball) {
     if (this.DeadTime !== 0) {
         return false;
     }
-    
+
     var xD = fireball.X - this.X, yD = fireball.Y - this.Y;
     if (xD > -16 && xD < 16) {
         if (yD > -this.Height && yD < fireball.Height) {
@@ -96,7 +96,7 @@ Mario.BulletBill.prototype.ShellCollideCheck = function(shell) {
     if (this.DeadTime !== 0) {
         return false;
     }
-    
+
     var xD = shell.X - this.X, yD = shell.Y - this.Y;
     if (xD > -16 && xD < 16) {
         if (yD > -this.Height && yD < shell.Height) {
