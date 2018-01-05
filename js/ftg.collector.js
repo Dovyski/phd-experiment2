@@ -59,7 +59,7 @@ FTG.Collector = function() {
 			aData;
 
 		if(isTimeToSendData() || theForce) {
-			if(mData.length < 0) {
+			if(mData.length <= 0) {
 				return;
 			}
 
