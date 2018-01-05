@@ -80,15 +80,14 @@ SetupState.prototype = {
 		}
 	},
 
-	initialize: function() {
-		var aConfig = {
-			container: 'container',
-			videoId: 'videoel',
-			overlay: 'overlay'
-		};
+	initialize: function(theJumpToMenu) {
+		GlobalInfo.data = new FTG.Collector();
 
-		GlobalInfo.data = new FTG.Collector(aConfig);
-		this.state.start('menu');
+		var aJump = theJumpToMenu === undefined ? true : theJumpToMenu;
+
+		if(aJump) {
+			this.state.start('menu');
+		}
 	},
 
 	adjustConstantsFromConfig: function() {
