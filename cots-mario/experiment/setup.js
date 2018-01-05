@@ -6,7 +6,7 @@
 var Experiment = {
 	SEED: 200,
 	LEVEL_DIFFICULTY: 2,
-	active: false
+	ENABLE_DATA_LOG: true
 };
 
 if(GlobalInfo.experiment) {
@@ -20,9 +20,6 @@ if(GlobalInfo.experiment) {
 
 	// Create a global, seeded PRNG.
 	var gMersennem = new MersenneTwister(Experiment.SEED);
-
-	// Indicate for the COTS game that the expeirment is active
-	Experiment.active = true;
 
 	console.log('Adjusting game to work in experiment mode.');
 

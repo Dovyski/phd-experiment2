@@ -30,7 +30,7 @@ GlobalInfo.user = getURLParamByName('user');
 GlobalInfo.game = getURLParamByName('game');
 
 // Are we running as part of an experiment?
-if(aExperiment.instance) {
+if(aExperiment && aExperiment.instance) {
 	// Yes, we are. In this case, we adjust
 	// everything based on the external information
 	// that were provived by the experiment manager.

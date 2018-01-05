@@ -110,6 +110,10 @@ Mario.MapState.prototype.Enter = function() {
     this.LevelType = 0;
 
 	Mario.PlayMapMusic();
+
+    if(GlobalInfo.experiment) {
+        GlobalInfo.data.logMilestone(GlobalInfo.user, GlobalInfo.game, 'game_start');
+    }
 };
 
 Mario.MapState.prototype.Exit = function() {
@@ -655,7 +659,7 @@ Mario.MapState.prototype.GetY = function() {
 
 Mario.MapState.prototype.CheckForChange = function(context) {
     // Go directly to the level state if running in experiment mode
-    if(Experiment.active) {
+    if(GlobalInfo.experiment) {
         context.ChangeState(new Mario.LevelState(Experiment.LEVEL_DIFFICULTY, Mario.LevelType.Overground, Experiment.SEED));
     }
 

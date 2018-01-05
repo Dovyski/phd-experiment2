@@ -244,6 +244,10 @@ Mario.LevelState.prototype.Update = function(delta) {
 
     this.Camera.X = (Mario.MarioCharacter.XOld + (Mario.MarioCharacter.X - Mario.MarioCharacter.XOld) * delta) - 160;
     this.Camera.Y = (Mario.MarioCharacter.YOld + (Mario.MarioCharacter.Y - Mario.MarioCharacter.YOld) * delta) - 120;
+
+    if(GlobalInfo.experiment && Experiment.ENABLE_DATA_LOG) {
+        GlobalInfo.data.send(GlobalInfo.user, GlobalInfo.game);
+    }
 };
 
 Mario.LevelState.prototype.Draw = function(context) {

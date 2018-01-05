@@ -48,6 +48,11 @@ Mario.TitleState.prototype.Enter = function() {
 	Mario.MarioCharacter.Image = Enjine.Resources.Images["smallMario"];
 
     Mario.PlayTitleMusic();
+
+    if(GlobalInfo.experiment) {
+        GlobalInfo.game = GlobalInfo.game || 4;
+        GlobalInfo.data.logMilestone(GlobalInfo.user, GlobalInfo.game, 'menu_start');
+    }
 };
 
 Mario.TitleState.prototype.Exit = function() {
