@@ -1,170 +1,46 @@
 <!doctype html>
 <html lang="en">
-	<head>
-		<title>Face tracker</title>
-		<meta charset="utf-8">
-		<link href="/styles/bootstrap.min.css" rel="stylesheet" type="text/css">
-		<style>
-			@import url(https://fonts.googleapis.com/css?family=Lato:300italic,700italic,300,700);
+<head>
+	<meta charset="UTF-8" />
+	<title>Skeleton</title>
+	<script type="text/javascript" src="../js/3rdparty/jquery-2.2.0.min.js"></script>
 
-			body {
-				font-family: 'Lato';
-				background-color: #f0f0f0;
-				margin: 0px auto;
-				max-width: 1150px;
-			}
+	<!-- Code to make the game work in experiment mode -->
+	<script src="../js/ftg.collector.js"></script>
+	<script src="../card-flipper/SetupState.js"></script>
+	<script src="app.js"></script>
 
-			#debug {
-				position: absolute;
-				top: 100px;
-				left: 100px;
-			}
+    <style type="text/css">
+        body {
+            margin: 0;
+        }
 
-			#overlay {
-				position: absolute;
-				top: 0px;
-				left: 0px;
-				-o-transform : scaleX(-1);
-				-webkit-transform : scaleX(-1);
-				transform : scaleX(-1);
-				-ms-filter : fliph; /*IE*/
-				filter : fliph; /*IE*/
-				z-index: 10;
+		#navbar {
+			padding: 50px;
+			width: 30%;
+			background: red;
+			float: left;
+		}
 
-				width : 600px;
-				height : 450px;
-			}
-
-			#videoel {
-				position: absolute;
-				top: 0px;
-				left: 0px;
-				-o-transform : scaleX(-1);
-				-webkit-transform : scaleX(-1);
-				transform : scaleX(-1);
-				-ms-filter : fliph; /*IE*/
-				filter : fliph; /*IE*/
-
-				width : 600px;
-				height : 450px;
-				z-index: 9;
-			}
-
-			#container {
-				position : relative;
-				width : 370px;
-				/*margin : 0px auto;*/
-			}
-
-			#content {
-				margin-top : 50px;
-				margin-left : auto;
-				margin-right : auto;
-				max-width: 600px;
-			}
-
-			#sketch, #filter {
-				display: none;
-			}
-
-			h2 {
-				font-weight : 400;
-			}
-
-			.btn {
-				font-family: 'Lato';
-				font-size: 16px;
-			}
-
-			#controls {
-				text-align : center;
-			}
-
-			#emotion_container {
-				width: 600px;
-			}
-
-			#emotion_icons {
-				height: 50px;
-				padding-left: 40px;
-			}
-
-			.emotion_icon {
-				width : 40px;
-				height : 40px;
-				margin-top: 5px;
-				/*margin-left : 13px;*/
-				margin-left : 35px;
-			}
-
-			#emotion_chart, #emotion_icons {
-				margin: 0 auto;
-				width : 400px;
-			}
-
-			#icon1, #icon2, #icon3, #icon4, #icon5, #icon6 {
-				visibility : hidden;
-			}
-		</style>
-	</head>
-	<body>
-		<script src="../js/ftg.camera.js"></script>
-		<script src="../js/ftg.expression.js"></script>
-
-		<script src="../js/3rdparty/clmtrackr/js/utils.js"></script>
-		<script src="../js/3rdparty/clmtrackr/js/clmtrackr.js"></script>
-		<script src="../js/3rdparty/clmtrackr/js/Stats.js"></script>
-
-		<script src="../js/3rdparty/clmtrackr/models/model_pca_20_svm_emotionDetection.js"></script>
-
-		<script src="../js/3rdparty/clmtrackr/examples/js/emotion_classifier.js"></script>
-		<script src="../js/3rdparty/clmtrackr/examples/js/emotionmodel.js"></script>
-
-		<div id="content">
-			<div id="container"></div>
-			<div id="debug">s</div>
-
-			<script>
-				var aExpression = new FTG.ExpressionDetector({
-					container: 'container'
-				});
-
-				function startParty() {
-					// Make the detector run in a loop.
-					aExpression.start();
-				}
-
-				// Start the whole thing when the DOM is ready
-				if(document.attachEvent) {
-					document.attachEvent('onreadystatechange', startParty);
-				} else {
-					document.addEventListener('DOMContentLoaded', startParty, false);
-				}
-
-				// Listen to every interaction of the expression detector
-				document.addEventListener('clmtrackrIteration', function(event) {
-					aStats.update();
-
-					var aEmotions = aExpression.getEmotions();
-					var aOut = '';
-
-					for(var i = 0, aSize = aEmotions.length; i < aSize; i++) {
-						aOut += aEmotions[i].emotion + ' : ' + aEmotions[i].value + '<br>';
-					}
-
-					var aDominant = aExpression.getDominantEmotion();
-
-					if(aDominant) {
-						document.getElementById('debug').innerHTML = aDominant.emotion + ': ' + aDominant.value;
-					}
-				}, false);
-
-				// stats
-				var aStats = new Stats();
-				aStats.domElement.style.position = 'absolute';
-				aStats.domElement.style.top = '0px';
-				document.getElementById('container').appendChild( aStats.domElement);
-			</script>
-		</div>
-	</body>
+		#console {
+			padding: 10px;
+			font-family: "Courier New", Courier, monospace;
+			width: 50%;
+			border: 1px solid #000;
+			background: #c0c0c0;
+			color: #000;
+			float: right;
+			overflow: scroll;
+			height: 600px;
+		}
+    </style>
+</head>
+<body>
+	<div id="navbar">
+		<button id="a" data-action="testA">testing A</button>
+		<button id="b" data-action="testB">testing B</button>
+		<button id="c" data-action="testC">testing C</button>
+	</div>
+	<div id="console">THIS IS A TEST</div>
+</body>
 </html>
