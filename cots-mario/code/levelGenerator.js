@@ -144,7 +144,6 @@ Mario.LevelGenerator.prototype = {
     },
 
     BuildCannons: function(level, xo, maxLength) {
-		alert("cannons");
         var length = ((this.Random() * 10) | 0) + 2, floor = this.Height - 1 - (this.Random() * 4) | 0,
             xCannon = xo + 1 + (this.Random() * 4) | 0, x = 0, y = 0, cannonHeight = 0;
 
