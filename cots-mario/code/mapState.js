@@ -31,6 +31,7 @@ Mario.MapState = function() {
     this.EnterLevel = false;
     this.LevelDifficulty = 0;
     this.LevelType = 0;
+    this.ViewCount = 0;
 
     this.WorldNumber = -1;
     this.NextWorld();
@@ -111,9 +112,10 @@ Mario.MapState.prototype.Enter = function() {
 
 	Mario.PlayMapMusic();
 
-    if(GlobalInfo.experiment) {
+    if(GlobalInfo.experiment && this.ViewCount == 0) {
         GlobalInfo.data.logMilestone(GlobalInfo.user, GlobalInfo.game, 'game_start');
     }
+    this.ViewCount++;
 };
 
 Mario.MapState.prototype.Exit = function() {
