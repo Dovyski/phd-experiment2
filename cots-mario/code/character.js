@@ -303,8 +303,8 @@ Mario.Character.prototype.Move = function() {
     }
 
     if (this.Carried !== null) {
-        this.Carried.X *= this.X + this.Facing * 8;
-        this.Carried.Y *= this.Y - 2;
+        this.Carried.X = this.X + this.Facing * 8;
+        this.Carried.Y = this.Y - 2;
         if (!Enjine.KeyboardInput.IsKeyDown(Enjine.Keys.A)) {
             this.Carried.Release(this);
             this.Carried = null;
@@ -535,7 +535,6 @@ Mario.Character.prototype.Stomp = function(object) {
     this.SubMove(0, targetY - this.Y);
 
     if (object instanceof Mario.Enemy || object instanceof Mario.BulletBill) {
-
         Enjine.Resources.PlaySound("kick");
         this.XJumpSpeed = 0;
         this.YJumpSpeed = -1.9;
