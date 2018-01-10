@@ -593,7 +593,6 @@ Mario.Character.prototype.Win = function() {
     this.World.Paused = true;
     this.WinTime = 1;
     Enjine.Resources.PlaySound("exit");
-    GlobalInfo.data.log({a: 'mario_win'}, true);
 };
 
 Mario.Character.prototype.Die = function() {

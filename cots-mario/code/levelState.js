@@ -78,6 +78,8 @@ Mario.LevelState.prototype.Enter = function() {
 
 	this.GotoMapState = false;
 	this.GotoLoseState = false;
+
+    GlobalInfo.data.log({a: 'level_start', t: this.LevelType, d: this.LevelDifficulty, s: this.LevelSeed}, true);
 };
 
 Mario.LevelState.prototype.Exit = function() {
@@ -109,7 +111,9 @@ Mario.LevelState.prototype.Update = function(delta) {
 
     this.TimeLeft -= delta;
     if ((this.TimeLeft | 0) === 0) {
-        GlobalInfo.data.log({a: 'mario_hurt', t: 'timeout'}, true);
+        if(Mario.MarioCharacter.DeathTime == 0) {
+            GlobalInfo.data.log({a: 'mario_hurt', t: 'timeout'}, true);
+        }
         Mario.MarioCharacter.Die();
     }
 
@@ -319,9 +323,9 @@ Mario.LevelState.prototype.Draw = function(context) {
         t = t * t * 0.2;
 
         if (t > 900) {
-            //TODO: goto map state with level won
 			Mario.GlobalMapState.LevelWon();
 			this.GotoMapState = true;
+            GlobalInfo.data.log({a: 'level_end', t: 'won'}, true);
         }
 
         this.RenderBlackout(context, ((Mario.MarioCharacter.XDeathPos - this.Camera.X) | 0), ((Mario.MarioCharacter.YDeathPos - this.Camera.Y) | 0), (320 - t) | 0);
@@ -338,6 +342,7 @@ Mario.LevelState.prototype.Draw = function(context) {
 			this.GotoMapState = true;
 			if (Mario.MarioCharacter.Lives <= 0) {
 				this.GotoLoseState = true;
+                GlobalInfo.data.log({a: 'level_end', t: 'lose'}, true);
 			}
         }
 
