@@ -9,6 +9,7 @@ Mario.LoseState = function() {
     this.gameOver = null;
     this.font = null;
     this.wasKeyDown = false;
+    this.ended = false;
 };
 
 Mario.LoseState.prototype = new Enjine.GameState();
@@ -29,6 +30,7 @@ Mario.LoseState.prototype.Enter = function() {
 
     this.font = Mario.SpriteCuts.CreateBlackFont();
     this.font.Strings[0] = { String: "Game over!", X: 116, Y: 160 };
+    this.font.Strings[1] = { String: "Click HERE to continue", X: 70, Y: 175 };
 
     this.drawManager.Add(this.font);
     this.drawManager.Add(this.gameOver);
@@ -58,10 +60,13 @@ Mario.LoseState.prototype.Draw = function(context) {
 };
 
 Mario.LoseState.prototype.CheckForChange = function(context) {
-    if (this.wasKeyDown && !Enjine.KeyboardInput.IsKeyDown(Enjine.Keys.S)) {
-        if(GlobalInfo.experiment) {
-			GlobalInfo.experiment.concludeCurrentGame();
-		} else {
+    if(GlobalInfo.experiment) {
+        if(Enjine.MouseInput.IsMouseDown() && !this.ended) {
+            this.ended = true;
+            GlobalInfo.experiment.concludeCurrentGame();
+        }
+    } else {
+        if(this.wasKeyDown && !Enjine.KeyboardInput.IsKeyDown(Enjine.Keys.S)) {
             context.ChangeState(new Mario.TitleState());
         }
     }
