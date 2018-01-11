@@ -41,6 +41,11 @@ FTG.Collector = function() {
 		return aMinutes.substr(-2) + ':' + aSeconds.substr(-2);
 	};
 
+	// Automatically invoked when a piece of data is sent to the server.
+	// Clients might override this method to act as a listener.
+	this.onDataSent = function(theResponseText) {
+	};
+
 	// Adds a new entry to the data log.
 	this.log = function(theData, theForce) {
 		// Collect only if it is time to do it
@@ -56,7 +61,8 @@ FTG.Collector = function() {
 	// Send current recorded data to the server
 	this.send = function(theUid, theGameId, theForce) {
 		var aXmlRequest,
-			aData;
+			aData,
+			aSelf = this;
 
 		if(isTimeToSendData() || theForce) {
 			if(mData.length <= 0) {
@@ -74,6 +80,9 @@ FTG.Collector = function() {
 	        aXmlRequest.onreadystatechange = function() {
 	            if(aXmlRequest.readyState == 4 && aXmlRequest.status == 200) {
 					console.log('[Collector] Data sent!', aXmlRequest.responseText);
+					if(aSelf.onDataSent) {
+						aSelf.onDataSent(aXmlRequest.responseText);
+					}
 	            }
 	        };
 
