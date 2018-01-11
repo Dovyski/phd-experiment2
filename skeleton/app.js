@@ -6,9 +6,9 @@
  */
 
 var SKELETON = new function() {
-	this.console = function(theMessage) {
+	this.console = function(theMessage, theClass) {
 		var aNow = new Date();
-		$('#console').prepend('<p>[' + aNow.toLocaleString('pt-BR') + '] ' + theMessage + '</p>');
+		$('#console').prepend('<p class="' + (theClass || '') + '">[' + aNow.toLocaleString('pt-BR') + '] ' + theMessage + '</p>');
 	};
 
 	this.handleButtonClick = function(theButton) {
@@ -21,7 +21,7 @@ var SKELETON = new function() {
 			GlobalInfo.data.send(GlobalInfo.user, GlobalInfo.game, true);
 
 		} else if (aMilestone != undefined) {
-			this.console('MILESTONE: ' + aMilestone);
+			this.console('MILESTONE: ' + aMilestone, 'strong');
 			GlobalInfo.data.logMilestone(GlobalInfo.user, GlobalInfo.game, aMilestone);
 		} else {
 			console.error('Button has no data to be sent.');
@@ -29,7 +29,7 @@ var SKELETON = new function() {
 	};
 
 	this.onDataSent = function(theTextResponse) {
-		SKELETON.console('<strong>Data sent! ' + theTextResponse + '</strong>');
+		SKELETON.console('Data sent! ' + theTextResponse, 'subtle');
 	};
 
 	this.init = function() {
@@ -41,6 +41,8 @@ var SKELETON = new function() {
 
 		// Listen to events regarding data being sent
 		GlobalInfo.data.onDataSent = this.onDataSent;
+
+		this.console('User: ' + GlobalInfo.user + ', Game: ' + GlobalInfo.game);
 
 		$('button').click(function() {
 			SKELETON.handleButtonClick($(this));

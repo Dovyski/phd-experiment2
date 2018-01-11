@@ -15,15 +15,28 @@
             margin: 0;
         }
 
+		.subtle {
+			opacity: 0.5;
+		}
+
+		.strong {
+			font-weight: bold;
+			color: #aa0000;
+		}
+
 		#navbar {
-			padding: 50px;
-			width: 30%;
-			background: red;
+			padding: 10px;
+			width: 40%;
+			background: #d0d0d0;
 			float: left;
 		}
 
+		#navbar li {
+			margin-bottom: 45px;
+		}
+
 		#console {
-			padding: 10px;
+			padding: 20px;
 			font-family: "Courier New", Courier, monospace;
 			width: 50%;
 			border: 1px solid #000;
@@ -37,11 +50,13 @@
 </head>
 <body>
 	<div id="navbar">
-		<button id="a" data-action="testA">testing A</button>
-		<button id="b" data-action="testB">testing B</button>
-		<button id="c" data-action="testC">testing C</button>
-		<button id="d" data-milestone="milestoneD">milestone D</button>
-		<button id="f">NOTJING</button>
+		<h1>Control</h1>
+		<ul>
+			<li><button data-action="testA">ACTION: testing A</button> ddd</li>
+			<li><button data-action="testB">ACTION: testing B</button></li>
+			<li><button data-action="testC">ACTION: testing C</button></li>
+			<li><button data-milestone="milestoneD">MILESTONE: milestone D</button></li>
+		</ul>
 	</div>
 	<div id="console"></div>
 </body>
