@@ -6,17 +6,19 @@
  */
 
 var SKELETON = new function() {
-	this.testA = function() {
-		console.log('testA');
-	};
+	this.handleButtonClick = function(theButton) {
+		var aAction = theButton.data('action');
+		var aMilestone = theButton.data('milestone');
 
-	this.handleAction = function(theAction) {
-		if(typeof SKELETON[theAction] != "function") {
-			console.error('Unable to find action: ' + theAction);
-			return;
+		if(aAction != undefined) {
+			GlobalInfo.data.log({a: aAction}, true);
+			GlobalInfo.data.send(GlobalInfo.user, GlobalInfo.game, true);
+
+		} else if (aMilestone != undefined) {
+			GlobalInfo.data.logMilestone(GlobalInfo.user, GlobalInfo.game, aMilestone);
+		} else {
+			console.error('Button has no data to be sent.');
 		}
-
-		SKELETON[theAction].call(this);
 	};
 
 	this.init = function() {
@@ -26,9 +28,10 @@ var SKELETON = new function() {
 		var aSetupState = new SetupState();
 		aSetupState.initialize(false);
 
+		// TODO: register callback for GlobalInfo.data
+
 		$('button').click(function() {
-			var aAction = $(this).data('action');
-			SKELETON.handleAction(aAction);
+			SKELETON.handleButtonClick($(this));
 		});
 	};
 }
