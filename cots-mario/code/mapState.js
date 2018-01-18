@@ -662,7 +662,7 @@ Mario.MapState.prototype.GetY = function() {
 Mario.MapState.prototype.CheckForChange = function(context) {
     // Go directly to the level state if running in experiment mode
     if(GlobalInfo.experiment) {
-        context.ChangeState(new Mario.LevelState(Experiment.LEVEL_DIFFICULTY, Mario.LevelType.Overground, Experiment.SEED));
+        context.ChangeState(new Mario.LevelState(Experiment.config('levelDifficulty'), Mario.LevelType.Overground, Experiment.config('seed')));
     }
 
     if (this.WorldNumber === 8) {

@@ -3,10 +3,24 @@
  * to make it work in experiment mode.
  */
 
+var EXPERIMENT_GAME_PROFILES = {
+	'a': {seed: 200, levelDifficulty: 2},
+	'b': {seed: 201, levelDifficulty: 10},
+};
+
 var Experiment = {
-	SEED: 200,
-	LEVEL_DIFFICULTY: 2,
-	ENABLE_DATA_LOG: true
+	// Global game configuration related to the experiment
+	profile: EXPERIMENT_GAME_PROFILES['a'], // use first one by default
+	ENABLE_DATA_LOG: true,
+
+	// Some utility methods to ensure JS sanity
+	config: function(theName) {
+		if(theName in this.profile) {
+			return this.profile[theName];
+		} else {
+			console.error('Unknown experiment game profile named "' + theName + '"');
+		}
+	}
 };
 
 if(GlobalInfo.experiment) {
@@ -18,10 +32,17 @@ if(GlobalInfo.experiment) {
 	var aSetupState = new SetupState();
 	aSetupState.initialize(false);
 
-	// Create a global, seeded PRNG.
-	var gMersennem = new MersenneTwister(Experiment.SEED);
+	var aGameProfile = FTG.Utils.getURLParamByName('profile');
 
-	console.log('Adjusting game to work in experiment mode.');
+	if(aGameProfile in EXPERIMENT_GAME_PROFILES) {
+		console.log('Adjusting game to work in experiment mode (profile: ' + aGameProfile + ')');
+		Experiment.profile = EXPERIMENT_GAME_PROFILES[aGameProfile];
+	} else {
+		console.error('Unknown game profile: ' + aGameProfile);
+	}
+
+	// Create a global, seeded PRNG.
+	var gMersennem = new MersenneTwister(Experiment.config('seed'));
 
 	// Override Math.random() with the global PRNG, so we have control
 	// over the randomness in the game
