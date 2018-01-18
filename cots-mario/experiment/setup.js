@@ -4,8 +4,8 @@
  */
 
 var EXPERIMENT_GAME_PROFILES = {
-	'a': {seed: 200, levelDifficulty: 2},
-	'b': {seed: 201, levelDifficulty: 10},
+	'a': {levelName: 'A2', seed: 200, levelDifficulty: 2},
+	'b': {levelName: 'B10', seed: 201, levelDifficulty: 10},
 };
 
 var Experiment = {
