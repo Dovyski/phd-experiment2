@@ -3,7 +3,8 @@
 	Code by Rob Kleffner, 2011
 */
 
-Mario.LoseState = function() {
+Mario.LoseState = function(message) {
+    this.message = message;
     this.drawManager = null;
     this.camera = null;
     this.gameOver = null;
@@ -29,7 +30,7 @@ Mario.LoseState.prototype.Enter = function() {
     this.gameOver.Y = 68;
 
     this.font = Mario.SpriteCuts.CreateBlackFont();
-    this.font.Strings[0] = { String: "Game over!", X: 116, Y: 160 };
+    this.font.Strings[0] = { String: this.message, X: 116, Y: 160 };
     this.font.Strings[1] = { String: "Click HERE to continue", X: 70, Y: 175 };
 
     this.drawManager.Add(this.font);

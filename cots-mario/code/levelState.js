@@ -29,6 +29,7 @@ Mario.LevelState = function(difficulty, type, seed) {
 
     this.Delta = 0;
 
+    this.LoseStateMessage = "Game Over!";
 	this.GotoMapState = false;
 	this.GotoLoseState = false;
 };
@@ -324,8 +325,15 @@ Mario.LevelState.prototype.Draw = function(context) {
 
         if (t > 900) {
 			Mario.GlobalMapState.LevelWon();
-			this.GotoMapState = true;
-            GlobalInfo.data.log({a: 'level_end', t: 'won'}, true);
+            // If in experiment mode, go to the lose state even when player won.
+            // Only the message will be different there
+            if(GlobalInfo.experiment) {
+    			this.GotoLoseState = true;
+                this.LoseStateMessage = "You WIN!";
+                GlobalInfo.data.log({a: 'level_end', t: 'won'}, true);
+            } else {
+                this.GotoMapState = true;
+            }
         }
 
         this.RenderBlackout(context, ((Mario.MarioCharacter.XDeathPos - this.Camera.X) | 0), ((Mario.MarioCharacter.YDeathPos - this.Camera.Y) | 0), (320 - t) | 0);
@@ -342,6 +350,7 @@ Mario.LevelState.prototype.Draw = function(context) {
 			this.GotoMapState = true;
 			if (Mario.MarioCharacter.Lives <= 0) {
 				this.GotoLoseState = true;
+                this.LoseStateMessage = "You lose!";
                 GlobalInfo.data.log({a: 'level_end', t: 'lose'}, true);
 			}
         }
@@ -475,7 +484,7 @@ Mario.LevelState.prototype.BumpInto = function(x, y) {
 
 Mario.LevelState.prototype.CheckForChange = function(context) {
 	if (this.GotoLoseState) {
-		context.ChangeState(new Mario.LoseState());
+		context.ChangeState(new Mario.LoseState(this.LoseStateMessage));
 	}
 	else {
 		if (this.GotoMapState) {
