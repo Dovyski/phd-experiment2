@@ -50,7 +50,8 @@ if(GlobalInfo.experiment) {
 	var aSetupState = new SetupState();
 	aSetupState.initialize(false);
 
-	var aGameProfile = FTG.Utils.getURLParamByName('profile');
+	var aGameProfile = FTG.Utils.getURLParamByName('profile') || 'a';
+	aGameProfile = aGameProfile.toLocaleLowerCase();
 
 	if(aGameProfile in EXPERIMENT_GAME_PROFILES) {
 		console.log('Adjusting game to work in experiment mode (profile: ' + aGameProfile + ')');
