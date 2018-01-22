@@ -12,6 +12,8 @@ Mario.LevelGenerator = function(width, height) {
     this.CoinsLineStartOffset = 4;      // max amount of tiles that will be occupied before placing coins in a line of coins
     this.CoinsLineEndOffset = 4;        // max amount of tiles that will be occupied before stop placing coins in a line of coins
     this.CoinsLineAdditionalHeight = 2; // additional height to be added to a coin position. Recommended 0 to 2 (inclusive). Values grater than 2 will interfer with blocks.
+    this.BlocksLineStartOffset = 4;     // max amount of tiles that will be occupied before placing blocks in a line of blocks
+    this.BlocksLineEndOffset = 4;       // max amount of tiles that will be occupied before stop placing blocks in a line of blocks
     this.Type = 0;
     this.PRNG = null;
 };
@@ -357,8 +359,8 @@ Mario.LevelGenerator.prototype = {
             }
         }
 
-        s = (this.Random() * 4) | 0;
-        e = (this.Random() * 4) | 0;
+        s = (this.Random() * this.BlocksLineStartOffset) | 0;
+        e = (this.Random() * this.BlocksLineEndOffset) | 0;
 
         if (floor - 4 > 0) {
             if ((x1 - 1 - e) - (x0 + 1 + s) > 2) {
