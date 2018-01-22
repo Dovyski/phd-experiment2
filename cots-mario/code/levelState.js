@@ -71,6 +71,11 @@ Mario.LevelState.prototype.Enter = function() {
         this.BgLayer[i] = new Mario.BackgroundRenderer(bgLevelGenerator.CreateLevel(), 320, 240, scrollSpeed);
     }
 
+    // If in experimet mode, adjust mario according to instructions
+    if(GlobalInfo.experiment) {
+        Mario.MarioCharacter.Large = Experiment.config('marioLarge') || false;
+    }
+
     Mario.MarioCharacter.Initialize(this);
 
     this.Sprites.Add(Mario.MarioCharacter);

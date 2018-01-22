@@ -4,26 +4,26 @@
  */
 
 var EXPERIMENT_GAME_PROFILES = {
-	'a': {levelName: 'A1', seed: 200, levelDifficulty: 1},
-	'b': {levelName: 'B2', seed: 201, levelDifficulty: 2},
-	'c': {levelName: 'C3', seed: 201, levelDifficulty: 3},
-	'd': {levelName: 'D4', seed: 201, levelDifficulty: 4},
-	'e': {levelName: 'E5', seed: 201, levelDifficulty: 5},
-	'f': {levelName: 'F6', seed: 201, levelDifficulty: 6},
-	'g': {levelName: 'G7', seed: 201, levelDifficulty: 7},
-	'h': {levelName: 'H8', seed: 201, levelDifficulty: 8},
-	'i': {levelName: 'I9', seed: 201, levelDifficulty: 9},
-	'j': {levelName: 'J10', seed: 201, levelDifficulty: 10},
-	'k': {levelName: 'K11', seed: 201, levelDifficulty: 11},
-	'l': {levelName: 'L12', seed: 201, levelDifficulty: 12},
-	'm': {levelName: 'M13', seed: 201, levelDifficulty: 13},
-	'n': {levelName: 'N14', seed: 201, levelDifficulty: 14},
-	'o': {levelName: 'O15', seed: 201, levelDifficulty: 15},
-	'p': {levelName: 'P16', seed: 201, levelDifficulty: 16},
-	'q': {levelName: 'Q17', seed: 201, levelDifficulty: 17},
-	'r': {levelName: 'R18', seed: 201, levelDifficulty: 18},
-	's': {levelName: 'S19', seed: 201, levelDifficulty: 19},
-	't': {levelName: 'T20', seed: 201, levelDifficulty: 20}
+	'a': {levelName: 'A1', seed: 200, marioLives: 3, marioLarge: false, levelDifficulty: 1, ValueMinOddsTubes: 0, ValueMultiOddsTubes: 0},
+	'b': {levelName: 'B2', seed: 201, marioLives: 3, marioLarge: false, levelDifficulty: 1, ValueMinOddsTubes: 0, ValueMultiOddsTubes: 0},
+	'c': {levelName: 'C3', seed: 201, marioLives: 3, marioLarge: false, levelDifficulty: 1, ValueMinOddsTubes: 0, ValueMultiOddsTubes: 0},
+	'd': {levelName: 'D4', seed: 201, marioLives: 3, marioLarge: false, levelDifficulty: 2},
+	'e': {levelName: 'E5', seed: 201, marioLives: 3, marioLarge: false, levelDifficulty: 2},
+	'f': {levelName: 'F6', seed: 201, marioLives: 3, marioLarge: false, levelDifficulty: 3},
+	'g': {levelName: 'G7', seed: 201, marioLives: 3, marioLarge: false, levelDifficulty: 3},
+	'h': {levelName: 'H8', seed: 201, marioLives: 3, marioLarge: false, levelDifficulty: 4},
+	'i': {levelName: 'I9', seed: 201, marioLives: 3, marioLarge: false, levelDifficulty: 5},
+	'j': {levelName: 'J10', seed: 201, marioLives: 3, marioLarge: false, levelDifficulty: 5},
+	'k': {levelName: 'K11', seed: 201, marioLives: 3, marioLarge: false, levelDifficulty: 5},
+	'l': {levelName: 'L12', seed: 201, marioLives: 3, marioLarge: false, levelDifficulty: 6},
+	'm': {levelName: 'M13', seed: 201, marioLives: 3, marioLarge: false, levelDifficulty: 6},
+	'n': {levelName: 'N14', seed: 201, marioLives: 3, marioLarge: false, levelDifficulty: 7},
+	'o': {levelName: 'O15', seed: 201, marioLives: 3, marioLarge: false, levelDifficulty: 7},
+	'p': {levelName: 'P16', seed: 201, marioLives: 3, marioLarge: false, levelDifficulty: 8},
+	'q': {levelName: 'Q17', seed: 201, marioLives: 3, marioLarge: false, levelDifficulty: 8},
+	'r': {levelName: 'R18', seed: 201, marioLives: 3, marioLarge: false, levelDifficulty: 9},
+	's': {levelName: 'S19', seed: 201, marioLives: 3, marioLarge: false, levelDifficulty: 9},
+	't': {levelName: 'T20', seed: 201, marioLives: 5, marioLarge: true, levelDifficulty: 10}
 };
 
 var Experiment = {
@@ -37,6 +37,7 @@ var Experiment = {
 			return this.profile[theName];
 		} else {
 			console.error('Unknown experiment game profile named "' + theName + '"');
+			return undefined;
 		}
 	}
 };

@@ -50,6 +50,8 @@ Mario.TitleState.prototype.Enter = function() {
     Mario.PlayTitleMusic();
 
     if(GlobalInfo.experiment) {
+        Mario.MarioCharacter.Lives = Experiment.config('marioLives') || 3;
+        
         GlobalInfo.game = GlobalInfo.game || 4;
         GlobalInfo.data.logMilestone(GlobalInfo.user, GlobalInfo.game, 'menu_start');
     }
