@@ -9,16 +9,44 @@ Mario.LevelGenerator = function(width, height) {
     this.Odds = [];
     this.TotalOdds = 0;
     this.Difficulty = 0;
+
     this.CoinsLineStartOffset = 4;      // max amount of tiles that will be occupied before placing coins in a line of coins
     this.CoinsLineEndOffset = 4;        // max amount of tiles that will be occupied before stop placing coins in a line of coins
     this.CoinsLineAdditionalHeight = 2; // additional height to be added to a coin position. Recommended 0 to 2 (inclusive). Values grater than 2 will interfer with blocks.
     this.BlocksLineStartOffset = 4;     // max amount of tiles that will be occupied before placing blocks in a line of blocks
     this.BlocksLineEndOffset = 4;       // max amount of tiles that will be occupied before stop placing blocks in a line of blocks
+
+    this.ValueOddsStraight = 20;
+    this.ValueOddsHillStraight = 10;
+    this.ValueMinOddsTubes = 2;
+    this.ValueMultiOddsTubes = 1;
+    this.ValueMinOddsJump = 0;
+    this.ValueMultiOddsJump = 2;
+    this.ValueMinOddsCannon = -10;
+    this.ValueMultiOddsCannon = 5;
+
     this.Type = 0;
     this.PRNG = null;
 };
 
 Mario.LevelGenerator.prototype = {
+    AdjustOddsValues: function() {
+        if(!GlobalInfo.experiment) {
+            return;
+        }
+
+        for(var prop in this) {
+            if(typeof(this[prop]) == "function") {
+                continue;
+            }
+
+            if(Experiment.profile[prop] !== undefined && Experiment.profile[prop] != null) {
+                this[prop] = Experiment.profile[prop];
+                console.log('levelGenerator.' + prop + ' = ' + Experiment.profile[prop]);
+            }
+        }
+    },
+
     Random: function() {
         if(this.PRNG == null) {
             return Math.random();
@@ -43,11 +71,13 @@ Mario.LevelGenerator.prototype = {
 
         this.Type = type;
         this.Difficulty = difficulty;
-        this.Odds[Mario.Odds.Straight] = 20;
-        this.Odds[Mario.Odds.HillStraight] = 10;
-        this.Odds[Mario.Odds.Tubes] = 2 + difficulty;
-        this.Odds[Mario.Odds.Jump] = 2 * difficulty;
-        this.Odds[Mario.Odds.Cannon] = -10 + 5 * difficulty;
+
+        this.AdjustOddsValues();
+        this.Odds[Mario.Odds.Straight]     = this.ValueOddsStraight;
+        this.Odds[Mario.Odds.HillStraight] = this.ValueOddsHillStraight;
+        this.Odds[Mario.Odds.Tubes]        = this.ValueMinOddsTubes  + this.ValueMultiOddsTubes  * difficulty;
+        this.Odds[Mario.Odds.Jump]         = this.ValueMinOddsJump   + this.ValueMultiOddsJump   * difficulty;
+        this.Odds[Mario.Odds.Cannon]       = this.ValueMinOddsCannon + this.ValueMultiOddsCannon * difficulty;
 
         if (this.Type !== Mario.LevelType.Overground) {
             this.Odds[Mario.Odds.HillStraight] = 0;
