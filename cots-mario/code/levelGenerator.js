@@ -9,6 +9,9 @@ Mario.LevelGenerator = function(width, height) {
     this.Odds = [];
     this.TotalOdds = 0;
     this.Difficulty = 0;
+    this.CoinsLineStartOffset = 4;      // max amount of tiles that will be occupied before placing coins in a line of coins
+    this.CoinsLineEndOffset = 4;        // max amount of tiles that will be occupied before stop placing coins in a line of coins
+    this.CoinsLineAdditionalHeight = 2; // additional height to be added to a coin position. Recommended 0 to 2 (inclusive). Values grater than 2 will interfer with blocks.
     this.Type = 0;
     this.PRNG = null;
 };
@@ -338,14 +341,18 @@ Mario.LevelGenerator.prototype = {
             return;
         }
 
-        var rocks = true, s = (this.Random() * 4) | 0, e = (this.Random() * 4) | 0, x = 0;
+        var rocks = true,
+            s = (this.Random() * this.CoinsLineStartOffset) | 0,
+            e = (this.Random() * this.CoinsLineEndOffset) | 0,
+            h = (this.Random() * this.CoinsLineAdditionalHeight) | 0,
+            x = 0;
 
         this.AddEnemyLine(level, x0 + 1, x1 - 1, floor - 1);
 
         if (floor - 2 > 0) {
             if ((x1 - 1 - e) - (x0 + 1 + s) > 1) {
                 for (x = x0 + 1 + s; x < x1 - 1 - e; x++) {
-                    level.SetBlock(x, floor - 2, 2 + 2 * 16);
+                    level.SetBlock(x, floor - 2 - h, 2 + 2 * 16);
                 }
             }
         }
