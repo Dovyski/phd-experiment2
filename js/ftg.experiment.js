@@ -21,7 +21,8 @@
          {id: 1, name: 'card-flipper', url: '../card-flipper/', width: 1300, height: 975, paddingLeft: 300, cots: false, questions: FTG.Questions.Game, hasRest: true},
          {id: 2, name: 'tetris', url: '../tetris/', width: 640, height: 960, paddingLeft: 600, cots: false, questions: FTG.Questions.Game, hasRest: true},
          {id: 3, name: 'platformer', url: '../platformer/', width: 1300, height: 975, paddingLeft: 300, cots: false, questions: FTG.Questions.Game, hasRest: true},
-         {id: 4, name: 'cots-mario', url: '../cots-mario/', width: 700, height: 520, paddingLeft: 600, cots: true, questions: FTG.Questions.COTS, hasRest: false}
+         {id: 4, name: 'cots-mario', url: '../cots-mario/', width: 700, height: 520, paddingLeft: 600, cots: true, questions: FTG.Questions.COTS, hasRest: false, params: {profile: 'T'}},
+         {id: 5, name: 'skeleton', url: '../skeleton/', width: 1300, height: 975, paddingLeft: 300, cots: true, questions: FTG.Questions.COTS, hasRest: false}
      ];
 
      this.mGamesSorting = [
@@ -55,7 +56,7 @@ FTG.Experiment.prototype.init = function() {
     this.mSorting = this.mUid ? this.mUid % this.mGamesSorting.length : 0;
     this.mFinished = false;
 
-    this.mData = new FTG.Collector();
+    this.mData = new FTG.Collector(this.mDebug);
 
     this.mRestTime *= 60 * 1000;
 
@@ -164,7 +165,7 @@ FTG.Experiment.prototype.generateGameURL = function(theGameInfo) {
         }
     }
 
-    return theGameInfo.url + '?user=' + this.mUid + '&game=' + theGameInfo.id + '&rand=' + Math.random() + aGameParams;
+    return theGameInfo.url + '?user=' + this.mUid + '&game=' + theGameInfo.id + '&rand=' + Math.random() + '&debug=' + this.mDebug + aGameParams;
 };
 
 FTG.Experiment.prototype.startNewGame = function() {

@@ -81,7 +81,8 @@ SetupState.prototype = {
 	},
 
 	initialize: function(theJumpToMenu) {
-		GlobalInfo.data = new FTG.Collector();
+		var aDebug = getURLParamByName('debug') || false;
+		GlobalInfo.data = new FTG.Collector(aDebug);
 
 		var aJump = theJumpToMenu === undefined ? true : theJumpToMenu;
 

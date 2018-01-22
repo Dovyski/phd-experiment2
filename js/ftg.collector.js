@@ -6,10 +6,11 @@
 
 var FTG = FTG || {};
 
-FTG.Collector = function() {
+FTG.Collector = function(theDebug) {
 	var COLLECT_INTERVAL 	= 500; 	// time, in milliseconds, to wait between logging entries.
 	var SEND_INTERVAL 		= 5000;	// time, in milliseconds, to wait until data is send to the server
 
+	var mDebug = theDebug;
 	var mLastTimeCollected = 0;
 	var mLastTimeSent = 0;
 	var mServerURL = '../backend/';
@@ -50,7 +51,13 @@ FTG.Collector = function() {
 	this.log = function(theData, theForce) {
 		// Collect only if it is time to do it
 		if(isTimeToCollect() || theForce) {
-			mData.push({t: getTimestamp(), d: JSON.stringify(theData)});
+			var aStringData = JSON.stringify(theData);
+
+			if(mDebug) {
+				console.debug('[Collector] [DEBUG] ', aStringData);
+			}
+
+			mData.push({t: getTimestamp(), d: aStringData});
 
 			if(!theForce) {
 				mLastTimeCollected = getTimestamp();
