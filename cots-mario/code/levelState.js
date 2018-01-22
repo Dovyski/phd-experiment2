@@ -85,7 +85,7 @@ Mario.LevelState.prototype.Enter = function() {
 	this.GotoMapState = false;
 	this.GotoLoseState = false;
 
-    GlobalInfo.data.log({a: 'level_start', t: this.LevelType, d: this.LevelDifficulty, s: this.LevelSeed}, true);
+    GlobalInfo.data.log({a: 'level_start', n: Experiment.config('levelName')}, true);
 };
 
 Mario.LevelState.prototype.Exit = function() {
