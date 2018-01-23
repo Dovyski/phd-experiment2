@@ -30,7 +30,7 @@ Mario.LoseState.prototype.Enter = function() {
     this.gameOver.Y = 68;
 
     this.font = Mario.SpriteCuts.CreateBlackFont();
-    this.font.Strings[0] = { String: this.message, X: 116, Y: 160 };
+    this.font.Strings[0] = { String: this.message, X: 160 - ((this.message.length * 8 / 2) | 0), Y: 160 };
     this.font.Strings[1] = { String: "Click HERE to continue", X: 70, Y: 175 };
 
     this.drawManager.Add(this.font);
