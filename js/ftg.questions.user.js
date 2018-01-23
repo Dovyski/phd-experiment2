@@ -82,5 +82,14 @@
              {value: 4, label: 'A bit more stressed than usual'},
              {value: 5, label: 'Unusually stressed'}
          ]
-     }
+     },
+     {
+         text: 'How familiar are you with the research related to this experiment?',
+         options: [
+             {value: 1, label: 'Unfamiliar (e.g. never heard about it)'},
+             {value: 2, label: 'Not very familiar (e.g. heard something about it)'},
+             {value: 3, label: 'Moderately familiar (e.g. attended a seminar/guest lecture about it)'},
+             {value: 4, label: 'Very familiar (e.g. read a scientific paper or text about it)'}
+         ]
+     },
  ];
