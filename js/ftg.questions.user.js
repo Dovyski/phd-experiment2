@@ -53,7 +53,7 @@
          ]
      },
      {
-         text: 'How familiar are platform games (e.g. jump/slide game you just played) to you?',
+         text: 'How familiar are platform games (e.g. jump/slide games you just played) to you?',
          hide: true,
          options: [
              {value: 1, label: 'Unfamiliar'},
@@ -82,13 +82,5 @@
              {value: 4, label: 'A bit more stressed than usual'},
              {value: 5, label: 'Unusually stressed'}
          ]
-     },
-     {
-         text: 'Which of the following profiles describes you better in terms of what type of digital game player you are?',
-         hide: true,
-         options: [
-             {value: 1, label: 'I don’t like challenges, I just want easy games (they are fun)'},
-             {value: 2, label: 'I like challenging games, the more difficult, the better'}
-         ]
-     },
+     }
  ];
