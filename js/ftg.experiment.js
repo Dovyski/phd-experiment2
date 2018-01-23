@@ -18,20 +18,26 @@
      this.mCalmSound;
 
      this.mGames = [
+         // Calibration games, from 0 to 2 (inclusive)
          {id: 1, name: 'card-flipper', url: '../card-flipper/', width: 1300, height: 975, paddingLeft: 300, cots: false, questions: FTG.Questions.Game, hasRest: true},
          {id: 2, name: 'tetris', url: '../tetris/', width: 640, height: 960, paddingLeft: 600, cots: false, questions: FTG.Questions.Game, hasRest: true},
          {id: 3, name: 'platformer', url: '../platformer/', width: 1300, height: 975, paddingLeft: 300, cots: false, questions: FTG.Questions.Game, hasRest: true},
-         {id: 4, name: 'cots-mario', url: '../cots-mario/', width: 700, height: 520, paddingLeft: 600, cots: true, questions: FTG.Questions.COTS, hasRest: false, params: {profile: 'T'}},
-         {id: 5, name: 'skeleton', url: '../skeleton/', width: 1300, height: 975, paddingLeft: 300, cots: true, questions: FTG.Questions.COTS, hasRest: false}
+
+         // COTS games, from 3 (inclusive) to 23 (inclusive)
+         {id: 4, name: 'cots-mario', url: '../cots-mario/', width: 700, height: 520, paddingLeft: 600, cots: true, questions: FTG.Questions.COTS, hasRest: false, params: {profile: 'T'}}
+     ];
+
+     this.mCOTSSorting = [
+         3, 3, 3
      ];
 
      this.mGamesSorting = [
-         [0, 1, 2, 3],
-         [0, 2, 1, 3],
-         [1, 0, 2, 3],
-         [1, 2, 0, 3],
-         [2, 1, 0, 3],
-         [2, 0, 1, 3]
+         [0, 1, 2].concat(this.mCOTSSorting),
+         [0, 2, 1].concat(this.mCOTSSorting),
+         [1, 0, 2].concat(this.mCOTSSorting),
+         [1, 2, 0].concat(this.mCOTSSorting),
+         [2, 1, 0].concat(this.mCOTSSorting),
+         [2, 0, 1].concat(this.mCOTSSorting)
      ];
      this.mSorting;
 
