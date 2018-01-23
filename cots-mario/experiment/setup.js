@@ -23,7 +23,7 @@ var EXPERIMENT_GAME_PROFILES = {
 	'q': {levelName: 'Q17', sessionMaxDurationSeconds: 0, levelWidth: 340, seed: 201, marioLives: 3, marioLarge: false, levelDifficulty: 8},
 	'r': {levelName: 'R18', sessionMaxDurationSeconds: 0, levelWidth: 340, seed: 201, marioLives: 3, marioLarge: false, levelDifficulty: 9},
 	's': {levelName: 'S19', sessionMaxDurationSeconds: 0, levelWidth: 340, seed: 201, marioLives: 3, marioLarge: false, levelDifficulty: 9},
-	't': {levelName: 'T20', sessionMaxDurationSeconds: 0, levelWidth: 340, seed: 201, marioLives: 5, marioLarge: true, levelDifficulty: 10}
+	't': {levelName: 'T20', sessionMaxDurationSeconds: 0, levelWidth: 340, seed: 201, marioLives: 5, marioLarge: true, levelDifficulty: 10, JumpMinLength: 3, JumpLengthVariation: 3}
 };
 
 var Experiment = {

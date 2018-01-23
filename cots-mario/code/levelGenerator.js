@@ -15,6 +15,8 @@ Mario.LevelGenerator = function(width, height) {
     this.CoinsLineAdditionalHeight = 2; // additional height to be added to a coin position. Recommended 0 to 2 (inclusive). Values grater than 2 will interfer with blocks.
     this.BlocksLineStartOffset = 4;     // max amount of tiles that will be occupied before placing blocks in a line of blocks
     this.BlocksLineEndOffset = 4;       // max amount of tiles that will be occupied before stop placing blocks in a line of blocks
+    this.JumpMinLength = 2;             // minimum length of any jump (gap), in tiles
+    this.JumpLengthVariation = 2;       // a random value from 0 to JumpLengthVariation (exclusive) will be added to JumpMinLength to define the length of any jump (gap). Recommended value is 2.
 
     this.ValueOddsStraight = 20;
     this.ValueOddsHillStraight = 10;
@@ -152,7 +154,7 @@ Mario.LevelGenerator.prototype = {
     },
 
     BuildJump: function(level, xo, maxLength) {
-        var js = ((this.Random() * 4) | 0) + 2, jl = ((this.Random() * 2) | 0) + 2, length = js * 2 + jl, x = 0, y = 0,
+        var js = ((this.Random() * 4) | 0) + 2, jl = ((this.Random() * this.JumpLengthVariation) | 0) + this.JumpMinLength, length = js * 2 + jl, x = 0, y = 0,
             hasStairs = ((this.Random() * 3) | 0) === 0, floor = this.Height - 1 - ((this.Random() * 4) | 0);
 
         for (x = xo; x < xo + length; x++) {
