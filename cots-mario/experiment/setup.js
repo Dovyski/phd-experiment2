@@ -4,26 +4,26 @@
  */
 
 var EXPERIMENT_GAME_PROFILES = {
-	'a': {levelName: 'A1', seed: 200, marioLives: 3, marioLarge: false, levelDifficulty: 1, ValueMinOddsTubes: 0, ValueMultiOddsTubes: 0},
-	'b': {levelName: 'B2', seed: 201, marioLives: 3, marioLarge: false, levelDifficulty: 1, ValueMinOddsTubes: 0, ValueMultiOddsTubes: 0},
-	'c': {levelName: 'C3', seed: 201, marioLives: 3, marioLarge: false, levelDifficulty: 1, ValueMinOddsTubes: 0, ValueMultiOddsTubes: 0},
-	'd': {levelName: 'D4', seed: 201, marioLives: 3, marioLarge: false, levelDifficulty: 2},
-	'e': {levelName: 'E5', seed: 201, marioLives: 3, marioLarge: false, levelDifficulty: 2},
-	'f': {levelName: 'F6', seed: 201, marioLives: 3, marioLarge: false, levelDifficulty: 3},
-	'g': {levelName: 'G7', seed: 201, marioLives: 3, marioLarge: false, levelDifficulty: 3},
-	'h': {levelName: 'H8', seed: 201, marioLives: 3, marioLarge: false, levelDifficulty: 4},
-	'i': {levelName: 'I9', seed: 201, marioLives: 3, marioLarge: false, levelDifficulty: 5},
-	'j': {levelName: 'J10', seed: 201, marioLives: 3, marioLarge: false, levelDifficulty: 5},
-	'k': {levelName: 'K11', seed: 201, marioLives: 3, marioLarge: false, levelDifficulty: 5},
-	'l': {levelName: 'L12', seed: 201, marioLives: 3, marioLarge: false, levelDifficulty: 6},
-	'm': {levelName: 'M13', seed: 201, marioLives: 3, marioLarge: false, levelDifficulty: 6},
-	'n': {levelName: 'N14', seed: 201, marioLives: 3, marioLarge: false, levelDifficulty: 7},
-	'o': {levelName: 'O15', seed: 201, marioLives: 3, marioLarge: false, levelDifficulty: 7},
-	'p': {levelName: 'P16', seed: 201, marioLives: 3, marioLarge: false, levelDifficulty: 8},
-	'q': {levelName: 'Q17', seed: 201, marioLives: 3, marioLarge: false, levelDifficulty: 8},
-	'r': {levelName: 'R18', seed: 201, marioLives: 3, marioLarge: false, levelDifficulty: 9},
-	's': {levelName: 'S19', seed: 201, marioLives: 3, marioLarge: false, levelDifficulty: 9},
-	't': {levelName: 'T20', seed: 201, marioLives: 5, marioLarge: true, levelDifficulty: 10}
+	'a': {levelName: 'A1', levelWidth: 340, seed: 200, marioLives: 3, marioLarge: false, levelDifficulty: 1, ValueMinOddsTubes: 0, ValueMultiOddsTubes: 0},
+	'b': {levelName: 'B2', levelWidth: 340, seed: 201, marioLives: 3, marioLarge: false, levelDifficulty: 1, ValueMinOddsTubes: 0, ValueMultiOddsTubes: 0},
+	'c': {levelName: 'C3', levelWidth: 340, seed: 201, marioLives: 3, marioLarge: false, levelDifficulty: 1, ValueMinOddsTubes: 0, ValueMultiOddsTubes: 0},
+	'd': {levelName: 'D4', levelWidth: 340, seed: 201, marioLives: 3, marioLarge: false, levelDifficulty: 2},
+	'e': {levelName: 'E5', levelWidth: 340, seed: 201, marioLives: 3, marioLarge: false, levelDifficulty: 2},
+	'f': {levelName: 'F6', levelWidth: 340, seed: 201, marioLives: 3, marioLarge: false, levelDifficulty: 3},
+	'g': {levelName: 'G7', levelWidth: 340, seed: 201, marioLives: 3, marioLarge: false, levelDifficulty: 3},
+	'h': {levelName: 'H8', levelWidth: 340, seed: 201, marioLives: 3, marioLarge: false, levelDifficulty: 4},
+	'i': {levelName: 'I9', levelWidth: 340, seed: 201, marioLives: 3, marioLarge: false, levelDifficulty: 5},
+	'j': {levelName: 'J10', levelWidth: 340, seed: 201, marioLives: 3, marioLarge: false, levelDifficulty: 5},
+	'k': {levelName: 'K11', levelWidth: 340, seed: 201, marioLives: 3, marioLarge: false, levelDifficulty: 5},
+	'l': {levelName: 'L12', levelWidth: 340, seed: 201, marioLives: 3, marioLarge: false, levelDifficulty: 6},
+	'm': {levelName: 'M13', levelWidth: 340, seed: 201, marioLives: 3, marioLarge: false, levelDifficulty: 6},
+	'n': {levelName: 'N14', levelWidth: 340, seed: 201, marioLives: 3, marioLarge: false, levelDifficulty: 7},
+	'o': {levelName: 'O15', levelWidth: 340, seed: 201, marioLives: 3, marioLarge: false, levelDifficulty: 7},
+	'p': {levelName: 'P16', levelWidth: 340, seed: 201, marioLives: 3, marioLarge: false, levelDifficulty: 8},
+	'q': {levelName: 'Q17', levelWidth: 340, seed: 201, marioLives: 3, marioLarge: false, levelDifficulty: 8},
+	'r': {levelName: 'R18', levelWidth: 340, seed: 201, marioLives: 3, marioLarge: false, levelDifficulty: 9},
+	's': {levelName: 'S19', levelWidth: 340, seed: 201, marioLives: 3, marioLarge: false, levelDifficulty: 9},
+	't': {levelName: 'T20', levelWidth: 340, seed: 201, marioLives: 5, marioLarge: true, levelDifficulty: 10}
 };
 
 var Experiment = {
