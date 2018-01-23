@@ -8,32 +8,43 @@
 
  FTG.Questions.COTS = [
      {
-         text: 'COTS On a scale from 1 to 5, how <em>bored</em> did you feel at the <em>beginning</em> of the game?',
+         text: 'How <em>boring</em> was the game?',
          options: [
-             {value: 1, label: '(Not bored at all)'},
+             {value: 1, label: '(Not boring at all)'},
              {value: 2, label: ''},
              {value: 3, label: ''},
              {value: 4, label: ''},
-             {value: 5, label: '(Extremely bored)'}
+             {value: 5, label: '(Extremely boring)'}
          ]
      },
      {
-         text: 'COTS On a scale from 1 to 5, how <em>stressed</em> did you feel at the <em>beginning</em> of the game?',
+         text: 'How <em>stressful</em> was the game?',
          options: [
-             {value: 1, label: '(Not stressed at all)'},
+             {value: 1, label: '(Not stressful at all)'},
              {value: 2, label: ''},
              {value: 3, label: ''},
              {value: 4, label: ''},
-             {value: 5, label: '(Extremely stressed)'}
+             {value: 5, label: '(Extremely stressful)'}
          ]
      },
      {
-         text: 'COTS Did you understand how to play the game properly?',
-         hide: true,
+         text: 'How <em>fun</em> was the game?',
          options: [
-             {value: 2, label: 'Yes'},
-             {value: 1, label: 'Yes, but I was a bit confused'},
-             {value: 0, label: 'No'}
+             {value: 1, label: '(Not fun at all)'},
+             {value: 2, label: ''},
+             {value: 3, label: ''},
+             {value: 4, label: ''},
+             {value: 5, label: '(Extremely fun)'}
+         ]
+     },
+     {
+         text: 'How <em>challenging</em> was the game?',
+         options: [
+             {value: 1, label: '(Not challenging at all)'},
+             {value: 2, label: ''},
+             {value: 3, label: ''},
+             {value: 4, label: ''},
+             {value: 5, label: '(Extremely challenging)'}
          ]
      },
  ];
