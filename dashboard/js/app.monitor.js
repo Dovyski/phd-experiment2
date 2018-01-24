@@ -6,6 +6,8 @@ APP.Monitor = function(theContainerId, theApp) {
     this.mIntervalId = -1;
     this.mSession = null;
     this.mLastReceivedInfo = null;
+    this.mPlayedGames = [];
+    this.mCurrentMilestone = '?';
 };
 
 APP.Monitor.prototype.run = function() {
@@ -24,6 +26,27 @@ APP.Monitor.prototype.stop = function() {
     clearInterval(this.mIntervalId);
 };
 
+APP.Monitor.prototype.updateActiveSessionCurrentMilestone = function(theBackendData) {
+    var aStatus = '';
+
+    for(var i = 0, aSize = theBackendData.length; i < aSize; i++) {
+        var aEntry = theBackendData[i];
+        var aData = JSON.parse(aEntry.d);
+
+        if(typeof(aData) == "string") {
+            aStatus = aData;
+        }
+    }
+
+    if(aStatus != '') {
+        this.mCurrentMilestone = aStatus;
+    }
+};
+
+APP.Monitor.prototype.prettifyMilestoneString = function(theCurrentStatus) {
+    return theCurrentStatus.toUpperCase();
+};
+
 APP.Monitor.prototype.updateActiveSessionInfo = function(theData) {
     if(!$('#data-table').is(':visible')) {
         $('#data-table').show();
@@ -31,9 +54,24 @@ APP.Monitor.prototype.updateActiveSessionInfo = function(theData) {
     }
 
     $('#data-table-user').html(this.mSession.uuid);
-    $('#data-table-game').html(this.mSession.uuid);
+
+    if(theData == null) {
+        return;
+    }
+
+    if(this.mPlayedGames.length == 0 || (this.mPlayedGames[this.mPlayedGames.length - 1] != theData.fk_game && theData.fk_game > 0)) {
+        this.mPlayedGames.push(theData.fk_game);
+    }
+
+    this.updateActiveSessionCurrentMilestone(theData.data);
+
+    $('#data-table-status').html(this.prettifyMilestoneString(this.mCurrentMilestone));
+    $('#data-table-milestone').html(this.mCurrentMilestone);
+
+    $('#data-table-current').html(theData.fk_game > 0 ? theData.fk_game : '<em>none</em>');
+    $('#data-table-played').html(this.mPlayedGames.join(', '));
     $('#data-table-time').html(this.getTimeSinceBegining(theData.timestamp));
-    $('#data-table-status').html(JSON.stringify(theData.data));
+    $('#data-table-log').html('<code>' + JSON.stringify(theData.data) + '</code>');
 }
 
 APP.Monitor.prototype.update = function(theMonitor) {
@@ -52,9 +90,7 @@ APP.Monitor.prototype.update = function(theMonitor) {
                 this.mLastReceivedInfo = theData.data[theData.data.length - 1];
             }
 
-            if(this.mLastReceivedInfo) {
-                this.updateActiveSessionInfo(this.mLastReceivedInfo);
-            }
+            this.updateActiveSessionInfo(this.mLastReceivedInfo);
         }
     }, theMonitor);
 };
@@ -92,10 +128,12 @@ APP.Monitor.prototype.buildLayoutStructure = function() {
                         '<div class="col-md-12" style="padding: 10px;">' +
                             '<table class="table table-bordered" id="data-table" style="display:none;">' +
                                 '<tr><td class="active-status-prop">User</td><td id="data-table-user"></td></tr>' +
-                                '<tr><td class="active-status-prop">Time in experiment</td><td id="data-table-time"></td></tr>' +
+                                '<tr><td class="active-status-prop">Session duration</td><td id="data-table-time"></td></tr>' +
                                 '<tr><td class="active-status-prop">Current game</td><td id="data-table-current"></td></tr>' +
                                 '<tr><td class="active-status-prop">Played games</td><td id="data-table-played"></td></tr>' +
                                 '<tr><td class="active-status-prop">Status</td><td id="data-table-status"></td></tr>' +
+                                '<tr><td class="active-status-prop">Last milestone</td><td id="data-table-milestone"></td></tr>' +
+                                '<tr><td class="active-status-prop">Log</td><td id="data-table-log"></td></tr>' +
                             '</table>' +
                             '<p id="data-waiting">Waiting for session to start. Click <a href="javascript:void(0)" class="action-link" data-action="active">here</a> to refresh.</p>' +
                         '</div>' +

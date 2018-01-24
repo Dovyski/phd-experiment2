@@ -14,6 +14,19 @@ APP.Main = function() {
 
         this.generateSessionsMenu();
         this.generateExperimentsMenu();
+        this.makeLinksClickable();
+    };
+
+    this.makeLinksClickable = function() {
+        var aSelf = this;
+
+        $('a.action-link').click(function() {
+            var aAction = $(this).data('action');
+
+            if(aAction == 'active') {
+                aSelf.showActiveSession();
+            }
+        });
     };
 
     this.generateSessionsMenu = function() {
@@ -29,14 +42,6 @@ APP.Main = function() {
             '</li>';
 
         $('#sidebar-menu').append('<ul class="nav side-menu">' + aOut + '</ul>');
-
-        $('#sidebar-menu a.action-link').click(function() {
-            var aAction = $(this).data('action');
-
-            if(aAction == 'active') {
-                aSelf.showActiveSession();
-            }
-        });
     };
 
     this.showActiveSession = function() {
