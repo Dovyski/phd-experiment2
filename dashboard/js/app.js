@@ -72,7 +72,6 @@ APP.Main = function() {
             });
 
             customUpdateSidebarMenu();
-            aSelf.showExperimentData(409);
         });
     };
 

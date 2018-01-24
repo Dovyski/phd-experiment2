@@ -24,6 +24,18 @@ APP.Monitor.prototype.stop = function() {
     clearInterval(this.mIntervalId);
 };
 
+APP.Monitor.prototype.updateActiveSessionInfo = function(theData) {
+    if(!$('#data-table').is(':visible')) {
+        $('#data-table').show();
+        $('#data-waiting').hide();
+    }
+
+    $('#data-table-user').html(this.mSession.uuid);
+    $('#data-table-game').html(this.mSession.uuid);
+    $('#data-table-time').html(this.getTimeSinceBegining(theData.timestamp));
+    $('#data-table-status').html(JSON.stringify(theData.data));
+}
+
 APP.Monitor.prototype.update = function(theMonitor) {
     if(theMonitor.mSession == null) {
         return;
@@ -35,22 +47,14 @@ APP.Monitor.prototype.update = function(theMonitor) {
     };
 
     theMonitor.mApp.loadData(aConfig, function(theData) {
-        var i,
-            aOut = '',
-            aEntry;
-
         if(theData.success) {
             if(theData.data && theData.data.length > 0) {
                 this.mLastReceivedInfo = theData.data[theData.data.length - 1];
             }
 
             if(this.mLastReceivedInfo) {
-                aOut += this.getTimeSinceBegining(this.mLastReceivedInfo.timestamp) + ': ' + JSON.stringify(this.mLastReceivedInfo.data) + '<br />';
+                this.updateActiveSessionInfo(this.mLastReceivedInfo);
             }
-
-            aOut = 'User: ' + this.mSession.uuid + '<br/>' + aOut;
-
-            $('#data-area').html(aOut);
         }
     }, theMonitor);
 };
@@ -85,7 +89,16 @@ APP.Monitor.prototype.buildLayoutStructure = function() {
                 '</div>' +
                 '<div class="x_content">' +
                     '<div class="row">' +
-                        '<div class="col-md-12" style="padding: 10px;" id="data-area">Waiting for session to start.</div>' +
+                        '<div class="col-md-12" style="padding: 10px;">' +
+                            '<table class="table table-bordered" id="data-table" style="display:none;">' +
+                                '<tr><td class="active-status-prop">User</td><td id="data-table-user"></td></tr>' +
+                                '<tr><td class="active-status-prop">Time in experiment</td><td id="data-table-time"></td></tr>' +
+                                '<tr><td class="active-status-prop">Current game</td><td id="data-table-current"></td></tr>' +
+                                '<tr><td class="active-status-prop">Played games</td><td id="data-table-played"></td></tr>' +
+                                '<tr><td class="active-status-prop">Status</td><td id="data-table-status"></td></tr>' +
+                            '</table>' +
+                            '<p id="data-waiting">Waiting for session to start. Click <a href="javascript:void(0)" class="action-link" data-action="active">here</a> to refresh.</p>' +
+                        '</div>' +
                     '</div>' +
                     '<div class="row">' +
                         '<div id="legend-area" class="col-md-12"></div>' +

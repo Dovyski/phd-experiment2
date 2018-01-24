@@ -6373,3 +6373,8 @@ ul.notifications {
 .demographics td {
     padding: 4px;
 }
+
+.active-status-prop {
+    font-weight: bold;
+    width: 20%;
+}
