@@ -18,26 +18,42 @@
      this.mCalmSound;
 
      this.mGames = [
-         // Calibration games, from 0 to 2 (inclusive)
          {id: 1, name: 'card-flipper', url: '../card-flipper/', width: 1300, height: 975, paddingLeft: 300, cots: false, questions: FTG.Questions.Game, hasRest: true},
          {id: 2, name: 'tetris', url: '../tetris/', width: 640, height: 960, paddingLeft: 600, cots: false, questions: FTG.Questions.Game, hasRest: true},
          {id: 3, name: 'platformer', url: '../platformer/', width: 1300, height: 975, paddingLeft: 300, cots: false, questions: FTG.Questions.Game, hasRest: true},
-
-         // COTS games, from 3 (inclusive) to 23 (inclusive)
-         {id: 4, name: 'cots-mario', url: '../cots-mario/', width: 700, height: 520, paddingLeft: 600, cots: true, questions: FTG.Questions.COTS, hasRest: false, params: {profile: 'T'}}
+         {id: 4, name: 'cots-mario', url: '../cots-mario/', width: 700, height: 520, paddingLeft: 600, cots: true, questions: FTG.Questions.COTS, hasRest: false, params: {profile: 'A'}},
+         {id: 5, name: 'cots-mario', url: '../cots-mario/', width: 700, height: 520, paddingLeft: 600, cots: true, questions: FTG.Questions.COTS, hasRest: false, params: {profile: 'B'}},
+         {id: 6, name: 'cots-mario', url: '../cots-mario/', width: 700, height: 520, paddingLeft: 600, cots: true, questions: FTG.Questions.COTS, hasRest: false, params: {profile: 'C'}},
+         {id: 7, name: 'cots-mario', url: '../cots-mario/', width: 700, height: 520, paddingLeft: 600, cots: true, questions: FTG.Questions.COTS, hasRest: false, params: {profile: 'D'}},
+         {id: 8, name: 'cots-mario', url: '../cots-mario/', width: 700, height: 520, paddingLeft: 600, cots: true, questions: FTG.Questions.COTS, hasRest: false, params: {profile: 'E'}},
+         {id: 9, name: 'cots-mario', url: '../cots-mario/', width: 700, height: 520, paddingLeft: 600, cots: true, questions: FTG.Questions.COTS, hasRest: false, params: {profile: 'F'}},
+         {id: 10, name: 'cots-mario', url: '../cots-mario/', width: 700, height: 520, paddingLeft: 600, cots: true, questions: FTG.Questions.COTS, hasRest: false, params: {profile: 'G'}},
+         {id: 11, name: 'cots-mario', url: '../cots-mario/', width: 700, height: 520, paddingLeft: 600, cots: true, questions: FTG.Questions.COTS, hasRest: false, params: {profile: 'H'}},
+         {id: 12, name: 'cots-mario', url: '../cots-mario/', width: 700, height: 520, paddingLeft: 600, cots: true, questions: FTG.Questions.COTS, hasRest: false, params: {profile: 'I'}},
+         {id: 13, name: 'cots-mario', url: '../cots-mario/', width: 700, height: 520, paddingLeft: 600, cots: true, questions: FTG.Questions.COTS, hasRest: false, params: {profile: 'J'}},
+         {id: 14, name: 'cots-mario', url: '../cots-mario/', width: 700, height: 520, paddingLeft: 600, cots: true, questions: FTG.Questions.COTS, hasRest: false, params: {profile: 'K'}},
+         {id: 15, name: 'cots-mario', url: '../cots-mario/', width: 700, height: 520, paddingLeft: 600, cots: true, questions: FTG.Questions.COTS, hasRest: false, params: {profile: 'L'}},
+         {id: 16, name: 'cots-mario', url: '../cots-mario/', width: 700, height: 520, paddingLeft: 600, cots: true, questions: FTG.Questions.COTS, hasRest: false, params: {profile: 'M'}},
+         {id: 16, name: 'cots-mario', url: '../cots-mario/', width: 700, height: 520, paddingLeft: 600, cots: true, questions: FTG.Questions.COTS, hasRest: false, params: {profile: 'N'}},
+         {id: 17, name: 'cots-mario', url: '../cots-mario/', width: 700, height: 520, paddingLeft: 600, cots: true, questions: FTG.Questions.COTS, hasRest: false, params: {profile: 'O'}},
+         {id: 18, name: 'cots-mario', url: '../cots-mario/', width: 700, height: 520, paddingLeft: 600, cots: true, questions: FTG.Questions.COTS, hasRest: false, params: {profile: 'P'}},
+         {id: 19, name: 'cots-mario', url: '../cots-mario/', width: 700, height: 520, paddingLeft: 600, cots: true, questions: FTG.Questions.COTS, hasRest: false, params: {profile: 'Q'}},
+         {id: 20, name: 'cots-mario', url: '../cots-mario/', width: 700, height: 520, paddingLeft: 600, cots: true, questions: FTG.Questions.COTS, hasRest: false, params: {profile: 'R'}},
+         {id: 21, name: 'cots-mario', url: '../cots-mario/', width: 700, height: 520, paddingLeft: 600, cots: true, questions: FTG.Questions.COTS, hasRest: false, params: {profile: 'S'}},
+         {id: 22, name: 'cots-mario', url: '../cots-mario/', width: 700, height: 520, paddingLeft: 600, cots: true, questions: FTG.Questions.COTS, hasRest: false, params: {profile: 'T'}},
      ];
 
      this.mCOTSSorting = [
-         3, 3, 3
+         4, 5, 6
      ];
 
      this.mGamesSorting = [
-         [0, 1, 2].concat(this.mCOTSSorting),
-         [0, 2, 1].concat(this.mCOTSSorting),
-         [1, 0, 2].concat(this.mCOTSSorting),
-         [1, 2, 0].concat(this.mCOTSSorting),
-         [2, 1, 0].concat(this.mCOTSSorting),
-         [2, 0, 1].concat(this.mCOTSSorting)
+        /* 0 */ [1, 2, 3].concat(this.mCOTSSorting),
+        /* 1 */ [1, 3, 2].concat(this.mCOTSSorting),
+        /* 2 */ [2, 1, 3].concat(this.mCOTSSorting),
+        /* 3 */ [2, 3, 1].concat(this.mCOTSSorting),
+        /* 4 */ [3, 2, 1].concat(this.mCOTSSorting),
+        /* 5 */ [3, 1, 2].concat(this.mCOTSSorting)
      ];
      this.mSorting;
 
@@ -59,7 +75,7 @@ FTG.Experiment.prototype.init = function() {
     this.mBipSound = document.getElementById('bip');
     this.mTanSound = document.getElementById('tan');
     this.mCalmSound = document.getElementById('calm');
-    this.mSorting = this.mUid ? this.mUid % this.mGamesSorting.length : 0;
+    this.mSorting = this.mUid ? (this.mUid % this.mGamesSorting.length) : 0;
     this.mFinished = false;
 
     this.mData = new FTG.Collector(this.mDebug);
@@ -75,10 +91,6 @@ FTG.Experiment.prototype.init = function() {
     if(this.mUid == null) {
         alert('User id not informed! Append ?user=DDD to the URL.');
     } else {
-        // Reverse the order of the games for a subset of users.
-        if(this.mUid % 2 == 0) {
-            this.mGames.reverse();
-        }
         this.greetings();
     }
 };
@@ -344,8 +356,25 @@ FTG.Experiment.prototype.sendSubjectHome = function() {
     this.playBipSound();
 };
 
+FTG.Experiment.prototype.getGameById = function(theId) {
+    var aGame = null;
+
+    for(var i = 0, aSize = this.mGames.length; i < aSize; i++) {
+        if(this.mGames[i].id == theId) {
+            aGame = this.mGames[i];
+            break;
+        }
+    }
+
+    return aGame;
+};
+
 FTG.Experiment.prototype.getCurrentGame = function() {
-    return this.mGames[this.mGamesSorting[this.mSorting][this.mCurrentGame]];
+    var aSelectedSorting = this.mGamesSorting[this.mSorting];
+    var aCurrentGameId = aSelectedSorting[this.mCurrentGame];
+    var aCurrentGame = this.getGameById(aCurrentGameId);
+
+    return aCurrentGame;;
 };
 
 FTG.Experiment.prototype.anyMoreGamesToPlay = function() {
