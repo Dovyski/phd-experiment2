@@ -236,10 +236,10 @@ FTG.Experiment.prototype.proceedAfterQuestionnaireAnswered = function() {
     }
 };
 
-FTG.Experiment.prototype.concludeCurrentQuestionnaire = function(theData) {
+FTG.Experiment.prototype.concludeCurrentQuestionnaire = function(theGameId, theData) {
     var aSelf = this;
 
-    console.log('[Experiment] Sending questionnaire data.', theData);
+    console.log('[Experiment] Sending questionnaire data (game: ' + theGameId + ')', theData);
 
     $.ajax({
         url: '../backend/',
@@ -247,7 +247,7 @@ FTG.Experiment.prototype.concludeCurrentQuestionnaire = function(theData) {
         data: {
             method: 'answer',
             user: this.mUid,
-            game: this.getCurrentGame().id,
+            game: theGameId,
             data: JSON.stringify({t: Date.now(), d: theData})
         },
         dataType: 'json'

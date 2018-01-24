@@ -88,6 +88,6 @@ FTG.Questionnaire.prototype.finish = function() {
     }
 
     if(aData.length == this.mQuestions.length) {
-        this.mDoneCallback.call(this.mCallbackContext, aData);
+        this.mDoneCallback.call(this.mCallbackContext, this.mGameId, aData);
     }
 };
