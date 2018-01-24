@@ -44,7 +44,23 @@ APP.Monitor.prototype.updateActiveSessionCurrentMilestone = function(theBackendD
 };
 
 APP.Monitor.prototype.prettifyMilestoneString = function(theCurrentStatus) {
-    return theCurrentStatus.toUpperCase();
+    var aTexts = {
+        'experiment_hr_start': 'Sync\'d and waiting to start',
+        'menu_start': 'Watching game title screen',
+        'tutorial_start': 'Doing game tutorial',
+        'game_start': 'Playing game',
+        'game_end': 'Watching game over screen',
+        'experiment_game_end': 'Answering game questionnaire',
+        'experiment_rest_start': 'Resting',
+        'experiment_final_questions_start': 'Answering final questionnaire',
+        'experiment_end': '<strong style="color: red;">Completed experiment session</strong>'
+    };
+
+    if(theCurrentStatus in aTexts) {
+        return aTexts[theCurrentStatus];
+    } else {
+        return '?';
+    }
 };
 
 APP.Monitor.prototype.updateActiveSessionInfo = function(theData) {
@@ -59,8 +75,10 @@ APP.Monitor.prototype.updateActiveSessionInfo = function(theData) {
         return;
     }
 
-    if(this.mPlayedGames.length == 0 || (this.mPlayedGames[this.mPlayedGames.length - 1] != theData.fk_game && theData.fk_game > 0)) {
-        this.mPlayedGames.push(theData.fk_game);
+    if(this.mPlayedGames.length == 0 || this.mPlayedGames[this.mPlayedGames.length - 1] != theData.fk_game) {
+        if(theData.fk_game > 0) {
+            this.mPlayedGames.push(theData.fk_game);
+        }
     }
 
     this.updateActiveSessionCurrentMilestone(theData.data);
@@ -131,7 +149,7 @@ APP.Monitor.prototype.buildLayoutStructure = function() {
                                 '<tr><td class="active-status-prop">Session duration</td><td id="data-table-time"></td></tr>' +
                                 '<tr><td class="active-status-prop">Current game</td><td id="data-table-current"></td></tr>' +
                                 '<tr><td class="active-status-prop">Played games</td><td id="data-table-played"></td></tr>' +
-                                '<tr><td class="active-status-prop">Status</td><td id="data-table-status"></td></tr>' +
+                                '<tr><td class="active-status-prop">Subject status</td><td id="data-table-status"></td></tr>' +
                                 '<tr><td class="active-status-prop">Last milestone</td><td id="data-table-milestone"></td></tr>' +
                                 '<tr><td class="active-status-prop">Log</td><td id="data-table-log"></td></tr>' +
                             '</table>' +
