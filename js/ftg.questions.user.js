@@ -85,6 +85,7 @@
      },
      {
          text: 'How familiar are you with the research related to this experiment?',
+         hide: true,
          options: [
              {value: 1, label: 'Unfamiliar (e.g. never heard about it)'},
              {value: 2, label: 'Not very familiar (e.g. heard something about it)'},
