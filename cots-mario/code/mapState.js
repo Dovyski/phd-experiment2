@@ -114,6 +114,7 @@ Mario.MapState.prototype.Enter = function() {
 
     if(GlobalInfo.experiment && this.ViewCount == 0) {
         GlobalInfo.data.logMilestone(GlobalInfo.user, GlobalInfo.game, 'game_start');
+        Experiment.startTime = Date.now();
     }
     this.ViewCount++;
 };
