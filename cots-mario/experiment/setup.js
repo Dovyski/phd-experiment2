@@ -77,6 +77,9 @@ if(GlobalInfo.experiment) {
 		console.error('Unknown game profile: ' + aGameProfile);
 	}
 
+	// Prevent abrupt termination of experiment because of weird keys
+	document.addEventListener('keydown', FTG.Utils.preventedProblematicKeyboardKey);
+
 	// Create a global, seeded PRNG.
 	var gMersennem = new MersenneTwister(Experiment.config('seed'));
 

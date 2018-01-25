@@ -52,17 +52,11 @@ Enjine.KeyboardInput = {
     },
 
     KeyDownEvent: function(event) {
-        if(FTG.Utils.preventedProblematicKeyboardKey(event)) {
-            return;
-        }
         this.Pressed[event.keyCode] = true;
         this.PreventScrolling(event);
     },
 
     KeyUpEvent: function(event) {
-        if(FTG.Utils.preventedProblematicKeyboardKey(event)) {
-            return;
-        }
         this.Pressed[event.keyCode] = false;
         this.PreventScrolling(event);
     },
