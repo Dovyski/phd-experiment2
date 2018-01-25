@@ -53,7 +53,7 @@
          ]
      },
      {
-         text: 'How familiar are platform games (e.g. jump/slide games you just played) to you?',
+         text: 'How familiar are platform games (e.g. jump/slide game you just played) to you?',
          hide: true,
          options: [
              {value: 1, label: 'Unfamiliar'},
@@ -64,6 +64,16 @@
      },
      {
          text: 'How familiar are you with the game Tetris (e.g. the game with squared blocks you just played)?',
+         hide: true,
+         options: [
+             {value: 1, label: 'Unfamiliar'},
+             {value: 2, label: 'Not very familiar'},
+             {value: 3, label: 'Moderately familiar'},
+             {value: 4, label: 'Very familiar'}
+         ]
+     },
+     {
+         text: 'How familiar are you with the game Super Mario?',
          hide: true,
          options: [
              {value: 1, label: 'Unfamiliar'},
