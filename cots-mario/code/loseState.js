@@ -38,6 +38,7 @@ Mario.LoseState.prototype.Enter = function() {
 
     if(GlobalInfo.experiment) {
         GlobalInfo.data.logMilestone(GlobalInfo.user, GlobalInfo.game, 'game_end');
+        console.log('Game duration: ' + ((Date.now() - Experiment.startTime) / 1000) + ' seconds');
     }
 };
 
