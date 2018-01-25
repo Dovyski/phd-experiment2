@@ -23,10 +23,10 @@ FTG.Utils.preventedProblematicKeyboardKey = function(theKeyEvent) {
     var aIsRefresh = aKey == 116 || aKey == 82;
     var aIsTabFocus = aKey == 9;
     var aIsFSomething = aKey >= 112 && aKey <= 123;
+	var aIsCtrl = aKey == 17 || aKey == 83;
     var aIsAltRelated = aKey == 17 || aKey == 18 || aKey == 36; // apparently it takes you to the browser's default/home page.
 
-    if (aIsRefresh || aIsTabFocus || aIsFSomething || aIsAltRelated) {
-        console.warn('Problematic key behavior has been prevented.');
+    if (aIsRefresh || aIsTabFocus || aIsFSomething || aIsCtrl || aIsAltRelated) {
         theKeyEvent.preventDefault();
 		return true;
     }

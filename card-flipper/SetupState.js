@@ -64,6 +64,9 @@ SetupState.prototype = {
 			this.adjustConstantsFromConfig();
 		}
 
+		// Prevent abrupt termination of experiment because of weird keys
+		document.addEventListener('keydown', FTG.Utils.preventedProblematicKeyboardKey);
+
 		if(GlobalInfo.experiment || getURLParamByName('face') == 'false') {
 			// We are in an experiment. No need to show information about data collection, it has
 			// already been done.
