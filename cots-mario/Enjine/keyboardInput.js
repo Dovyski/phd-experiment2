@@ -38,27 +38,33 @@ Enjine.Keys = {
 
 Enjine.KeyboardInput = {
     Pressed: new Array(),
-    
+
     Initialize: function() {
         var self = this;
         document.onkeydown = function(event) { self.KeyDownEvent(event); }
         document.onkeyup = function(event) { self.KeyUpEvent(event); }
     },
-    
+
     IsKeyDown: function(key) {
         if (this.Pressed[key] != null)
             return this.Pressed[key];
         return false;
     },
-    
+
     KeyDownEvent: function(event) {
+        if(FTG.Utils.preventedProblematicKeyboardKey(event)) {
+            return;
+        }
         this.Pressed[event.keyCode] = true;
-	this.PreventScrolling(event);
+        this.PreventScrolling(event);
     },
-    
+
     KeyUpEvent: function(event) {
+        if(FTG.Utils.preventedProblematicKeyboardKey(event)) {
+            return;
+        }
         this.Pressed[event.keyCode] = false;
-	this.PreventScrolling(event);
+        this.PreventScrolling(event);
     },
 
     PreventScrolling: function(event) {

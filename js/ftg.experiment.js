@@ -48,6 +48,8 @@
      ];
 
      this.mGamesSorting = [
+        /* T0 */ [4, 5, 6].concat(this.mCOTSSorting),
+        /* T1 */ [22, 21, 20].concat(this.mCOTSSorting),
         /* 0 */ [1, 2, 3].concat(this.mCOTSSorting),
         /* 1 */ [1, 3, 2].concat(this.mCOTSSorting),
         /* 2 */ [2, 1, 3].concat(this.mCOTSSorting),
@@ -101,15 +103,6 @@ FTG.Experiment.prototype.init = function() {
     }
 };
 
-FTG.Experiment.prototype.disableRefresh = function(e) {
-    var aKey = e.which || e.keyCode;
-
-    if (aKey == 116 || aKey == 82) {
-        console.warn('Page refresh has been prevented.');
-        e.preventDefault();
-    }
-};
-
 FTG.Experiment.prototype.preventAbruptSessionEnd = function() {
     // Warn the user before leaving the page
     window.addEventListener("beforeunload", function(e) {
@@ -130,7 +123,7 @@ FTG.Experiment.prototype.preventAbruptSessionEnd = function() {
     var aSelf = this;
 
     $(document).ready(function() {
-        $(document).on("keydown", aSelf.disableRefresh);
+        $(document).on("keydown", FTG.Utils.preventedProblematicKeyboardKey);
     });
 };
 
