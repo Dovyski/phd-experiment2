@@ -79,8 +79,14 @@ FTG.Experiment.prototype.init = function() {
     this.mFinished = false;
 
     this.mData = new FTG.Collector(this.mDebug);
-
     this.mRestTime *= 60 * 1000;
+
+    var aInformedSorting = FTG.Utils.getURLParamByName('sorting');
+
+    if(aInformedSorting) {
+        this.mSorting = aInformedSorting;
+        console.warn('[Experiment] Default sorting was overridden by value informed in the URL (sorting=' + aInformedSorting + ')');
+    }
 
     console.log('[Experiment] Init with user uid:' + this.mUid + ', rest: ' + this.mRestTime + 'ms, sorting: ' + this.mSorting + ' [' + this.mGamesSorting[this.mSorting].join(',') + ']');
 
