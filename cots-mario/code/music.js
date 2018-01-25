@@ -1,5 +1,5 @@
 /*
-* using cross platform MIDI library MIDI.js http://www.midijs.net/
+* Play music using the machinery provided by Enjine.
 */
 
 var midifiles = {
@@ -16,8 +16,6 @@ var availableMusic = {
 	"map": "music_map",
 	"background": "music_background"
 };
-
-Mario.ActiveMusic = null;
 
 Mario.PlayMusic = function(name) {
 	if(name in availableMusic) {
