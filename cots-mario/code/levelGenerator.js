@@ -10,13 +10,21 @@ Mario.LevelGenerator = function(width, height) {
     this.TotalOdds = 0;
     this.Difficulty = 0;
 
-    this.CoinsLineStartOffset = 4;      // max amount of tiles that will be occupied before placing coins in a line of coins
-    this.CoinsLineEndOffset = 4;        // max amount of tiles that will be occupied before stop placing coins in a line of coins
-    this.CoinsLineAdditionalHeight = 2; // additional height to be added to a coin position. Recommended 0 to 2 (inclusive). Values grater than 2 will interfer with blocks.
-    this.BlocksLineStartOffset = 4;     // max amount of tiles that will be occupied before placing blocks in a line of blocks
-    this.BlocksLineEndOffset = 4;       // max amount of tiles that will be occupied before stop placing blocks in a line of blocks
-    this.JumpMinLength = 2;             // minimum length of any jump (gap), in tiles
-    this.JumpLengthVariation = 2;       // a random value from 0 to JumpLengthVariation (exclusive) will be added to JumpMinLength to define the length of any jump (gap). Recommended value is 2.
+    this.CoinsMinLineStartOffset = 0;          // min amount of tiles that will be occupied before placing coins in a line of coins
+    this.CoinsMinLineEndOffset = 0;            // min amount of tiles that will be occupied before stop placing coins in a line of coins
+    this.CoinsVariationLineStartOffset = 4;    // variation of tiles that will be occupied before placing coins in a line of coins
+    this.CoinsVariationLineEndOffset = 4;      // variation of tiles that will be occupied before stop placing coins in a line of coins
+    this.CoinsLineAdditionalHeight = 2;        // additional height to be added to a coin position. Recommended 0 to 2 (inclusive). Values grater than 2 will interfer with blocks.
+
+    this.BlocksMinLineStartOffset = 0;         // min amount of tiles that will be occupied before placing blocks in a line of blocks
+    this.BlocksMinLineEndOffset = 0;           // min amount of tiles that will be occupied before stop placing blocks in a line of blocks
+    this.BlocksVariationLineStartOffset = 4;   // variation of tiles that will be occupied before placing blocks in a line of blocks
+    this.BlocksVariationLineEndOffset = 4;     // variation of tiles that will be occupied before stop placing blocks in a line of blocks
+
+    this.EnemyCreationCeilControl = 35;        // enemy is added if (rand() * EnemyCreationCeilControl) < difficulty + 1), so a high EnemyCreationCeilControl value means less enemies.
+
+    this.JumpMinLength = 2;                    // minimum length of any jump (gap), in tiles
+    this.JumpLengthVariation = 2;              // a random value from 0 to JumpLengthVariation (exclusive) will be added to JumpMinLength to define the length of any jump (gap). Recommended value is 2.
 
     this.ValueOddsStraight = 20;
     this.ValueOddsHillStraight = 10;
@@ -290,7 +298,7 @@ Mario.LevelGenerator.prototype = {
     AddEnemyLine: function(level, x0, x1, y) {
         var x = 0, type = 0;
         for (x = x0; x < x1; x++) {
-            if (((this.Random() * 35) | 0) < this.Difficulty + 1) {
+            if (((this.Random() * this.EnemyCreationCeilControl) | 0) < this.Difficulty + 1) {
                 type = (this.Random() * 4) | 0;
                 if (this.Difficulty < 1) {
                     type = Mario.Enemy.Goomba;
@@ -376,8 +384,8 @@ Mario.LevelGenerator.prototype = {
         }
 
         var rocks = true,
-            s = (this.Random() * this.CoinsLineStartOffset) | 0,
-            e = (this.Random() * this.CoinsLineEndOffset) | 0,
+            s = (this.CoinsMinLineStartOffset + this.Random() * this.CoinsVariationLineStartOffset) | 0,
+            e = (this.CoinsMinLineEndOffset + this.Random() * this.CoinsVariationLineEndOffset) | 0,
             h = (this.Random() * this.CoinsLineAdditionalHeight) | 0,
             x = 0;
 
@@ -391,8 +399,8 @@ Mario.LevelGenerator.prototype = {
             }
         }
 
-        s = (this.Random() * this.BlocksLineStartOffset) | 0;
-        e = (this.Random() * this.BlocksLineEndOffset) | 0;
+        s = (this.BlocksMinLineStartOffset + this.Random() * this.BlocksVariationLineStartOffset) | 0;
+        e = (this.BlocksMinLineEndOffset + this.Random() * this.BlocksVariationLineEndOffset) | 0;
 
         if (floor - 4 > 0) {
             if ((x1 - 1 - e) - (x0 + 1 + s) > 2) {
