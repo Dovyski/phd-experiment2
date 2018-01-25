@@ -4,7 +4,7 @@
  */
 
 var EXPERIMENT_GAME_PROFILES = {
-	'a': {levelName: 'A1', sessionMaxDurationSeconds: 0, levelWidth: 340, seed: 200, marioLives: 3, marioLarge: false, levelDifficulty: 1, ValueMinOddsTubes: 0, ValueMultiOddsTubes: 0},
+	'a': {levelName: 'A1', sessionMaxDurationSeconds: 0, levelWidth: 1000, seed: 200, marioLives: 3, marioLarge: true, levelDifficulty: 0, ValueMinOddsTubes: 0, ValueMultiOddsTubes: 0, ValueMinOddsJump: 0, ValueMultiOddsJump: 0, CoinsMinLineStartOffset: 10, CoinsMinLineEndOffset: 10, BlocksMinLineStartOffset: 10, BlocksMinLineEndOffset: 10, ValueOddsStraight: 10, ValueOddsHillStraight: 0, EnemyCreationCeilControl: 400},
 	'b': {levelName: 'B2', sessionMaxDurationSeconds: 0, levelWidth: 340, seed: 201, marioLives: 3, marioLarge: false, levelDifficulty: 1, ValueMinOddsTubes: 0, ValueMultiOddsTubes: 0},
 	'c': {levelName: 'C3', sessionMaxDurationSeconds: 0, levelWidth: 340, seed: 201, marioLives: 3, marioLarge: false, levelDifficulty: 1, ValueMinOddsTubes: 0, ValueMultiOddsTubes: 0},
 	'd': {levelName: 'D4', sessionMaxDurationSeconds: 0, levelWidth: 340, seed: 201, marioLives: 3, marioLarge: false, levelDifficulty: 2},
