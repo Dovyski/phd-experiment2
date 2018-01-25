@@ -20,11 +20,11 @@ FTG.Utils.getURLParamByName = function(theName) {
 FTG.Utils.preventedProblematicKeyboardKey = function(theKeyEvent) {
     var aKey = theKeyEvent.which || theKeyEvent.keyCode;
 
-    var aIsRefresh = aKey == 116 || aKey == 82;
+    var aIsRefresh = aKey == 116 || (aKey == 82 && theKeyEvent.ctrlKey);
     var aIsTabFocus = aKey == 9;
     var aIsFSomething = aKey >= 112 && aKey <= 123;
-	var aIsCtrl = aKey == 17 || aKey == 83;
-    var aIsAltRelated = aKey == 17 || aKey == 18 || aKey == 36; // apparently it takes you to the browser's default/home page.
+	var aIsCtrl = aKey == 17 || (aKey == 83 && theKeyEvent.ctrlKey);
+    var aIsAltRelated = aKey == 17 || aKey == 18 || aKey == 36; // apparently Alt+Home takes you to the browser's default/home page.
 
     if (aIsRefresh || aIsTabFocus || aIsFSomething || aIsCtrl || aIsAltRelated) {
         theKeyEvent.preventDefault();
