@@ -7,6 +7,13 @@
  var FTG = FTG || {};
 
  FTG.Experiment = function() {
+     this.MARIO_INSTRUCTIONS =
+        '<p class="head">How to play:</p>' +
+        '<li><img src="../img/keys/a.png" title="A" class="key" /> <p>(Press and hold) <strong>RUN</strong><br />(Press and hold) <strong>CARRY things<strong/></p></li>' +
+        '<li><img src="../img/keys/s.png" title="S" class="key" /> <p><strong>JUMP</strong></p></li>' +
+        '<li><img src="../img/keys/left.png" title="Left arrow" class="key" /> <p><strong>MOVE left</strong></p></li>' +
+        '<li><img src="../img/keys/right.png" title="Right arrow" class="key" /> <p><strong>MOVE right</strong></p></li>';
+
      this.mUid;
      this.mCurrentGame;
      this.mRestTime = 2; // in minutes
@@ -21,7 +28,7 @@
          {id: 1, name: 'card-flipper', url: '../card-flipper/', width: 1300, height: 975, paddingLeft: 300, cots: false, questions: FTG.Questions.Game, hasRest: true},
          {id: 2, name: 'tetris', url: '../tetris/', width: 640, height: 960, paddingLeft: 600, cots: false, questions: FTG.Questions.Game, hasRest: true},
          {id: 3, name: 'platformer', url: '../platformer/', width: 1300, height: 975, paddingLeft: 300, cots: false, questions: FTG.Questions.Game, hasRest: true},
-         {id: 4, name: 'cots-mario', url: '../cots-mario/', width: 700, height: 520, paddingLeft: 600, cots: true, questions: FTG.Questions.COTS, hasRest: false, params: {profile: 'A'}},
+         {id: 4, name: 'cots-mario', url: '../cots-mario/', width: 700, height: 520, paddingLeft: 600, cots: true, questions: FTG.Questions.COTS, hasRest: false, params: {profile: 'A'}, instructions: this.MARIO_INSTRUCTIONS},
          {id: 5, name: 'cots-mario', url: '../cots-mario/', width: 700, height: 520, paddingLeft: 600, cots: true, questions: FTG.Questions.COTS, hasRest: false, params: {profile: 'B'}},
          {id: 6, name: 'cots-mario', url: '../cots-mario/', width: 700, height: 520, paddingLeft: 600, cots: true, questions: FTG.Questions.COTS, hasRest: false, params: {profile: 'C'}},
          {id: 7, name: 'cots-mario', url: '../cots-mario/', width: 700, height: 520, paddingLeft: 600, cots: true, questions: FTG.Questions.COTS, hasRest: false, params: {profile: 'D'}},
