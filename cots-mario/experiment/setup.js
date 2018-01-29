@@ -4,10 +4,10 @@
  */
 
 var EXPERIMENT_GAME_PROFILES = {
-	'a': {levelName: 'A1', sessionMaxDurationSeconds: 0, levelWidth: 1000, seed: 200, marioLives: 3, marioLarge: true, levelDifficulty: 0, ValueMinOddsTubes: 0, ValueMultiOddsTubes: 0, ValueMinOddsJump: 0, ValueMultiOddsJump: 0, CoinsMinLineStartOffset: 10, CoinsMinLineEndOffset: 10, BlocksMinLineStartOffset: 10, BlocksMinLineEndOffset: 10, ValueOddsStraight: 10, ValueOddsHillStraight: 0, EnemyCreationCeilControl: 400},
-	'b': {levelName: 'B2', sessionMaxDurationSeconds: 0, levelWidth: 800, seed: 201, marioLives: 3, marioLarge: false, levelDifficulty: 1, ValueMinOddsTubes: 0, ValueMultiOddsTubes: 0, ValueMinOddsJump: 0, ValueMultiOddsJump: 0, CoinsMinLineStartOffset: 2, CoinsMinLineEndOffset: 2, BlocksMinLineStartOffset: 2, BlocksMinLineEndOffset: 2, ValueOddsStraight: 20, ValueOddsHillStraight: 3, EnemyCreationCeilControl: 150},
-	'c': {levelName: 'C3', sessionMaxDurationSeconds: 0, levelWidth: 800, seed: 202, marioLives: 3, marioLarge: false, levelDifficulty: 1, ValueMinOddsTubes: 0, ValueMultiOddsTubes: 0},
-	'd': {levelName: 'D4', sessionMaxDurationSeconds: 0, levelWidth: 800, seed: 203, marioLives: 3, marioLarge: false, levelDifficulty: 2},
+	'a': {levelName: 'A1', sessionMaxDurationSeconds: 0, levelWidth: 1000, seed: 200, marioLives: 3, marioLarge: true, levelDifficulty: 0, levelFlowerAllowed: false, ValueMinOddsTubes: 0, ValueMultiOddsTubes: 0, ValueMinOddsJump: 0, ValueMultiOddsJump: 0, CoinsMinLineStartOffset: 10, CoinsMinLineEndOffset: 10, BlocksMinLineStartOffset: 10, BlocksMinLineEndOffset: 10, ValueOddsStraight: 10, ValueOddsHillStraight: 0, EnemyCreationCeilControl: 400},
+	'b': {levelName: 'B2', sessionMaxDurationSeconds: 0, levelWidth: 800, seed: 201, marioLives: 3, marioLarge: true, levelDifficulty: 1, levelFlowerAllowed: false, ValueMinOddsTubes: 0, ValueMultiOddsTubes: 0, ValueMinOddsJump: 0, ValueMultiOddsJump: 0, CoinsMinLineStartOffset: 2, CoinsMinLineEndOffset: 2, BlocksMinLineStartOffset: 2, BlocksMinLineEndOffset: 2, ValueOddsStraight: 20, ValueOddsHillStraight: 3, EnemyCreationCeilControl: 150},
+	'c': {levelName: 'C3', sessionMaxDurationSeconds: 0, levelWidth: 800, seed: 202, marioLives: 3, marioLarge: true, levelDifficulty: 1, levelFlowerAllowed: false, ValueMinOddsTubes: 0, ValueMultiOddsTubes: 0, ValueMinOddsJump: 1, ValueMultiOddsJump: 2, CoinsMinLineStartOffset: 1, CoinsMinLineEndOffset: 1, BlocksMinLineStartOffset: 1, BlocksMinLineEndOffset: 1, ValueOddsStraight: 20, ValueOddsHillStraight: 6, EnemyCreationCeilControl: 100},
+	'd': {levelName: 'D4', sessionMaxDurationSeconds: 0, levelWidth: 800, seed: 203, marioLives: 3, marioLarge: false, levelDifficulty: 2, levelFlowerAllowed: false, ValueMinOddsTubes: 1, ValueMultiOddsTubes: 0, ValueMinOddsJump: 1, ValueMultiOddsJump: 2, CoinsMinLineStartOffset: 1, CoinsMinLineEndOffset: 1, BlocksMinLineStartOffset: 1, BlocksMinLineEndOffset: 1, ValueOddsStraight: 20, ValueOddsHillStraight: 10, EnemyCreationCeilControl: 80},
 	'e': {levelName: 'E5', sessionMaxDurationSeconds: 0, levelWidth: 800, seed: 204, marioLives: 3, marioLarge: false, levelDifficulty: 2},
 	'f': {levelName: 'F6', sessionMaxDurationSeconds: 0, levelWidth: 800, seed: 205, marioLives: 3, marioLarge: false, levelDifficulty: 3},
 	'g': {levelName: 'G7', sessionMaxDurationSeconds: 0, levelWidth: 800, seed: 206, marioLives: 3, marioLarge: false, levelDifficulty: 3},
@@ -33,9 +33,13 @@ var Experiment = {
 	ENABLE_DATA_LOG: true,
 
 	// Some utility methods to ensure JS sanity
-	config: function(theName) {
+	config: function(theName, theDefault) {
 		if(theName in this.profile) {
 			return this.profile[theName];
+
+		} else if (theDefault !== undefined) {
+			return theDefault;
+
 		} else {
 			console.error('Unknown experiment game profile named "' + theName + '"');
 			return undefined;

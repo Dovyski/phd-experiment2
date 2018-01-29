@@ -74,7 +74,7 @@ Mario.LevelState.prototype.Enter = function() {
 
     // If in experimet mode, adjust mario according to instructions
     if(GlobalInfo.experiment) {
-        Mario.MarioCharacter.Large = Experiment.config('marioLarge') || false;
+        Mario.MarioCharacter.Large = Experiment.config('marioLarge', false);
     }
 
     Mario.MarioCharacter.Initialize(this);
@@ -435,7 +435,7 @@ Mario.LevelState.prototype.RemoveSprite = function(sprite) {
 };
 
 Mario.LevelState.prototype.Bump = function(x, y, canBreakBricks) {
-    var block = this.Level.GetBlock(x, y), xx = 0, yy = 0;
+    var block = this.Level.GetBlock(x, y), xx = 0, yy = 0, flowerAllowed = true;
 
     if ((Mario.Tile.Behaviors[block & 0xff] & Mario.Tile.Bumpable) > 0) {
         this.BumpInto(x, y - 1);
@@ -444,7 +444,14 @@ Mario.LevelState.prototype.Bump = function(x, y, canBreakBricks) {
 
         if ((Mario.Tile.Behaviors[block & 0xff] & Mario.Tile.Special) > 0) {
             Enjine.Resources.PlaySound("sprout");
-            if (!Mario.MarioCharacter.Large) {
+
+            // If in experiment mode, special flower might be controlled.
+            // Check if it is allowed.
+            if(GlobalInfo.experiment) {
+                flowerAllowed = Experiment.config('levelFlowerAllowed', true);
+            }
+
+            if (!Mario.MarioCharacter.Large || !flowerAllowed) {
                 this.AddSprite(new Mario.Mushroom(this, x * 16 + 8, y * 16 + 8));
                 GlobalInfo.data.log({a: 'mario_bump', t: 'mushroom'}, true);
             } else {
