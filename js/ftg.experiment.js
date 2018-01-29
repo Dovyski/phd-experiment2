@@ -29,29 +29,28 @@
          {id: 2, name: 'tetris', url: '../tetris/', width: 640, height: 960, paddingLeft: 600, cots: false, questions: FTG.Questions.Game, hasRest: true},
          {id: 3, name: 'platformer', url: '../platformer/', width: 1300, height: 975, paddingLeft: 300, cots: false, questions: FTG.Questions.Game, hasRest: true},
          {id: 4, name: 'cots-mario', url: '../cots-mario/', width: 700, height: 520, paddingLeft: 600, cots: true, questions: FTG.Questions.COTS, hasRest: false, params: {profile: 'A'}, instructions: this.MARIO_INSTRUCTIONS},
-         {id: 5, name: 'cots-mario', url: '../cots-mario/', width: 700, height: 520, paddingLeft: 600, cots: true, questions: FTG.Questions.COTS, hasRest: false, params: {profile: 'B'}},
-         {id: 6, name: 'cots-mario', url: '../cots-mario/', width: 700, height: 520, paddingLeft: 600, cots: true, questions: FTG.Questions.COTS, hasRest: false, params: {profile: 'C'}},
-         {id: 7, name: 'cots-mario', url: '../cots-mario/', width: 700, height: 520, paddingLeft: 600, cots: true, questions: FTG.Questions.COTS, hasRest: false, params: {profile: 'D'}},
-         {id: 8, name: 'cots-mario', url: '../cots-mario/', width: 700, height: 520, paddingLeft: 600, cots: true, questions: FTG.Questions.COTS, hasRest: false, params: {profile: 'E'}},
-         {id: 9, name: 'cots-mario', url: '../cots-mario/', width: 700, height: 520, paddingLeft: 600, cots: true, questions: FTG.Questions.COTS, hasRest: false, params: {profile: 'F'}},
-         {id: 10, name: 'cots-mario', url: '../cots-mario/', width: 700, height: 520, paddingLeft: 600, cots: true, questions: FTG.Questions.COTS, hasRest: false, params: {profile: 'G'}},
-         {id: 11, name: 'cots-mario', url: '../cots-mario/', width: 700, height: 520, paddingLeft: 600, cots: true, questions: FTG.Questions.COTS, hasRest: false, params: {profile: 'H'}},
-         {id: 12, name: 'cots-mario', url: '../cots-mario/', width: 700, height: 520, paddingLeft: 600, cots: true, questions: FTG.Questions.COTS, hasRest: false, params: {profile: 'I'}},
-         {id: 13, name: 'cots-mario', url: '../cots-mario/', width: 700, height: 520, paddingLeft: 600, cots: true, questions: FTG.Questions.COTS, hasRest: false, params: {profile: 'J'}},
-         {id: 14, name: 'cots-mario', url: '../cots-mario/', width: 700, height: 520, paddingLeft: 600, cots: true, questions: FTG.Questions.COTS, hasRest: false, params: {profile: 'K'}},
-         {id: 15, name: 'cots-mario', url: '../cots-mario/', width: 700, height: 520, paddingLeft: 600, cots: true, questions: FTG.Questions.COTS, hasRest: false, params: {profile: 'L'}},
-         {id: 16, name: 'cots-mario', url: '../cots-mario/', width: 700, height: 520, paddingLeft: 600, cots: true, questions: FTG.Questions.COTS, hasRest: false, params: {profile: 'M'}},
-         {id: 16, name: 'cots-mario', url: '../cots-mario/', width: 700, height: 520, paddingLeft: 600, cots: true, questions: FTG.Questions.COTS, hasRest: false, params: {profile: 'N'}},
-         {id: 17, name: 'cots-mario', url: '../cots-mario/', width: 700, height: 520, paddingLeft: 600, cots: true, questions: FTG.Questions.COTS, hasRest: false, params: {profile: 'O'}},
-         {id: 18, name: 'cots-mario', url: '../cots-mario/', width: 700, height: 520, paddingLeft: 600, cots: true, questions: FTG.Questions.COTS, hasRest: false, params: {profile: 'P'}},
-         {id: 19, name: 'cots-mario', url: '../cots-mario/', width: 700, height: 520, paddingLeft: 600, cots: true, questions: FTG.Questions.COTS, hasRest: false, params: {profile: 'Q'}},
-         {id: 20, name: 'cots-mario', url: '../cots-mario/', width: 700, height: 520, paddingLeft: 600, cots: true, questions: FTG.Questions.COTS, hasRest: false, params: {profile: 'R'}},
-         {id: 21, name: 'cots-mario', url: '../cots-mario/', width: 700, height: 520, paddingLeft: 600, cots: true, questions: FTG.Questions.COTS, hasRest: false, params: {profile: 'S'}},
-         {id: 22, name: 'cots-mario', url: '../cots-mario/', width: 700, height: 520, paddingLeft: 600, cots: true, questions: FTG.Questions.COTS, hasRest: false, params: {profile: 'T'}},
+         {id: 5, name: 'cots-mario', url: '../cots-mario/', width: 700, height: 520, paddingLeft: 600, cots: true, questions: FTG.Questions.COTS, hasRest: false, params: {profile: 'B'}, instructions: this.MARIO_INSTRUCTIONS},
+         {id: 6, name: 'cots-mario', url: '../cots-mario/', width: 700, height: 520, paddingLeft: 600, cots: true, questions: FTG.Questions.COTS, hasRest: false, params: {profile: 'C'}, instructions: this.MARIO_INSTRUCTIONS},
+         {id: 7, name: 'cots-mario', url: '../cots-mario/', width: 700, height: 520, paddingLeft: 600, cots: true, questions: FTG.Questions.COTS, hasRest: false, params: {profile: 'D'}, instructions: this.MARIO_INSTRUCTIONS},
+         {id: 8, name: 'cots-mario', url: '../cots-mario/', width: 700, height: 520, paddingLeft: 600, cots: true, questions: FTG.Questions.COTS, hasRest: false, params: {profile: 'E'}, instructions: this.MARIO_INSTRUCTIONS},
+         {id: 9, name: 'cots-mario', url: '../cots-mario/', width: 700, height: 520, paddingLeft: 600, cots: true, questions: FTG.Questions.COTS, hasRest: false, params: {profile: 'F'}, instructions: this.MARIO_INSTRUCTIONS},
+         {id: 10, name: 'cots-mario', url: '../cots-mario/', width: 700, height: 520, paddingLeft: 600, cots: true, questions: FTG.Questions.COTS, hasRest: false, params: {profile: 'G'}, instructions: this.MARIO_INSTRUCTIONS},
+         {id: 11, name: 'cots-mario', url: '../cots-mario/', width: 700, height: 520, paddingLeft: 600, cots: true, questions: FTG.Questions.COTS, hasRest: false, params: {profile: 'H'}, instructions: this.MARIO_INSTRUCTIONS},
+         {id: 12, name: 'cots-mario', url: '../cots-mario/', width: 700, height: 520, paddingLeft: 600, cots: true, questions: FTG.Questions.COTS, hasRest: false, params: {profile: 'I'}, instructions: this.MARIO_INSTRUCTIONS},
+         {id: 13, name: 'cots-mario', url: '../cots-mario/', width: 700, height: 520, paddingLeft: 600, cots: true, questions: FTG.Questions.COTS, hasRest: false, params: {profile: 'J'}, instructions: this.MARIO_INSTRUCTIONS},
+         {id: 14, name: 'cots-mario', url: '../cots-mario/', width: 700, height: 520, paddingLeft: 600, cots: true, questions: FTG.Questions.COTS, hasRest: false, params: {profile: 'K'}, instructions: this.MARIO_INSTRUCTIONS},
+         {id: 15, name: 'cots-mario', url: '../cots-mario/', width: 700, height: 520, paddingLeft: 600, cots: true, questions: FTG.Questions.COTS, hasRest: false, params: {profile: 'L'}, instructions: this.MARIO_INSTRUCTIONS},
+         {id: 16, name: 'cots-mario', url: '../cots-mario/', width: 700, height: 520, paddingLeft: 600, cots: true, questions: FTG.Questions.COTS, hasRest: false, params: {profile: 'M'}, instructions: this.MARIO_INSTRUCTIONS},
+         {id: 16, name: 'cots-mario', url: '../cots-mario/', width: 700, height: 520, paddingLeft: 600, cots: true, questions: FTG.Questions.COTS, hasRest: false, params: {profile: 'N'}, instructions: this.MARIO_INSTRUCTIONS},
+         {id: 17, name: 'cots-mario', url: '../cots-mario/', width: 700, height: 520, paddingLeft: 600, cots: true, questions: FTG.Questions.COTS, hasRest: false, params: {profile: 'O'}, instructions: this.MARIO_INSTRUCTIONS},
+         {id: 18, name: 'cots-mario', url: '../cots-mario/', width: 700, height: 520, paddingLeft: 600, cots: true, questions: FTG.Questions.COTS, hasRest: false, params: {profile: 'P'}, instructions: this.MARIO_INSTRUCTIONS},
+         {id: 19, name: 'cots-mario', url: '../cots-mario/', width: 700, height: 520, paddingLeft: 600, cots: true, questions: FTG.Questions.COTS, hasRest: false, params: {profile: 'Q'}, instructions: this.MARIO_INSTRUCTIONS},
+         {id: 20, name: 'cots-mario', url: '../cots-mario/', width: 700, height: 520, paddingLeft: 600, cots: true, questions: FTG.Questions.COTS, hasRest: false, params: {profile: 'R'}, instructions: this.MARIO_INSTRUCTIONS},
+         {id: 21, name: 'cots-mario', url: '../cots-mario/', width: 700, height: 520, paddingLeft: 600, cots: true, questions: FTG.Questions.COTS, hasRest: false, params: {profile: 'S'}, instructions: this.MARIO_INSTRUCTIONS},
+         {id: 22, name: 'cots-mario', url: '../cots-mario/', width: 700, height: 520, paddingLeft: 600, cots: true, questions: FTG.Questions.COTS, hasRest: false, params: {profile: 'T'}, instructions: this.MARIO_INSTRUCTIONS}
      ];
 
      this.mCOTSSorting = [
-         4, 5, 6
      ];
 
      this.mGamesSorting = [
@@ -131,7 +130,7 @@ FTG.Experiment.prototype.preventAbruptSessionEnd = function() {
     var aSelf = this;
 
     $(document).ready(function() {
-        $(document).on("keydown", FTG.Utils.preventedProblematicKeyboardKey);
+        $(document).on("keydown", FTG.Utils.preventProblematicKeyboardKey);
     });
 };
 

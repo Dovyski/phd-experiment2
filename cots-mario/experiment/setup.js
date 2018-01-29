@@ -78,7 +78,7 @@ if(GlobalInfo.experiment) {
 	}
 
 	// Prevent abrupt termination of experiment because of weird keys
-	document.addEventListener('keydown', FTG.Utils.preventedProblematicKeyboardKey);
+	document.addEventListener('keydown', FTG.Utils.preventProblematicKeyboardKey);
 
 	// Create a global, seeded PRNG.
 	var gMersennem = new MersenneTwister(Experiment.config('seed'));
