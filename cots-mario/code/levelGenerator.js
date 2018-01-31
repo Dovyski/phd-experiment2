@@ -10,21 +10,25 @@ Mario.LevelGenerator = function(width, height) {
     this.TotalOdds = 0;
     this.Difficulty = 0;
 
-    this.CoinsMinLineStartOffset = 0;          // min amount of tiles that will be occupied before placing coins in a line of coins
-    this.CoinsMinLineEndOffset = 0;            // min amount of tiles that will be occupied before stop placing coins in a line of coins
-    this.CoinsVariationLineStartOffset = 4;    // variation of tiles that will be occupied before placing coins in a line of coins
-    this.CoinsVariationLineEndOffset = 4;      // variation of tiles that will be occupied before stop placing coins in a line of coins
-    this.CoinsLineAdditionalHeight = 2;        // additional height to be added to a coin position. Recommended 0 to 2 (inclusive). Values grater than 2 will interfer with blocks.
+    this.CoinsMinLineStartOffset = 0;                // min amount of tiles that will be occupied before placing coins in a line of coins
+    this.CoinsMinLineEndOffset = 0;                  // min amount of tiles that will be occupied before stop placing coins in a line of coins
+    this.CoinsVariationLineStartOffset = 4;          // variation of tiles that will be occupied before placing coins in a line of coins
+    this.CoinsVariationLineEndOffset = 4;            // variation of tiles that will be occupied before stop placing coins in a line of coins
+    this.CoinsLineAdditionalHeight = 2;              // additional height to be added to a coin position. Recommended 0 to 2 (inclusive). Values grater than 2 will interfer with blocks.
 
-    this.BlocksMinLineStartOffset = 0;         // min amount of tiles that will be occupied before placing blocks in a line of blocks
-    this.BlocksMinLineEndOffset = 0;           // min amount of tiles that will be occupied before stop placing blocks in a line of blocks
-    this.BlocksVariationLineStartOffset = 4;   // variation of tiles that will be occupied before placing blocks in a line of blocks
-    this.BlocksVariationLineEndOffset = 4;     // variation of tiles that will be occupied before stop placing blocks in a line of blocks
+    this.BlocksMinLineStartOffset = 0;               // min amount of tiles that will be occupied before placing blocks in a line of blocks
+    this.BlocksMinLineEndOffset = 0;                 // min amount of tiles that will be occupied before stop placing blocks in a line of blocks
+    this.BlocksVariationLineStartOffset = 4;         // variation of tiles that will be occupied before placing blocks in a line of blocks
+    this.BlocksVariationLineEndOffset = 4;           // variation of tiles that will be occupied before stop placing blocks in a line of blocks
+    this.BlocksQuestionChance = 0.3;                 // how likely a block is to be a question mark block
+    this.BlocksQuestionSpecialRewardChance = 0.1;    // how likely a question mark block is to give something
+    this.BlocksGoldenChance = 0.25;                  // how likely a block is to be a (special) golden block
+    this.BlocksGoldenSpecialRewardChance = 0.25;     // how likely a golden block is to give something
 
-    this.EnemyCreationCeilControl = 35;        // enemy is added if (rand() * EnemyCreationCeilControl) < difficulty + 1), so a high EnemyCreationCeilControl value means less enemies.
+    this.EnemyCreationCeilControl = 35;              // enemy is added if (rand() * EnemyCreationCeilControl) < difficulty + 1), so a high EnemyCreationCeilControl value means less enemies.
 
-    this.JumpMinLength = 2;                    // minimum length of any jump (gap), in tiles
-    this.JumpLengthVariation = 2;              // a random value from 0 to JumpLengthVariation (exclusive) will be added to JumpMinLength to define the length of any jump (gap). Recommended value is 2.
+    this.JumpMinLength = 2;                          // minimum length of any jump (gap), in tiles
+    this.JumpLengthVariation = 2;                    // a random value from 0 to JumpLengthVariation (exclusive) will be added to JumpMinLength to define the length of any jump (gap). Recommended value is 2.
 
     this.ValueOddsStraight = 20;
     this.ValueOddsHillStraight = 10;
@@ -406,14 +410,14 @@ Mario.LevelGenerator.prototype = {
             if ((x1 - 1 - e) - (x0 + 1 + s) > 2) {
                 for (x = x0 + 1 + s; x < x1 - 1 - e; x++) {
                     if (rocks) {
-                        if (x !== x0 + 1 && x !== x1 - 2 && ((this.Random() * 3) | 0) === 0) {
-                            if (((this.Random() * 4) | 0) === 0) {
+                        if (x !== x0 + 1 && x !== x1 - 2 && (this.Random() <= this.BlocksQuestionChance)) {
+                            if (this.Random() <= this.BlocksQuestionSpecialRewardChance) {
                                 level.SetBlock(x, floor - 4, 4 + 2 + 16);
                             } else {
                                 level.SetBlock(x, floor - 4, 4 + 1 + 16);
                             }
-                        } else if (((this.Random() * 4) | 0) === 0) {
-                            if (((this.Random() * 4) | 0) === 0) {
+                        } else if (this.Random() <= this.BlocksGoldenChance) {
+                            if (this.Random() <= this.BlocksGoldenSpecialRewardChance) {
                                 level.SetBlock(x, floor - 4, 2 + 16);
                             } else {
                                 level.SetBlock(x, floor - 4, 1 + 16);
