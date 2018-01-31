@@ -14,7 +14,10 @@ var midifiles = {
 var availableMusic = {
 	"title": "music_title",
 	"map": "music_map",
-	"background": "music_background"
+	"background": "music_background",
+	"overground": "music_overground",
+	"underground": "music_underground",
+	"castle": "music_castle"
 };
 
 Mario.PlayMusic = function(name) {
@@ -36,7 +39,7 @@ Mario.PlayMapMusic = function() {
 };
 
 Mario.PlayOvergroundMusic = function() {
-	Mario.PlayMusic("background");
+	Mario.PlayMusic("overground");
 };
 
 Mario.PlayUndergroundMusic = function() {

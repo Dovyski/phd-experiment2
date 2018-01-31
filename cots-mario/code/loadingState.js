@@ -75,7 +75,10 @@ Mario.LoadingState.prototype.Enter = function() {
             .AddSound("stomp", "sounds/stomp.mp3", 2)
             .AddSound("music_background", "music/background.mp3", 2)
 		    .AddSound("music_title", "music/title.mp3", 2)
-            .AddSound("music_map", "music/map.mp3", 2);
+            .AddSound("music_map", "music/map.mp3", 2)
+            .AddSound("music_overground", "music/overground.mp3", 2)
+            .AddSound("music_underground", "music/underground.mp3", 2)
+            .AddSound("music_castle", "music/castle.mp3", 2);
     } else {
 	    Enjine.Resources.AddSound("1up", "sounds/1-up.wav", 1)
 		    .AddSound("breakblock", "sounds/breakblock.wav")
@@ -96,7 +99,10 @@ Mario.LoadingState.prototype.Enter = function() {
 		    .AddSound("stomp", "sounds/stomp.wav", 1)
             .AddSound("music_background", "music/background.wav", 2)
             .AddSound("music_title", "music/title.wav", 2)
-            .AddSound("music_map", "music/map.wav", 2);
+            .AddSound("music_map", "music/map.wav", 2)
+            .AddSound("music_overground", "music/overground.wav", 2)
+            .AddSound("music_underground", "music/underground.wav", 2)
+            .AddSound("music_castle", "music/castle.wav", 2);
     }
 
     //load the array of tile behaviors
