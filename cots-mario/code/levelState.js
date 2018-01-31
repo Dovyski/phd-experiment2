@@ -77,6 +77,9 @@ Mario.LevelState.prototype.Enter = function() {
         this.BgLayer[i] = new Mario.BackgroundRenderer(bgLevelGenerator.CreateLevel(), 320, 240, scrollSpeed);
     }
 
+    this.CollectedMushrooms = 0;
+    this.CollectedFlowers = 0;
+
     // If in experimet mode, adjust mario according to instructions
     if(GlobalInfo.experiment) {
         Mario.MarioCharacter.Large = Experiment.config('marioLarge', false);
@@ -92,6 +95,10 @@ Mario.LevelState.prototype.Enter = function() {
 
 	this.GotoMapState = false;
 	this.GotoLoseState = false;
+
+    if(GlobalInfo.experiment) {
+        this.TimeLeft = Experiment.config('levelTimeLeft', 200);
+    }
 
     GlobalInfo.data.log({a: 'level_start', n: Experiment.config('levelName')}, true);
 };
