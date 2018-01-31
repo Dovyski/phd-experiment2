@@ -20,6 +20,11 @@ Mario.LevelState = function(difficulty, type, seed, width) {
     this.ShellsToCheck = null;
     this.FireballsToCheck = null;
 
+    this.CollectedMushrooms = 0;
+    this.CollectedFlowers = 0;
+    this.AllowedFlowers = 400;    // max amount of flowers allowed to be collected in this level
+    this.AllowedMushrooms = 400;  // max amount of mushroom allowed to be collected in this level
+
     this.FontShadow = null;
     this.Font = null;
 
@@ -75,6 +80,8 @@ Mario.LevelState.prototype.Enter = function() {
     // If in experimet mode, adjust mario according to instructions
     if(GlobalInfo.experiment) {
         Mario.MarioCharacter.Large = Experiment.config('marioLarge', false);
+        this.AllowedFlowers = Experiment.config('levelAllowedFlowers', 400);
+        this.AllowedMushrooms = Experiment.config('levelAllowedMushrooms', 400);
     }
 
     Mario.MarioCharacter.Initialize(this);
@@ -435,28 +442,28 @@ Mario.LevelState.prototype.RemoveSprite = function(sprite) {
 };
 
 Mario.LevelState.prototype.Bump = function(x, y, canBreakBricks) {
-    var block = this.Level.GetBlock(x, y), xx = 0, yy = 0, flowerAllowed = true;
+    var block = this.Level.GetBlock(x, y), xx = 0, yy = 0, canCollectPowerups = true, canCollectMushrooms = true, canCollectFlowers = true;
 
     if ((Mario.Tile.Behaviors[block & 0xff] & Mario.Tile.Bumpable) > 0) {
         this.BumpInto(x, y - 1);
         this.Level.SetBlock(x, y, 4);
         this.Level.SetBlockData(x, y, 4);
 
-        if ((Mario.Tile.Behaviors[block & 0xff] & Mario.Tile.Special) > 0) {
+        canCollectMushrooms = !Mario.MarioCharacter.Large && this.CollectedMushrooms < this.AllowedMushrooms;
+        canCollectFlowers = this.CollectedFlowers < this.AllowedFlowers;
+        canCollectPowerups = canCollectMushrooms || canCollectFlowers;
+
+        if ((Mario.Tile.Behaviors[block & 0xff] & Mario.Tile.Special) > 0 && canCollectPowerups) {
             Enjine.Resources.PlaySound("sprout");
 
-            // If in experiment mode, special flower might be controlled.
-            // Check if it is allowed.
-            if(GlobalInfo.experiment) {
-                flowerAllowed = Experiment.config('levelFlowerAllowed', true);
-            }
-
-            if (!Mario.MarioCharacter.Large || !flowerAllowed) {
+            if (canCollectMushrooms) {
                 this.AddSprite(new Mario.Mushroom(this, x * 16 + 8, y * 16 + 8));
                 GlobalInfo.data.log({a: 'mario_bump', t: 'mushroom'}, true);
-            } else {
+                this.CollectedMushrooms++;
+            } else if(canCollectFlowers) {
                 this.AddSprite(new Mario.FireFlower(this, x * 16 + 8, y * 16 + 8));
                 GlobalInfo.data.log({a: 'mario_bump', t: 'fireflower'}, true);
+                this.CollectedFlowers++;
             }
         } else {
             Mario.MarioCharacter.GetCoin();
