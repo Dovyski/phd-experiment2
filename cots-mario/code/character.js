@@ -13,6 +13,8 @@ Mario.Character = function() {
     this.LevelString = "none";
     this.GroundInertia = 0.89;
     this.AirInertia = 0.89;
+    this.MoveSpeedWalk = 0.60;
+    this.MoveSpeedRun = 0.90;
 
     //non static variables in Notch's code
     this.RunTime = 0;
@@ -178,7 +180,7 @@ Mario.Character.prototype.Move = function() {
     this.Visible = (((this.InvulerableTime / 2) | 0) & 1) === 0;
 
     this.WasOnGround = this.OnGround;
-    var sideWaysSpeed = Enjine.KeyboardInput.IsKeyDown(Enjine.Keys.A) ? 1.2 : 0.6;
+    var sideWaysSpeed = Enjine.KeyboardInput.IsKeyDown(Enjine.Keys.A) ? this.MoveSpeedRun : this.MoveSpeedWalk;
 
     if (this.OnGround) {
         if (Enjine.KeyboardInput.IsKeyDown(Enjine.Keys.Down) && this.Large) {
