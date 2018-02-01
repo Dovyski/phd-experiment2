@@ -36,6 +36,9 @@ Mario.LoseState.prototype.Enter = function() {
     this.drawManager.Add(this.font);
     this.drawManager.Add(this.gameOver);
 
+    // Stop any music currently playing
+    Mario.StopMusic();
+
     if(GlobalInfo.experiment) {
         GlobalInfo.data.logMilestone(GlobalInfo.user, GlobalInfo.game, 'game_end');
         console.log('Game duration: ' + ((Date.now() - Experiment.startTime) / 1000) + ' seconds');

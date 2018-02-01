@@ -31,7 +31,7 @@ Mario.LevelState = function(difficulty, type, seed, width) {
     this.MusicSilenceTimer = 0;
     this.MusicIsInSilence = false;
     this.AlertedHurryUp = false;
-    this.HurryUpLimit = 60;
+    this.HurryUpLimit = 61;
 
     this.TimeLeft = 0;
     this.StartTime = 0;

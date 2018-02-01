@@ -110,7 +110,9 @@ Mario.MapState.prototype.Enter = function() {
     this.LevelDifficulty = 0;
     this.LevelType = 0;
 
-	Mario.PlayMapMusic();
+    if(!GlobalInfo.experiment) {
+        Mario.PlayMapMusic();
+    }
 
     if(GlobalInfo.experiment && this.ViewCount == 0) {
         GlobalInfo.data.logMilestone(GlobalInfo.user, GlobalInfo.game, 'game_start');
