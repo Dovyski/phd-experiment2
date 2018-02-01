@@ -666,7 +666,13 @@ Mario.MapState.prototype.CheckForChange = function(context) {
     // Go directly to the level state if running in experiment mode
     if(GlobalInfo.experiment) {
         Mario.MarioCharacter.LevelString = Experiment.config('levelName');
-        context.ChangeState(new Mario.LevelState(Experiment.config('levelDifficulty'), Experiment.config('levelType'), Experiment.config('seed'), Experiment.config('levelWidth')));
+        context.ChangeState(new Mario.LevelState(
+            Experiment.config('levelDifficulty'),
+            Experiment.config('levelType'),
+            Experiment.config('seed'),
+            Experiment.config('levelWidth'),
+            Experiment.config('levelAutoScrolling', false)
+        ));
     }
 
     if (this.WorldNumber === 8) {
