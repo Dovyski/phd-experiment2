@@ -27,6 +27,7 @@ Mario.Character = function() {
     this.XJumpSpeed = 0;
     this.YJumpSpeed = 0;
     this.CanShoot = false;
+    this.Running = false;
 
     this.Width = 4;
     this.Height = 24;
@@ -69,6 +70,7 @@ Mario.Character.prototype.Initialize = function(world) {
     this.XJumpSpeed = 0;
     this.YJumpSpeed = 0;
     this.CanShoot = false;
+    this.Running = false;
 
     this.Width = 4;
     this.Height = 24;
@@ -134,6 +136,8 @@ Mario.Character.prototype.Blink = function(on) {
 };
 
 Mario.Character.prototype.Move = function() {
+    var currentlyFacing = this.Facing;
+
     if (this.WinTime > 0) {
         this.WinTime++;
         this.Xa = 0;
@@ -180,7 +184,20 @@ Mario.Character.prototype.Move = function() {
     this.Visible = (((this.InvulerableTime / 2) | 0) & 1) === 0;
 
     this.WasOnGround = this.OnGround;
-    var sideWaysSpeed = Enjine.KeyboardInput.IsKeyDown(Enjine.Keys.A) ? this.MoveSpeedRun : this.MoveSpeedWalk;
+
+    if(Enjine.KeyboardInput.IsKeyDown(Enjine.Keys.A)) {
+        if(!this.Running) {
+            GlobalInfo.data.log({a: 'mario_move', t: 'run_start', x: (Mario.MarioCharacter.X | 0)}, true);
+        }
+        this.Running = true;
+    } else {
+        if(this.Running) {
+            GlobalInfo.data.log({a: 'mario_move', t: 'run_end', x: (Mario.MarioCharacter.X | 0)}, true);
+        }
+        this.Running = false;
+    }
+
+    var sideWaysSpeed = this.Running ? this.MoveSpeedRun : this.MoveSpeedWalk;
 
     if (this.OnGround) {
         if (Enjine.KeyboardInput.IsKeyDown(Enjine.Keys.Down) && this.Large) {
@@ -280,7 +297,7 @@ Mario.Character.prototype.Move = function() {
     this.SubMove(this.Xa, 0);
     this.SubMove(0, this.Ya);
     if (this.Y > this.World.Level.Height * 16 + 16) {
-        GlobalInfo.data.log({a: 'mario_hurt', t: 'fall', x: Mario.MarioCharacter.X}, true);
+        GlobalInfo.data.log({a: 'mario_hurt', t: 'fall', x: (Mario.MarioCharacter.X | 0)}, true);
         this.Die();
     }
 
@@ -316,6 +333,10 @@ Mario.Character.prototype.Move = function() {
             this.Carried.Release(this);
             this.Carried = null;
         }
+    }
+
+    if(currentlyFacing != 0 && currentlyFacing != this.Facing) {
+        GlobalInfo.data.log({a: 'mario_facing', t: this.Facing, x: (Mario.MarioCharacter.X | 0)}, true);
     }
 };
 
@@ -575,7 +596,7 @@ Mario.Character.prototype.GetHurt = function(byWho) {
         return;
     }
 
-    GlobalInfo.data.log({a: 'mario_hurt', t: byWho, x: Mario.MarioCharacter.X}, true);
+    GlobalInfo.data.log({a: 'mario_hurt', t: byWho, x: (Mario.MarioCharacter.X | 0)}, true);
 
     if (this.Large) {
         this.World.Paused = true;

@@ -165,7 +165,7 @@ Mario.LevelState.prototype.Update = function(delta) {
     this.TimeLeft -= delta;
     if ((this.TimeLeft | 0) === 0) {
         if(Mario.MarioCharacter.DeathTime == 0) {
-            GlobalInfo.data.log({a: 'mario_hurt', t: 'timeout', x: Mario.MarioCharacter.X}, true);
+            GlobalInfo.data.log({a: 'mario_hurt', t: 'timeout', x: (Mario.MarioCharacter.X | 0)}, true);
         }
         Mario.MarioCharacter.Die();
     }
