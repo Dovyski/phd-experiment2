@@ -9,6 +9,7 @@ Mario.Character = function() {
     this.Fire = false;
     this.Coins = 0;
     this.Lives = 3;
+    this.Score = 0;
     this.LevelString = "none";
     this.GroundInertia = 0.89;
     this.AirInertia = 0.89;
@@ -85,6 +86,10 @@ Mario.Character.prototype.Initialize = function(world) {
 
     this.SetLarge(this.Large, this.Fire);
 };
+
+Mario.Character.prototype.AddScore = function(amount) {
+    this.Score += amount;
+}
 
 Mario.Character.prototype.SetLarge = function(large, fire) {
     if (fire) {
@@ -666,6 +671,8 @@ Mario.Character.prototype.GetCoin = function() {
     if (this.Coins === 100) {
         this.Coins = 0;
         this.Get1Up();
+        this.AddScore(100);
     }
+    this.AddScore(2);
     GlobalInfo.data.log({a: 'mario_coin', s: this.Coins}, true);
 };

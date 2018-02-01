@@ -320,7 +320,7 @@ Mario.LevelState.prototype.Draw = function(context) {
     this.Layer.DrawExit1(context, this.Camera);
 
     this.DrawStringShadow(context, "MARIO " + Mario.MarioCharacter.Lives, 0, 0);
-    this.DrawStringShadow(context, "00000000", 0, 1);
+    this.DrawStringShadow(context, this.PadString(8, "0", Mario.MarioCharacter.Score), 0, 1);
     this.DrawStringShadow(context, "COIN", 14, 0);
     this.DrawStringShadow(context, " " + Mario.MarioCharacter.Coins, 14, 1);
     this.DrawStringShadow(context, "WORLD", 24, 0);
@@ -345,6 +345,8 @@ Mario.LevelState.prototype.Draw = function(context) {
 
         if (t > 900) {
 			Mario.GlobalMapState.LevelWon();
+            Mario.MarioCharacter.AddScore(time * 2);
+
             // If in experiment mode, go to the lose state even when player won.
             // Only the message will be different there
             if(GlobalInfo.experiment) {
@@ -376,6 +378,26 @@ Mario.LevelState.prototype.Draw = function(context) {
         }
 
         this.RenderBlackout(context, ((Mario.MarioCharacter.XDeathPos - this.Camera.X) | 0), ((Mario.MarioCharacter.YDeathPos - this.Camera.Y) | 0), (320 - t) | 0);
+    }
+};
+
+// https://github.com/uxitten/polyfill/blob/master/string.polyfill.js
+// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/padStart
+Mario.LevelState.prototype.PadString = function(targetLength, padString, text) {
+    targetLength = targetLength>>0; //truncate if number or convert non-number to 0;
+    padString = String((typeof padString !== 'undefined' ? padString : ' '));
+    text = String(text);
+
+    if (text.length > targetLength) {
+        return text;
+    } else {
+        targetLength = targetLength - text.length;
+
+        if (targetLength > padString.length) {
+            padString += padString.repeat(targetLength / padString.length); //append to original to ensure we are longer than needed
+        }
+
+        return padString.slice(0, targetLength) + text;
     }
 };
 
@@ -484,6 +506,7 @@ Mario.LevelState.prototype.Bump = function(x, y, canBreakBricks) {
         this.BumpInto(x, y - 1);
         if (canBreakBricks) {
             Enjine.Resources.PlaySound("breakblock");
+            Mario.MarioCharacter.AddScore(1);
             GlobalInfo.data.log({a: 'mario_bump', t: 'breakblock'}, true);
             this.Level.SetBlock(x, y, 0);
             for (xx = 0; xx < 2; xx++) {
