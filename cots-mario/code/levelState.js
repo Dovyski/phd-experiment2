@@ -3,11 +3,13 @@
 	Code by Rob Kleffner, 2011
 */
 
-Mario.LevelState = function(difficulty, type, seed, width) {
+Mario.LevelState = function(difficulty, type, seed, width, autoScrolling) {
     this.LevelDifficulty = difficulty;
     this.LevelType = type;
     this.LevelSeed = seed;
     this.LevelWidth = width;
+    this.LevelAutoScrolling = autoScrolling === undefined ? false : autoScrolling;
+    this.AutoScrollingSpeed = 0.6;
     this.Level = null;
     this.Layer = null;
     this.BgLayer = [];
@@ -176,7 +178,10 @@ Mario.LevelState.prototype.Update = function(delta) {
 
     this.UpdateHurryUpAlert(delta);
 
-    this.Camera.X = Mario.MarioCharacter.X - 160;
+    if(!this.LevelAutoScrolling) {
+        this.Camera.X = Mario.MarioCharacter.X - 160;
+    }
+
     if (this.Camera.X < 0) {
         this.Camera.X = 0;
     }
@@ -302,12 +307,55 @@ Mario.LevelState.prototype.Update = function(delta) {
     this.SpritesToAdd.length = 0;
     this.SpritesToRemove.length = 0;
 
-    this.Camera.X = (Mario.MarioCharacter.XOld + (Mario.MarioCharacter.X - Mario.MarioCharacter.XOld) * delta) - 160;
-    this.Camera.Y = (Mario.MarioCharacter.YOld + (Mario.MarioCharacter.Y - Mario.MarioCharacter.YOld) * delta) - 120;
+    if(this.LevelAutoScrolling) {
+        this.UpdateAutoScrolling();
+    } else {
+        this.Camera.X = (Mario.MarioCharacter.XOld + (Mario.MarioCharacter.X - Mario.MarioCharacter.XOld) * delta) - 160;
+        this.Camera.Y = (Mario.MarioCharacter.YOld + (Mario.MarioCharacter.Y - Mario.MarioCharacter.YOld) * delta) - 120;
+    }
 
     if(GlobalInfo.experiment && Experiment.ENABLE_DATA_LOG) {
         GlobalInfo.data.send(GlobalInfo.user, GlobalInfo.game);
     }
+};
+
+Mario.LevelState.prototype.UpdateAutoScrolling = function() {
+    var marioScreenX = 0;
+
+    if(Mario.MarioCharacter.DeathTime > 0) {
+        return;
+    }
+
+    this.Camera.X += this.AutoScrollingSpeed;
+    marioScreenX = Mario.MarioCharacter.X - this.Camera.X;
+
+    if(marioScreenX < 9) {
+        Mario.MarioCharacter.X = this.Camera.X + 10;
+
+        if(this.WasMarioCrushed()) {
+            if(Mario.MarioCharacter.DeathTime == 0) {
+                GlobalInfo.data.log({a: 'mario_hurt', t: 'crushed', x: (Mario.MarioCharacter.X | 0)}, true);
+            }
+            Mario.MarioCharacter.Die();
+        }
+    } else if (marioScreenX >= (320 - 8)) {
+        Mario.MarioCharacter.X = this.Camera.X + 320 - 8;
+    }
+};
+
+Mario.LevelState.prototype.WasMarioCrushed = function() {
+    var block = 0, x = Mario.MarioCharacter.X, y = Mario.MarioCharacter.Y;
+
+    x = (x / 16) | 0;
+    y = (y / 16) | 0;
+
+    block = Mario.MarioCharacter.World.Level.GetBlock(x, y);
+
+    if (((Mario.Tile.Behaviors[block & 0xff]) & Mario.Tile.BlockAll) > 0) {
+        return true;
+    }
+
+    return false;
 };
 
 Mario.LevelState.prototype.Draw = function(context) {
