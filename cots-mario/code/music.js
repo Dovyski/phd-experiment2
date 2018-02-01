@@ -24,7 +24,7 @@ Mario.PlayMusic = function(name) {
 	if(name in availableMusic) {
 		// Stop anything currently playing then play the requested music
 		Mario.StopMusic();
-		Enjine.Resources.PlaySound(availableMusic[name], true);
+		Enjine.Resources.PlaySound(availableMusic[name], true, 0.5);
 	} else {
 		console.error("Cannot play music track " + name + " as it has no data.");
 	}

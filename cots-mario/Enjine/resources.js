@@ -67,14 +67,17 @@ Enjine.Resources = {
         return this;
     },
 
-    PlaySound: function(name, loop) {
+    PlaySound: function(name, loop, volume) {
     	if (this.Sounds[name].index >= this.Sounds[name].length) {
     		this.Sounds[name].index = 0;
     	}
     	if (loop) {
     		this.Sounds[name][this.Sounds[name].index].addEventListener("ended", this.LoopCallback, false);
     	}
-    	this.Sounds[name][this.Sounds[name].index++].play();
+        var index = this.Sounds[name].index++;
+        this.Sounds[name][index].play();
+    	this.Sounds[name][index].volume = volume || 1.0;
+
     	return this.Sounds[name].index;
     },
 
