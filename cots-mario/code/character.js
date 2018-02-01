@@ -278,7 +278,7 @@ Mario.Character.prototype.Move = function() {
     this.SubMove(this.Xa, 0);
     this.SubMove(0, this.Ya);
     if (this.Y > this.World.Level.Height * 16 + 16) {
-        GlobalInfo.data.log({a: 'mario_hurt', t: 'fall'}, true);
+        GlobalInfo.data.log({a: 'mario_hurt', t: 'fall', x: Mario.MarioCharacter.X}, true);
         this.Die();
     }
 
@@ -573,7 +573,7 @@ Mario.Character.prototype.GetHurt = function(byWho) {
         return;
     }
 
-    GlobalInfo.data.log({a: 'mario_hurt', t: byWho}, true);
+    GlobalInfo.data.log({a: 'mario_hurt', t: byWho, x: Mario.MarioCharacter.X}, true);
 
     if (this.Large) {
         this.World.Paused = true;
