@@ -599,7 +599,8 @@ Mario.MapState.prototype.CalcDistance = function(x, y, xa, ya) {
 Mario.MapState.prototype.Draw = function(context) {
     var x = 0, y = 0;
 
-    if (this.WorldNumber === 8) {
+    if (this.WorldNumber === 8 || GlobalInfo.experiment) {
+        // In experiment mode, the map screen should never appear on the screen.
         return;
     }
 
