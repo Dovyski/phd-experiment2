@@ -220,6 +220,7 @@ Mario.Character.prototype.Move = function() {
             this.Ya = -this.JumpTime * this.YJumpSpeed;
             this.JumpTime++;
         } else if (this.OnGround && this.MayJump) {
+            GlobalInfo.data.log({a: 'mario_jump', f: this.Facing, x: (this.X | 0), y: (this.Y | 0)}, true);
             Enjine.Resources.PlaySound("jump", false, 0.2);
             this.XJumpSpeed = 0;
             this.YJumpSpeed = -1.9;
@@ -228,6 +229,7 @@ Mario.Character.prototype.Move = function() {
             this.OnGround = false;
             this.Sliding = false;
         } else if (this.Sliding && this.MayJump) {
+            GlobalInfo.data.log({a: 'mario_jump', f: this.Facing, x: (this.X | 0), y: (this.Y | 0)}, true);
             Enjine.Resources.PlaySound("jump", false, 0.2);
             this.XJumpSpeed = -this.Facing * 6;
             this.YJumpSpeed = -2;
