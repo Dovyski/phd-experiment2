@@ -9,7 +9,7 @@ Mario.LevelState = function(difficulty, type, seed, width, autoScrolling) {
     this.LevelSeed = seed;
     this.LevelWidth = width;
     this.LevelAutoScrolling = autoScrolling === undefined ? false : autoScrolling;
-    this.AutoScrollingSpeed = 0.6;
+    this.AutoScrollingSpeed = 0.7;
     this.Level = null;
     this.Layer = null;
     this.BgLayer = [];
