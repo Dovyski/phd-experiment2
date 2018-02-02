@@ -32,7 +32,7 @@ Mario.LevelState = function(difficulty, type, seed, width, autoScrolling) {
 
     this.MusicSilenceTimer = 0;
     this.MusicIsInSilence = false;
-    this.AlertedHurryUp = false;
+    this.InHurryUp = false;
     this.HurryUpLimit = 61;
 
     this.TimeLeft = 0;
@@ -71,7 +71,7 @@ Mario.LevelState.prototype.Enter = function() {
 
     this.MusicSilenceTimer = 0;
     this.MusicIsInSilence = false;
-    this.AlertedHurryUp = false;
+    this.InHurryUp = false;
 
     for (i = 0; i < 2; i++) {
         scrollSpeed = 4 >> i;
@@ -128,13 +128,15 @@ Mario.LevelState.prototype.CheckFireballCollide = function(fireball) {
     this.FireballsToCheck.push(fireball);
 };
 
-Mario.LevelState.prototype.PlayLevelMusic = function() {
+Mario.LevelState.prototype.PlayLevelMusic = function(hurryup) {
+    hurryup = hurryup === undefined ? false : hurryup;
+
     if (this.LevelType === Mario.LevelType.Overground) {
-        Mario.PlayOvergroundMusic();
+        Mario.PlayOvergroundMusic(hurryup);
     } else if (this.LevelType === Mario.LevelType.Underground) {
-        Mario.PlayUndergroundMusic();
+        Mario.PlayUndergroundMusic(hurryup);
     } else if (this.LevelType === Mario.LevelType.Castle) {
-        Mario.PlayCastleMusic();
+        Mario.PlayCastleMusic(hurryup);
     }
 };
 
@@ -144,12 +146,12 @@ Mario.LevelState.prototype.UpdateHurryUpAlert = function(delta) {
 
         if(this.MusicSilenceTimer <= 0) {
             this.MusicIsInSilence = false;
-            this.PlayLevelMusic();
+            this.PlayLevelMusic(this.InHurryUp);
         }
     }
 
-    if(!this.AlertedHurryUp && this.TimeLeft <= this.HurryUpLimit) {
-        this.AlertedHurryUp = true;
+    if(!this.InHurryUp && this.TimeLeft <= this.HurryUpLimit) {
+        this.InHurryUp = true;
         this.MusicIsInSilence = true;
         this.MusicSilenceTimer = 2.5;
 

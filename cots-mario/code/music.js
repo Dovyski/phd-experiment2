@@ -17,7 +17,10 @@ var availableMusic = {
 	"background": "music_background",
 	"overground": "music_overground",
 	"underground": "music_underground",
-	"castle": "music_castle"
+	"castle": "music_castle",
+	"overground_hurryup": "music_overground_hurryup",
+	"underground_hurryup": "music_underground_hurryup",
+	"castle_hurryup": "music_castle_hurryup"
 };
 
 Mario.PlayMusic = function(name) {
@@ -38,16 +41,16 @@ Mario.PlayMapMusic = function() {
 	Mario.PlayMusic("map");
 };
 
-Mario.PlayOvergroundMusic = function() {
-	Mario.PlayMusic("overground");
+Mario.PlayOvergroundMusic = function(hurry) {
+	Mario.PlayMusic(hurry ? "overground_hurryup" : "overground");
 };
 
-Mario.PlayUndergroundMusic = function() {
-	Mario.PlayMusic("underground");
+Mario.PlayUndergroundMusic = function(hurry) {
+	Mario.PlayMusic(hurry ? "underground_hurryup" : "underground");
 };
 
-Mario.PlayCastleMusic = function() {
-	Mario.PlayMusic("castle");
+Mario.PlayCastleMusic = function(hurry) {
+	Mario.PlayMusic(hurry ? "castle_hurryup" : "castle");
 };
 
 Mario.StopMusic = function() {
