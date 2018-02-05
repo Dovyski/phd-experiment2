@@ -224,7 +224,7 @@ Mario.Character.prototype.Move = function() {
             GlobalInfo.data.log({a: 'mario_jump', f: this.Facing, x: (this.X | 0), y: (this.Y | 0)}, true);
             Enjine.Resources.PlaySound("jump", false, 0.2);
             this.XJumpSpeed = 0;
-            this.YJumpSpeed = -1.8;
+            this.YJumpSpeed = -1.9;
             this.JumpTime = 7;
             this.Ya = this.JumpTime * this.YJumpSpeed;
             this.OnGround = false;
@@ -233,7 +233,7 @@ Mario.Character.prototype.Move = function() {
             GlobalInfo.data.log({a: 'mario_jump', f: this.Facing, x: (this.X | 0), y: (this.Y | 0)}, true);
             Enjine.Resources.PlaySound("jump", false, 0.2);
             this.XJumpSpeed = -this.Facing * 6;
-            this.YJumpSpeed = -1.9;
+            this.YJumpSpeed = -2.0;
             this.JumpTime = -6;
             this.Xa = this.XJumpSpeed;
             this.Ya = -this.JumpTime * this.YJumpSpeed;
@@ -318,7 +318,7 @@ Mario.Character.prototype.Move = function() {
         this.Xa = 0;
     }
 
-    this.Ya *= 0.65;
+    this.Ya *= 0.6;
     if (this.OnGround) {
         this.Xa *= this.GroundInertia;
     } else {
@@ -344,7 +344,7 @@ Mario.Character.prototype.Move = function() {
 };
 
 Mario.Character.prototype.CalcPic = function() {
-    var runFrame = 0, i = 0, xaLimit = 8;
+    var runFrame = 0, i = 0, xaLimit = 8.1;
 
     if (this.Large) {
         runFrame = ((this.RunTime / 20) | 0) % 4;
