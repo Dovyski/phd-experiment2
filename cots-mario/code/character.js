@@ -137,7 +137,7 @@ Mario.Character.prototype.Blink = function(on) {
 };
 
 Mario.Character.prototype.Move = function() {
-    var currentlyFacing = this.Facing;
+    var currentlyFacing = this.Facing, jumpKeyDown = Enjine.KeyboardInput.IsKeyDown(Enjine.Keys.S) || Enjine.KeyboardInput.IsKeyDown(Enjine.Keys.Space);
 
     if (this.WinTime > 0) {
         this.WinTime++;
@@ -215,7 +215,7 @@ Mario.Character.prototype.Move = function() {
         this.Facing = -1;
     }
 
-    if (Enjine.KeyboardInput.IsKeyDown(Enjine.Keys.S) || (this.JumpTime < 0 && !this.OnGround && !this.Sliding)) {
+    if (jumpKeyDown || (this.JumpTime < 0 && !this.OnGround && !this.Sliding)) {
         if (this.JumpTime < 0) {
             this.Xa = this.XJumpSpeed;
             this.Ya = -this.JumpTime * this.YJumpSpeed;
@@ -224,7 +224,7 @@ Mario.Character.prototype.Move = function() {
             GlobalInfo.data.log({a: 'mario_jump', f: this.Facing, x: (this.X | 0), y: (this.Y | 0)}, true);
             Enjine.Resources.PlaySound("jump", false, 0.2);
             this.XJumpSpeed = 0;
-            this.YJumpSpeed = -1.9;
+            this.YJumpSpeed = -1.8;
             this.JumpTime = 7;
             this.Ya = this.JumpTime * this.YJumpSpeed;
             this.OnGround = false;
@@ -233,7 +233,7 @@ Mario.Character.prototype.Move = function() {
             GlobalInfo.data.log({a: 'mario_jump', f: this.Facing, x: (this.X | 0), y: (this.Y | 0)}, true);
             Enjine.Resources.PlaySound("jump", false, 0.2);
             this.XJumpSpeed = -this.Facing * 6;
-            this.YJumpSpeed = -2;
+            this.YJumpSpeed = -1.9;
             this.JumpTime = -6;
             this.Xa = this.XJumpSpeed;
             this.Ya = -this.JumpTime * this.YJumpSpeed;
@@ -279,7 +279,7 @@ Mario.Character.prototype.Move = function() {
     }
 
     this.CanShoot = !Enjine.KeyboardInput.IsKeyDown(Enjine.Keys.A);
-    this.MayJump = (this.OnGround || this.Sliding) && !Enjine.KeyboardInput.IsKeyDown(Enjine.Keys.S);
+    this.MayJump = (this.OnGround || this.Sliding) && !jumpKeyDown;
     this.XFlip = (this.Facing === -1);
     this.RunTime += Math.abs(this.Xa) + 5;
 
@@ -318,7 +318,7 @@ Mario.Character.prototype.Move = function() {
         this.Xa = 0;
     }
 
-    this.Ya *= 0.85;
+    this.Ya *= 0.65;
     if (this.OnGround) {
         this.Xa *= this.GroundInertia;
     } else {
@@ -344,14 +344,14 @@ Mario.Character.prototype.Move = function() {
 };
 
 Mario.Character.prototype.CalcPic = function() {
-    var runFrame = 0, i = 0;
+    var runFrame = 0, i = 0, xaLimit = 8;
 
     if (this.Large) {
         runFrame = ((this.RunTime / 20) | 0) % 4;
         if (runFrame === 3) {
             runFrame = 1;
         }
-        if (this.Carried === null && Math.abs(this.Xa) > 10) {
+        if (this.Carried === null && Math.abs(this.Xa) > xaLimit) {
             runFrame += 3;
         }
         if (this.Carried !== null) {
@@ -360,7 +360,7 @@ Mario.Character.prototype.CalcPic = function() {
         if (!this.OnGround) {
             if (this.Carried !== null) {
                 runFrame = 12;
-            } else if (Math.abs(this.Xa) > 10) {
+            } else if (Math.abs(this.Xa) > xaLimit) {
                 runFrame = 7;
             } else {
                 runFrame = 6;
@@ -368,7 +368,7 @@ Mario.Character.prototype.CalcPic = function() {
         }
     } else {
         runFrame = ((this.RunTime / 20) | 0) % 2;
-        if (this.Carried === null && Math.abs(this.Xa) > 10) {
+        if (this.Carried === null && Math.abs(this.Xa) > xaLimit) {
             runFrame += 2;
         }
         if (this.Carried !== null) {
@@ -377,7 +377,7 @@ Mario.Character.prototype.CalcPic = function() {
         if (!this.OnGround) {
             if (this.Carried !== null) {
                 runFrame = 9;
-            } else if (Math.abs(this.Xa) > 10) {
+            } else if (Math.abs(this.Xa) > xaLimit) {
                 runFrame = 5;
             } else {
                 runFrame = 4;
