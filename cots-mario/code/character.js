@@ -130,9 +130,9 @@ Mario.Character.prototype.Blink = function(on) {
     } else {
         this.Image = Enjine.Resources.Images["smallMario"];
         this.XPicO = 8;
-        this.YPicO = 21;
+        this.YPicO = 23;
         this.PicWidth = 16;
-        this.PicHeight = 22;
+        this.PicHeight = 24;
     }
 };
 
@@ -158,6 +158,7 @@ Mario.Character.prototype.Move = function() {
         }
         this.X += this.Xa;
         this.Y += this.Ya;
+        this.CalcPic();
         return;
     }
 
@@ -404,6 +405,10 @@ Mario.Character.prototype.CalcPic = function() {
         this.Height = this.Ducking ? 12 : 24;
     } else {
         this.Height = 12;
+    }
+
+    if(this.DeathTime > 0) {
+        runFrame = this.Large ? 16 : 11;
     }
 
     this.XPic = runFrame;
