@@ -23,6 +23,11 @@ body {
     margin-right: 10px;
 }
 
+#instructions p {
+    float: right;
+    width: 370px;
+}
+
 #instructions p.head {
     width: 100%;
     text-align: center;

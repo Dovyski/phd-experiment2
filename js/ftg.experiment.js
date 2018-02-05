@@ -9,7 +9,7 @@
  FTG.Experiment = function() {
      this.MARIO_INSTRUCTIONS =
         '<p class="head">How to play:</p>' +
-        '<li><img src="../img/keys/a.png" title="A" class="key" /> <p>(Press and hold) <strong>RUN</strong><br />(Press and hold) <strong>CARRY things<strong/></p></li>' +
+        '<li><img src="../img/keys/a.png" title="A" class="key" /> <p>(Press and hold) <strong>RUN</strong><br />(Press and hold) <strong>CARRY things</strong><br /><strong>FIREBALL</strong> (if Mario has a flower)</p></li>' +
         '<li><img src="../img/keys/s.png" title="S" class="key" /> <p><strong>JUMP</strong></p></li>' +
         '<li><img src="../img/keys/left.png" title="Left arrow" class="key" /> <p><strong>MOVE left</strong></p></li>' +
         '<li><img src="../img/keys/right.png" title="Right arrow" class="key" /> <p><strong>MOVE right</strong></p></li>';
