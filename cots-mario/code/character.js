@@ -130,8 +130,9 @@ Mario.Character.prototype.Blink = function(on) {
     } else {
         this.Image = Enjine.Resources.Images["smallMario"];
         this.XPicO = 8;
-        this.YPicO = 15;
-        this.PicWidth = this.PicHeight = 16;
+        this.YPicO = 21;
+        this.PicWidth = 16;
+        this.PicHeight = 22;
     }
 };
 
