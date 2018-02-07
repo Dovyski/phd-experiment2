@@ -16,7 +16,7 @@
 
      this.mUid;
      this.mCurrentGame;
-     this.mRestTime = 2; // in minutes
+     this.mRestTime = 2.3; // in minutes
      this.mDebug;
      this.mFinished;
      this.mData;
