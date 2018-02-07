@@ -8,43 +8,23 @@
 
  FTG.Questions.COTS = [
      {
-         text: 'How <em>boring</em> was the game?',
+         text: 'How <em>bored</em> did you feel while playing this game level?',
          options: [
-             {value: 1, label: '(Not boring at all)'},
+             {value: 1, label: '(Not bored at all)'},
              {value: 2, label: ''},
              {value: 3, label: ''},
              {value: 4, label: ''},
-             {value: 5, label: '(Extremely boring)'}
+             {value: 5, label: '(Extremely bored)'}
          ]
      },
      {
-         text: 'How <em>stressful</em> was the game?',
+         text: 'How <em>stressed</em> did you feel while playing this game level?',
          options: [
-             {value: 1, label: '(Not stressful at all)'},
+             {value: 1, label: '(Not stressed at all)'},
              {value: 2, label: ''},
              {value: 3, label: ''},
              {value: 4, label: ''},
-             {value: 5, label: '(Extremely stressful)'}
+             {value: 5, label: '(Extremely stressed)'}
          ]
-     },
-     {
-         text: 'How <em>fun</em> was the game?',
-         options: [
-             {value: 1, label: '(Not fun at all)'},
-             {value: 2, label: ''},
-             {value: 3, label: ''},
-             {value: 4, label: ''},
-             {value: 5, label: '(Extremely fun)'}
-         ]
-     },
-     {
-         text: 'How <em>challenging</em> was the game?',
-         options: [
-             {value: 1, label: '(Not challenging at all)'},
-             {value: 2, label: ''},
-             {value: 3, label: ''},
-             {value: 4, label: ''},
-             {value: 5, label: '(Extremely challenging)'}
-         ]
-     },
+     }
  ];

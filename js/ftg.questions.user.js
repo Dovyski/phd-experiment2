@@ -43,43 +43,43 @@
          ]
      },
      {
-         text: 'How familiar are puzzle games (e.g. mushroom game you just played) to you?',
+         text: 'How experienced do you believe you are with puzzle games (e.g. mushroom game you just played)?',
          hide: true,
          options: [
-             {value: 1, label: 'Unfamiliar'},
-             {value: 2, label: 'Not very familiar'},
-             {value: 3, label: 'Moderately familiar'},
-             {value: 4, label: 'Very familiar'}
+             {value: 1, label: 'No experience'},
+             {value: 2, label: 'Not very experienced'},
+             {value: 3, label: 'Moderately experienced'},
+             {value: 4, label: 'Very experienced'}
          ]
      },
      {
-         text: 'How familiar are platform games (e.g. jump/slide game you just played) to you?',
+         text: 'How experienced do you believe you are with platform games (e.g. jump/slide game you just played)?',
          hide: true,
          options: [
-             {value: 1, label: 'Unfamiliar'},
-             {value: 2, label: 'Not very familiar'},
-             {value: 3, label: 'Moderately familiar'},
-             {value: 4, label: 'Very familiar'}
+             {value: 1, label: 'No experience'},
+             {value: 2, label: 'Not very experienced'},
+             {value: 3, label: 'Moderately experienced'},
+             {value: 4, label: 'Very experienced'}
          ]
      },
      {
-         text: 'How familiar are you with the game Tetris (e.g. the game with squared blocks you just played)?',
+         text: 'How experienced do you believe you are with the game Tetris (e.g. game with squared blocks you just played)?',
          hide: true,
          options: [
-             {value: 1, label: 'Unfamiliar'},
-             {value: 2, label: 'Not very familiar'},
-             {value: 3, label: 'Moderately familiar'},
-             {value: 4, label: 'Very familiar'}
+             {value: 1, label: 'No experience'},
+             {value: 2, label: 'Not very experienced'},
+             {value: 3, label: 'Moderately experienced'},
+             {value: 4, label: 'Very experienced'}
          ]
      },
      {
-         text: 'How familiar are you with the game Super Mario?',
+         text: 'How experienced do you believe you are with the game Super Mario?',
          hide: true,
          options: [
-             {value: 1, label: 'Unfamiliar'},
-             {value: 2, label: 'Not very familiar'},
-             {value: 3, label: 'Moderately familiar'},
-             {value: 4, label: 'Very familiar'}
+             {value: 1, label: 'No experience'},
+             {value: 2, label: 'Not very experienced'},
+             {value: 3, label: 'Moderately experienced'},
+             {value: 4, label: 'Very experienced'}
          ]
      },
      {
