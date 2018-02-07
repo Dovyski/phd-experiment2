@@ -3,13 +3,13 @@
 	Code by Rob Kleffner, 2011
 */
 
-Mario.LevelState = function(difficulty, type, seed, width, autoScrolling) {
+Mario.LevelState = function(difficulty, type, seed, width, autoScrolling, autoScrollingSpeed) {
     this.LevelDifficulty = difficulty;
     this.LevelType = type;
     this.LevelSeed = seed;
     this.LevelWidth = width;
     this.LevelAutoScrolling = autoScrolling === undefined ? false : autoScrolling;
-    this.AutoScrollingSpeed = 0.7;
+    this.AutoScrollingSpeed = autoScrollingSpeed || 0.7;
     this.Level = null;
     this.Layer = null;
     this.BgLayer = [];

@@ -672,7 +672,8 @@ Mario.MapState.prototype.CheckForChange = function(context) {
             Experiment.config('levelType'),
             Experiment.config('seed'),
             Experiment.config('levelWidth'),
-            Experiment.config('levelAutoScrolling', false)
+            Experiment.config('levelAutoScrolling', false),
+            Experiment.config('levelAutoScrollingSpeed', 0.7)
         ));
     }
 
