@@ -3,8 +3,10 @@
 	Code by Rob Kleffner, 2011
 */
 
-Mario.LoseState = function(message) {
+Mario.LoseState = function(message, title, showGhost) {
     this.message = message;
+    this.title = title || "";
+    this.showGhost = showGhost === undefined ? true : showGhost;
     this.drawManager = null;
     this.camera = null;
     this.gameOver = null;
@@ -16,6 +18,8 @@ Mario.LoseState = function(message) {
 Mario.LoseState.prototype = new Enjine.GameState();
 
 Mario.LoseState.prototype.Enter = function() {
+    var textOffsetY = this.showGhost ? 0 : 50;
+
     this.drawManager = new Enjine.DrawableManager();
     this.camera = new Enjine.Camera();
 
@@ -29,12 +33,17 @@ Mario.LoseState.prototype.Enter = function() {
     this.gameOver.X = 112;
     this.gameOver.Y = 68;
 
-    this.font = Mario.SpriteCuts.CreateBlackFont();
-    this.font.Strings[0] = { String: this.message, X: 160 - ((this.message.length * 8 / 2) | 0), Y: 160 };
-    this.font.Strings[1] = { String: "Click HERE to continue", X: 70, Y: 175 };
+    this.font = this.showGhost ? Mario.SpriteCuts.CreateBlackFont() : Mario.SpriteCuts.CreateBlueFont();
+
+    this.font.Strings[0] = { String: this.title, X: 160 - ((this.title.length * 8 / 2) | 0), Y: 130 - textOffsetY };
+    this.font.Strings[1] = { String: this.message, X: 160 - ((this.message.length * 8 / 2) | 0), Y: 160 - textOffsetY };
+    this.font.Strings[2] = { String: "Click HERE to continue", X: 70, Y: 175 - textOffsetY};
 
     this.drawManager.Add(this.font);
-    this.drawManager.Add(this.gameOver);
+
+    if(this.showGhost) {
+        this.drawManager.Add(this.gameOver);
+    }
 
     // Stop any music currently playing
     Mario.StopMusic();

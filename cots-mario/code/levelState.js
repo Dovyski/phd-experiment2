@@ -619,7 +619,7 @@ Mario.LevelState.prototype.BumpInto = function(x, y) {
 Mario.LevelState.prototype.CheckForChange = function(context) {
     if(GlobalInfo.experiment && Experiment.shouldHaveEndedByNow()) {
         console.log('Limit for game session duration reached. Moving on with the experiment.');
-        context.ChangeState(new Mario.LoseState("Sorry! Time is over for this game."));
+        context.ChangeState(new Mario.LoseState("The time to test this game is over.", "Sorry!", false));
     }
 
 	if (this.GotoLoseState) {
