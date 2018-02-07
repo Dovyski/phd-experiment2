@@ -38,7 +38,10 @@
          // Mario B
          {id: 7, name: 'cots-mario', url: '../cots-mario/', width: 1300, height: 975, paddingLeft: 550, cots: true, questions: FTG.Questions.COTS, hasRest: false, params: {profile: 'B1'}, instructions: this.MARIO_INSTRUCTIONS},
          {id: 8, name: 'cots-mario', url: '../cots-mario/', width: 1300, height: 975, paddingLeft: 550, cots: true, questions: FTG.Questions.COTS, hasRest: false, params: {profile: 'B2'}, instructions: this.MARIO_INSTRUCTIONS},
-         {id: 9, name: 'cots-mario', url: '../cots-mario/', width: 700, height: 975, paddingLeft: 550, cots: true, questions: FTG.Questions.COTS, hasRest: false, params: {profile: 'B3'}, instructions: this.MARIO_INSTRUCTIONS}
+         {id: 9, name: 'cots-mario', url: '../cots-mario/', width: 1300, height: 975, paddingLeft: 550, cots: true, questions: FTG.Questions.COTS, hasRest: false, params: {profile: 'B3'}, instructions: this.MARIO_INSTRUCTIONS},
+
+         // Mario C
+         {id: 10, name: 'cots-mario', url: '../cots-mario/', width: 1300, height: 975, paddingLeft: 550, cots: true, questions: FTG.Questions.COTS, hasRest: false, params: {profile: 'C1'}, instructions: this.MARIO_INSTRUCTIONS}
      ];
 
      this.mCOTSSorting = [
@@ -46,8 +49,9 @@
 
      this.mGamesSorting = [
         /* T0 */ [4, 5, 6].concat(this.mCOTSSorting),
-        /* T1 */ [7, 8, 9].concat(this.mCOTSSorting),
-        /* T2 */ [4, 5, 6, 7, 8, 9].concat(this.mCOTSSorting),
+        /* T1 */ [8, 9].concat(this.mCOTSSorting),
+        /* T2 */ [10].concat(this.mCOTSSorting),
+        /* T3 */ [4, 5, 6, 7, 8, 9, 10].concat(this.mCOTSSorting),
         /* 0 */ [1, 2, 3].concat(this.mCOTSSorting),
         /* 1 */ [1, 3, 2].concat(this.mCOTSSorting),
         /* 2 */ [2, 1, 3].concat(this.mCOTSSorting),
