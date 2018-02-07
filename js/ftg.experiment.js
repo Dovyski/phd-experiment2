@@ -45,13 +45,11 @@
      ];
 
      this.mCOTSSorting = [
+         4, 5, 6, 7, 8, 9, 10
      ];
 
      this.mGamesSorting = [
-        /* T0 */ [1, 2, 3, 4, 5, 6].concat(this.mCOTSSorting),
-        /* T1 */ [8, 9].concat(this.mCOTSSorting),
-        /* T2 */ [10].concat(this.mCOTSSorting),
-        /* T3 */ [4, 5, 6, 7, 8, 9, 10].concat(this.mCOTSSorting),
+        /* T0 */ [].concat(this.mCOTSSorting),
         /* 0 */ [1, 2, 3].concat(this.mCOTSSorting),
         /* 1 */ [1, 3, 2].concat(this.mCOTSSorting),
         /* 2 */ [2, 1, 3].concat(this.mCOTSSorting),
