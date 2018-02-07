@@ -2,11 +2,12 @@
  * A set of question to be used after a COTS game in the experiment.
  */
 
- var FTG = FTG || {};
+var FTG = FTG || {};
 
- FTG.Questions = FTG.Questions || {};
+FTG.Questions = FTG.Questions || {};
 
- FTG.Questions.COTS = [
+FTG.Questions.COTS_INTRO = 'Regarding the game level you just played, please answer the questions below.';
+FTG.Questions.COTS = [
      {
          text: 'How <em>bored</em> did you feel while playing this game level?',
          options: [
@@ -27,4 +28,4 @@
              {value: 5, label: '(Extremely stressed)'}
          ]
      }
- ];
+];
