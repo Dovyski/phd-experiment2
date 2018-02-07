@@ -28,6 +28,11 @@ body {
     width: 370px;
 }
 
+#instructions small {
+    font-size: 0.8em;
+    opacity: 0.7;
+}
+
 #instructions p.head {
     width: 100%;
     text-align: center;
