@@ -59,7 +59,7 @@ body {
 }
 
 #info iframe {
-    overflow: none;
+    overflow: hidden;
     border: none;
 }
 
