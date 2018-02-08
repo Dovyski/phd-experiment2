@@ -49,7 +49,6 @@
      ];
 
      this.mGamesSorting = [
-        /* T0 */ [].concat(this.mCOTSSorting),
         /* 0 */ [1, 2, 3].concat(this.mCOTSSorting),
         /* 1 */ [1, 3, 2].concat(this.mCOTSSorting),
         /* 2 */ [2, 1, 3].concat(this.mCOTSSorting),
