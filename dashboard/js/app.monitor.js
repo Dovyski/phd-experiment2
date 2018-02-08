@@ -63,6 +63,41 @@ APP.Monitor.prototype.prettifyMilestoneString = function(theCurrentStatus) {
     }
 };
 
+APP.Monitor.prototype.getGameNameById = function(theGameId) {
+    var aName = '?', aNames = {
+        1: 'Mushroom',
+        2: 'Tetris',
+        3: 'Platformer',
+        4: 'Mario-A1',
+        5: 'Mario-A2',
+        6: 'Mario-A3',
+        7: 'Mario-B1',
+        8: 'Mario-B1',
+        9: 'Mario-B3',
+        10: 'Mario-C1'
+    };
+
+    if(theGameId in aNames) {
+        aName = aNames[theGameId];
+    }
+
+    return aName;
+};
+
+APP.Monitor.prototype.getGameNamesByIds = function(theGameIds) {
+    var aNames = [];
+
+    if(theGameIds.length == 0) {
+        return '';
+    }
+
+    for(var i = 0; i < theGameIds.length; i++) {
+        aNames.push(this.getGameNameById(theGameIds[i]));
+    }
+
+    return aNames.join(', ');
+};
+
 APP.Monitor.prototype.updateActiveSessionInfo = function(theData) {
     if(!$('#data-table').is(':visible')) {
         $('#data-table').show();
@@ -86,8 +121,13 @@ APP.Monitor.prototype.updateActiveSessionInfo = function(theData) {
     $('#data-table-status').html(this.prettifyMilestoneString(this.mCurrentMilestone));
     $('#data-table-milestone').html(this.mCurrentMilestone);
 
-    $('#data-table-current').html(theData.fk_game > 0 ? theData.fk_game : '<em>none</em>');
-    $('#data-table-played').html(this.mPlayedGames.join(', '));
+    if(this.mCurrentMilestone == 'experiment_rest_start' || theData.fk_game < 0) {
+        $('#data-table-current').html('<em>none</em>');
+    } else {
+        $('#data-table-current').html(this.getGameNameById(theData.fk_game));
+    }
+
+    $('#data-table-played').html(this.getGameNamesByIds(this.mPlayedGames));
     $('#data-table-time').html(this.getTimeSinceBegining(theData.timestamp));
     $('#data-table-log').html('<code>' + JSON.stringify(theData.data) + '</code>');
 }
