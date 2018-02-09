@@ -4,7 +4,9 @@
 */
 
 Enjine.GameTimer = function() {
-    this.FramesPerSecond = 1000 / 30;
+    this.FramesPerSecond = 33;
+    this.FrameDuration = 1.0 / this.FramesPerSecond;
+    this.FrameWaiting = 0;
 	this.LastTime = 0;
     this.IntervalFunc = null;
     this.UpdateObject = null;
@@ -12,22 +14,28 @@ Enjine.GameTimer = function() {
 
 Enjine.GameTimer.prototype = {
     Start: function() {
-        this.LastTime = new Date().getTime();
-        var self = this;
-        this.IntervalFunc = setInterval(function() { self.Tick() }, this.FramesPerSecond);
+        this.LastTime = Date.now();
+        this.IntervalFunc = requestAnimationFrame(this.Tick.bind(this));
     },
-    
+
     Tick: function() {
         if (this.UpdateObject != null) {
-            var newTime = new Date().getTime();
+            var newTime = Date.now();
     		var delta = (newTime - this.LastTime) / 1000;
     		this.LastTime = newTime;
-            
-            this.UpdateObject.Update(delta);
+            this.FrameWaiting += delta;
+
+            // Is it time to update according to fixed FPS?
+            if(this.FrameWaiting >= this.FrameDuration) {
+                this.UpdateObject.Update(delta);
+                this.FrameWaiting = 0;
+            }
         }
+
+        this.IntervalFunc = requestAnimationFrame(this.Tick.bind(this));
     },
-    
+
     Stop: function() {
-        clearInterval(this.IntervalFunc);
+        cancelAnimationFrame(this.IntervalFunc);
     }
 };
