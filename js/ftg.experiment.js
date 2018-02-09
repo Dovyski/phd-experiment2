@@ -26,22 +26,22 @@
 
      this.mGames = [
          // Calibration games
-         {id: 1, name: 'card-flipper', url: '../card-flipper/', width: 1300, height: 975, paddingLeft: 300, cots: false, questions: FTG.Questions.Game, hasRest: true},
-         {id: 2, name: 'tetris', url: '../tetris/', width: 640, height: 960, paddingLeft: 600, cots: false, questions: FTG.Questions.Game, hasRest: true},
-         {id: 3, name: 'platformer', url: '../platformer/', width: 1300, height: 975, paddingLeft: 300, cots: false, questions: FTG.Questions.Game, hasRest: true},
+         {id: 1, name: 'card-flipper', url: '../card-flipper/', width: 1200, height: 900, paddingLeft: 200, cots: false, questions: FTG.Questions.Game, hasRest: true},
+         {id: 2, name: 'tetris', url: '../tetris/', width: 600, height: 900, paddingLeft: 500, cots: false, questions: FTG.Questions.Game, hasRest: true},
+         {id: 3, name: 'platformer', url: '../platformer/', width: 1200, height: 900, paddingLeft: 200, cots: false, questions: FTG.Questions.Game, hasRest: true},
 
          // Mario A
-         {id: 4, name: 'cots-mario', url: '../cots-mario/', width: 1300, height: 975, paddingLeft: 480, cots: true, questions: FTG.Questions.COTS, questionsIntro: FTG.Questions.COTS_INTRO, hasRest: false, params: {profile: 'A1'}, instructions: this.MARIO_INSTRUCTIONS},
-         {id: 5, name: 'cots-mario', url: '../cots-mario/', width: 1300, height: 975, paddingLeft: 480, cots: true, questions: FTG.Questions.COTS, questionsIntro: FTG.Questions.COTS_INTRO, hasRest: false, params: {profile: 'A2'}, instructions: this.MARIO_INSTRUCTIONS},
-         {id: 6, name: 'cots-mario', url: '../cots-mario/', width: 1300, height: 975, paddingLeft: 480, cots: true, questions: FTG.Questions.COTS, questionsIntro: FTG.Questions.COTS_INTRO, hasRest: false, params: {profile: 'A3'}, instructions: this.MARIO_INSTRUCTIONS},
+         {id: 4, name: 'cots-mario', url: '../cots-mario/', width: 1000, height: 800, paddingLeft: 480, cots: true, questions: FTG.Questions.COTS, questionsIntro: FTG.Questions.COTS_INTRO, hasRest: false, params: {profile: 'A1'}, instructions: this.MARIO_INSTRUCTIONS},
+         {id: 5, name: 'cots-mario', url: '../cots-mario/', width: 1000, height: 800, paddingLeft: 480, cots: true, questions: FTG.Questions.COTS, questionsIntro: FTG.Questions.COTS_INTRO, hasRest: false, params: {profile: 'A2'}, instructions: this.MARIO_INSTRUCTIONS},
+         {id: 6, name: 'cots-mario', url: '../cots-mario/', width: 1000, height: 800, paddingLeft: 480, cots: true, questions: FTG.Questions.COTS, questionsIntro: FTG.Questions.COTS_INTRO, hasRest: false, params: {profile: 'A3'}, instructions: this.MARIO_INSTRUCTIONS},
 
          // Mario B
-         {id: 7, name: 'cots-mario', url: '../cots-mario/', width: 1300, height: 975, paddingLeft: 480, cots: true, questions: FTG.Questions.COTS, questionsIntro: FTG.Questions.COTS_INTRO, hasRest: false, params: {profile: 'B1'}, instructions: this.MARIO_INSTRUCTIONS},
-         {id: 8, name: 'cots-mario', url: '../cots-mario/', width: 1300, height: 975, paddingLeft: 480, cots: true, questions: FTG.Questions.COTS, questionsIntro: FTG.Questions.COTS_INTRO, hasRest: false, params: {profile: 'B2'}, instructions: this.MARIO_INSTRUCTIONS},
-         {id: 9, name: 'cots-mario', url: '../cots-mario/', width: 1300, height: 975, paddingLeft: 480, cots: true, questions: FTG.Questions.COTS, questionsIntro: FTG.Questions.COTS_INTRO, hasRest: false, params: {profile: 'B3'}, instructions: this.MARIO_INSTRUCTIONS},
+         {id: 7, name: 'cots-mario', url: '../cots-mario/', width: 1000, height: 800, paddingLeft: 480, cots: true, questions: FTG.Questions.COTS, questionsIntro: FTG.Questions.COTS_INTRO, hasRest: false, params: {profile: 'B1'}, instructions: this.MARIO_INSTRUCTIONS},
+         {id: 8, name: 'cots-mario', url: '../cots-mario/', width: 1000, height: 800, paddingLeft: 480, cots: true, questions: FTG.Questions.COTS, questionsIntro: FTG.Questions.COTS_INTRO, hasRest: false, params: {profile: 'B2'}, instructions: this.MARIO_INSTRUCTIONS},
+         {id: 9, name: 'cots-mario', url: '../cots-mario/', width: 1000, height: 800, paddingLeft: 480, cots: true, questions: FTG.Questions.COTS, questionsIntro: FTG.Questions.COTS_INTRO, hasRest: false, params: {profile: 'B3'}, instructions: this.MARIO_INSTRUCTIONS},
 
          // Mario C
-         {id: 10, name: 'cots-mario', url: '../cots-mario/', width: 1300, height: 975, paddingLeft: 480, cots: true, questions: FTG.Questions.COTS, questionsIntro: FTG.Questions.COTS_INTRO, hasRest: false, params: {profile: 'C1'}, instructions: this.MARIO_INSTRUCTIONS}
+         {id: 10, name: 'cots-mario', url: '../cots-mario/', width: 1200, height: 800, paddingLeft: 480, cots: true, questions: FTG.Questions.COTS, questionsIntro: FTG.Questions.COTS_INTRO, hasRest: false, params: {profile: 'C1'}, instructions: this.MARIO_INSTRUCTIONS}
      ];
 
      this.mCOTSSorting = [
@@ -162,7 +162,7 @@ FTG.Experiment.prototype.greetings = function() {
         aSelf.mData.logMilestone(aSelf.mUid, -1, 'experiment_hr_start');
         aSelf.playBipSound();
         $(this).hide();
-        
+
         // try to protect the experiment against unintended user actions
         // that will terminate the experiment, e.g. page refresh
         aSelf.preventAbruptSessionEnd();
