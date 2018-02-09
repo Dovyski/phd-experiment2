@@ -91,10 +91,6 @@ FTG.Experiment.prototype.init = function() {
 
     console.log('[Experiment] Init with user uid:' + this.mUid + ', rest: ' + this.mRestTime + 'ms, sorting: ' + this.mSorting + ' [' + this.mGamesSorting[this.mSorting].join(',') + ']');
 
-    // try to protect the experiment against unintended user actions
-    // that will terminate the experiment, e.g. page refresh
-    this.preventAbruptSessionEnd();
-
     if(this.mUid == null) {
         alert('User id not informed! Append ?user=DDD to the URL.');
     } else {
@@ -166,6 +162,10 @@ FTG.Experiment.prototype.greetings = function() {
         aSelf.mData.logMilestone(aSelf.mUid, -1, 'experiment_hr_start');
         aSelf.playBipSound();
         $(this).hide();
+        
+        // try to protect the experiment against unintended user actions
+        // that will terminate the experiment, e.g. page refresh
+        aSelf.preventAbruptSessionEnd();
     });
 
     // Play the bip sound to indicate everything is set.
