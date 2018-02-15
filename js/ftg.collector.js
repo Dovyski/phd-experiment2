@@ -10,7 +10,7 @@ FTG.Collector = function(theDebug) {
 	var COLLECT_INTERVAL 	= 500; 	// time, in milliseconds, to wait between logging entries.
 	var SEND_INTERVAL 		= 5000;	// time, in milliseconds, to wait until data is send to the server
 
-	var mDebug = theDebug;
+	var mDebug = theDebug == 'true' || theDebug == '1' ? true : false;
 	var mLastTimeCollected = 0;
 	var mLastTimeSent = 0;
 	var mServerURL = '../backend/';

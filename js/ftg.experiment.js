@@ -72,7 +72,7 @@ FTG.Experiment.prototype.init = function() {
 
     this.mCurrentGame = -1; // TODO: get from URL.
     this.mRestTime = FTG.Utils.getURLParamByName('rest') || this.mRestTime;
-    this.mDebug = FTG.Utils.getURLParamByName('debug') || false;
+    this.mDebug = FTG.Utils.getURLParamByName('debug') == 'true' || FTG.Utils.getURLParamByName('debug') == '1';
     this.mBipSound = document.getElementById('bip');
     this.mTanSound = document.getElementById('tan');
     this.mCalmSound = document.getElementById('calm');
