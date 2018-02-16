@@ -589,7 +589,7 @@ Mario.LevelState.prototype.Bump = function(x, y, canBreakBricks) {
     if ((Mario.Tile.Behaviors[block & 0xff] & Mario.Tile.Breakable) > 0) {
         this.BumpInto(x, y - 1);
         if (canBreakBricks) {
-            Enjine.Resources.PlaySound("breakblock");
+            Enjine.Resources.PlaySound("breakblock", false, 0.4);
             Mario.MarioCharacter.AddScore(1);
             GlobalInfo.data.log({a: 'mario_bump', t: 'breakblock'}, true);
             this.Level.SetBlock(x, y, 0);
