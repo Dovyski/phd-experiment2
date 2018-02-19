@@ -43,7 +43,7 @@
          ]
      },
      {
-         text: 'How experienced do you believe you are with puzzle games (e.g. mushroom game you just played)?',
+         text: 'How experienced do you believe you are with puzzle games (e.g. feed the monster game you played)?',
          hide: true,
          options: [
              {value: 1, label: 'No experience'},
@@ -53,7 +53,7 @@
          ]
      },
      {
-         text: 'How experienced do you believe you are with platform games (e.g. jump/slide game you just played)?',
+         text: 'How experienced do you believe you are with platform games (e.g. jump/slide game you played)?',
          hide: true,
          options: [
              {value: 1, label: 'No experience'},
@@ -63,7 +63,7 @@
          ]
      },
      {
-         text: 'How experienced do you believe you are with the game Tetris (e.g. game with squared blocks you just played)?',
+         text: 'How experienced do you believe you are with the game Tetris (e.g. game with squared blocks you played)?',
          hide: true,
          options: [
              {value: 1, label: 'No experience'},
