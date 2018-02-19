@@ -237,7 +237,7 @@ FTG.Experiment.prototype.proceedAfterQuestionnaireAnswered = function() {
 FTG.Experiment.prototype.concludeCurrentQuestionnaire = function(theGameId, theData) {
     var aSelf = this;
 
-    console.log('[Experiment] Sending questionnaire data (game: ' + theGameId + ')', theData);
+    console.log('[Experiment] Sending questionnaire data (game: ' + theGameId + ')', JSON.stringify(theData));
 
     $.ajax({
         url: '../backend/',
