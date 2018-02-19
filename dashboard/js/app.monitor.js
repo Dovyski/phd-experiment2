@@ -73,7 +73,7 @@ APP.Monitor.prototype.getGameNameById = function(theGameId) {
         5: 'Mario-A2',
         6: 'Mario-A3',
         7: 'Mario-B1',
-        8: 'Mario-B1',
+        8: 'Mario-B2',
         9: 'Mario-B3',
         10: 'Mario-C1'
     };
