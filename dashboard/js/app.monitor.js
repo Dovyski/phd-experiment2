@@ -8,6 +8,7 @@ APP.Monitor = function(theContainerId, theApp) {
     this.mLastReceivedInfo = null;
     this.mPlayedGames = [];
     this.mCurrentMilestone = '?';
+    this.mTimeAppStart = Date.now();
 };
 
 APP.Monitor.prototype.run = function() {
@@ -127,12 +128,37 @@ APP.Monitor.prototype.updateActiveSessionInfo = function(theData) {
         $('#data-table-current').html(this.getGameNameById(theData.fk_game));
     }
 
+    var aDurationSeconds = this.getTimeSinceBegining(theData.timestamp);
+
     $('#data-table-played').html(this.getGameNamesByIds(this.mPlayedGames));
-    $('#data-table-time').html(this.getTimeSinceBegining(theData.timestamp));
+    $('#data-table-time').html(this.formatSeconds(aDurationSeconds));
     $('#data-table-log').html('<code>' + JSON.stringify(theData.data) + '</code>');
 }
 
+// Source: https://stackoverflow.com/a/6313008/29827
+APP.Monitor.prototype.formatSeconds = function (theAmountSeconds) {
+    var aSecNum = parseInt(theAmountSeconds + '', 10); // don't forget the second param
+    var aHours   = Math.floor(aSecNum / 3600);
+    var aMinutes = Math.floor((aSecNum - (aHours * 3600)) / 60);
+    var aSeconds = aSecNum - (aHours * 3600) - (aMinutes * 60);
+
+    if (aHours   < 10) { aHours   = '0' + aHours;   }
+    if (aMinutes < 10) { aMinutes = '0' + aMinutes; }
+    if (aSeconds < 10) { aSeconds = '0' + aSeconds; }
+
+    return aHours + ':' + aMinutes + ':' + aSeconds;
+}
+
+APP.Monitor.prototype.updateAppClock = function() {
+    var aTimeDiff = Date.now() - this.mTimeAppStart;
+    var aFormattedTime = this.formatSeconds(aTimeDiff / 1000);
+
+    $('#app-clock').html(aFormattedTime);
+};
+
 APP.Monitor.prototype.update = function(theMonitor) {
+    theMonitor.updateAppClock();
+
     if(theMonitor.mSession == null) {
         return;
     }
@@ -155,10 +181,7 @@ APP.Monitor.prototype.update = function(theMonitor) {
 
 APP.Monitor.prototype.getTimeSinceBegining = function(theCurrentTimestamp) {
     var aTime = theCurrentTimestamp - this.mSession.timestamp;
-    var aMinutes = Math.floor(aTime / 60);
-    var aSeconds = aTime - aMinutes * 60;
-
-    return (aMinutes < 10 ? '0' + aMinutes : aMinutes) + ':' + (aSeconds < 10 ? '0' + aSeconds : aSeconds);
+    return aTime;
 };
 
 APP.Monitor.prototype.buildLayoutStructure = function() {
@@ -178,7 +201,7 @@ APP.Monitor.prototype.buildLayoutStructure = function() {
         '<div class="col-md-12">' +
             '<div class="x_panel">' +
                 '<div class="x_title">' +
-                    '<h2>Current active session</h2> <i class="fa fa-refresh fa-spin" style="margin-left: 10px; margin-top: 8px;"></i>' +
+                    '<h2>Current active session</h2> <span id="app-clock">00:00:00</span><i class="fa fa-refresh fa-spin" style="margin-left: 10px; margin-top: 8px;"></i>' +
                     '<div class="clearfix"></div>' +
                 '</div>' +
                 '<div class="x_content">' +
