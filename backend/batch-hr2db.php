@@ -37,6 +37,7 @@ if (php_sapi_name() != 'cli') {
 
 $aOptions = array(
     "data-dir:",
+    "test",
     "help"
 );
 
@@ -52,6 +53,9 @@ if(isset($aArgs['h']) || isset($aArgs['help']) || $argc == 1) {
      echo "                      the subjects id. E.g. Assuming data dir is /data/,\n";
      echo "                      the script will process dirs /data/400/ as subject 400,\n";
      echo "                      /data/401/ as subject 401, and so on.\n";
+     echo " --test               Run in test mode. If present, the script will analyze\n";
+     echo "                      the data dir and output the commands to required to insert\n";
+     echo "                      the HR data, however nothing is actually inserted.\n";
      echo " --help, -h           Show this help.\n";
      echo "\n";
      exit(1);
@@ -59,6 +63,7 @@ if(isset($aArgs['h']) || isset($aArgs['help']) || $argc == 1) {
 
 $aPathToInsertScript = dirname(__FILE__) . DIRECTORY_SEPARATOR . 'hr2db.php';
 $aDataFolder = isset($aArgs['data-dir']) ? $aArgs['data-dir'] : '';
+$aTestMode = isset($aArgs['test']);
 
 if(empty($aDataFolder)) {
   echo 'Empty or invalid data dir provided: ' . $aDataFolder . "\n";
@@ -120,12 +125,22 @@ if(count($aCmds) > 0) {
         $aLogPath = $aSubjectDir . $aSubjectId . '-hr2db.log';
 
         echo ' subject ' . $aSubjectId . ': ';
-        // TODO: call runAndExitIfFailed($aSubjectCmd, $aLogPath);
-        echo 'DONE' . "\n";
+
+        if($aTestMode) {
+            echo $aSubjectCmd . "\n";
+        } else {
+            // TODO: call runAndExitIfFailed($aSubjectCmd, $aLogPath);
+            echo 'DONE' . "\n";
+        }
     }
 
     echo "\n";
-    echo 'HR data inserted successfully!' . "\n";
+
+    if($aTestMode) {
+        echo 'This is a test (param --test was supplied). Nothing was actually ran/inserted.' . "\n";
+    } else {
+        echo 'HR data inserted successfully!' . "\n";
+    }
 
 } else {
     echo 'Warning: all subjects analyzed have HR data already. There is nothing to insert here.' . "\n";
