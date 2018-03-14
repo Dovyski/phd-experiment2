@@ -80,7 +80,14 @@ foreach($aSubjectDirectories as $aSubjectDir) {
         exit(5);
     }
 
-    if(subjectHasHRData($aDb, $aSubjectId)) {
+    $aSubjectData = getSubjectData($aDb, $aSubjectId);
+
+    if(!isset($aSubjectData['games']) || count($aSubjectData['games']) == 0) {
+        echo 'Subject has no data in the database. Is "'.$aSubjectId.'" a valid subject id?' . "\n";
+        exit(6);
+    }
+
+    if(subjectHasHRData($aSubjectData)) {
         echo 'IGNORED (already has HR data)' . "\n";
     } else {
         $aImportCmd = 'php "'.$aPathToInsertScript.'" ' . $aSubjectId . ' "' . $aCSVFilePath. '"';
@@ -120,7 +127,7 @@ if(count($aCmds) > 0) {
 
 } else {
     echo 'Warning: all subjects analyzed have HR data already. There is nothing to insert here.' . "\n";
-    exit(6);
+    exit(7);
 }
 
 ?>

@@ -38,8 +38,17 @@ function findSubjectFolders($theDataDirPath) {
     return $aDirs;
 }
 
-function subjectHasHRData($thePDO, $theSubjectId) {
-    // TODO: implement this function by calling getSubjectData($thePDO, $theSubjectId);
+function subjectHasHRData($theSubjectData) {
+    if(count($theSubjectData) == 0 || !isset($theSubjectData['games'])) {
+        return false;
+    }
+
+    foreach($theSubjectData['games'] as $aKey => $aGame) {
+        if(isset($aGame['hr']) && count($aGame['hr']) > 0) {
+            return true;
+        }
+    }
+
     return false;
 }
 
