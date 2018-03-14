@@ -38,20 +38,6 @@ function findSubjectFolders($theDataDirPath) {
     return $aDirs;
 }
 
-function subjectHasHRData($theSubjectData) {
-    if(count($theSubjectData) == 0 || !isset($theSubjectData['games'])) {
-        return false;
-    }
-
-    foreach($theSubjectData['games'] as $aKey => $aGame) {
-        if(isset($aGame['hr']) && count($aGame['hr']) > 0) {
-            return true;
-        }
-    }
-
-    return false;
-}
-
 function assertRunningAsCmdScript($theExitError = 10) {
     if (php_sapi_name() != 'cli') {
         echo 'This script should be run from the command line.';

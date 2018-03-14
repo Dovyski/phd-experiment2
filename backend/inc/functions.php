@@ -353,4 +353,18 @@ function writeBatFileBasedOnGroundData($theFilePath, $theData, $theSubjectId, $t
     fclose($aFile);
 }
 
+function subjectHasHRData($theSubjectData) {
+    if(count($theSubjectData) == 0 || !isset($theSubjectData['games'])) {
+        return false;
+    }
+
+    foreach($theSubjectData['games'] as $aKey => $aGame) {
+        if(isset($aGame['hr']) && count($aGame['hr']) > 0) {
+            return true;
+        }
+    }
+
+    return false;
+}
+
 ?>
