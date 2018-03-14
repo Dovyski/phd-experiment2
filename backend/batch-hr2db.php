@@ -30,8 +30,10 @@ if(isset($aArgs['h']) || isset($aArgs['help']) || $argc == 1) {
      echo "                      the subjects id. E.g. Assuming data dir is /data/,\n";
      echo "                      the script will process dirs /data/400/ as subject 400,\n";
      echo "                      /data/401/ as subject 401, and so on.\n";
-     echo " --data-file=<path>   Path to the file containing the SQLite database which\n";
-     echo "                      has the data for all subject sessions.\n";
+     echo " --data-file=<path>   Path to the file containing the SQLite database that\n";
+     echo "                      has the data for all subject sessions. If nothing is\n";
+     echo "                      provided, the root of the data dir is searched for\n";
+     echo "                      a database file.\n";
      echo " --test               Run in test mode. If present, the script will analyze\n";
      echo "                      the data dir and output the commands to required to insert\n";
      echo "                      the HR data, however nothing is actually inserted.\n";
@@ -51,6 +53,10 @@ if(empty($aDataFolder)) {
 }
 
 $aDataFolder .= @$aDataFolder[strlen($aDataFolder) - 1] != DIRECTORY_SEPARATOR ? DIRECTORY_SEPARATOR : '';
+
+if(empty($aDataFile)) {
+    $aDataFile = $aDataFolder . 'database.sqlite';
+}
 
 if(!file_exists($aDataFolder)) {
     echo 'Unable to access data dir: ' . $aDataFolder . "\n";
