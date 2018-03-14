@@ -7,33 +7,9 @@
  */
 
 require_once(dirname(__FILE__) . '/config.php');
+require_once(dirname(__FILE__) . '/inc/cmd-functions.php');
 
-function getHRCSVFilePath($theSubjectFolderPath) {
-    $aPath = null;
-    $aFiles = glob($theSubjectFolderPath . 'Treadmill_*.csv');
-
-    if(count($aFiles) == 1) {
-        $aPath = $aFiles[0];
-    }
-
-    return $aPath;
-}
-
-function findSubjectFolders($theDataDirPath) {
-    $aDirs = glob($theDataDirPath . '*', GLOB_ONLYDIR);
-    return $aDirs;
-}
-
-function subjectHasHRData($thePDO, $theSubjectId) {
-    // TODO: implement this function
-    return false;
-}
-
-
-if (php_sapi_name() != 'cli') {
-    echo 'This script should be run from the command line.';
-    exit();
-}
+assertRunningAsCmdScript();
 
 $aOptions = array(
     "data-dir:",
