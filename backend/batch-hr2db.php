@@ -13,6 +13,7 @@ assertRunningAsCmdScript();
 
 $aOptions = array(
     "data-dir:",
+    "data-file:",
     "test",
     "help"
 );
@@ -29,6 +30,8 @@ if(isset($aArgs['h']) || isset($aArgs['help']) || $argc == 1) {
      echo "                      the subjects id. E.g. Assuming data dir is /data/,\n";
      echo "                      the script will process dirs /data/400/ as subject 400,\n";
      echo "                      /data/401/ as subject 401, and so on.\n";
+     echo " --data-file=<path>   Path to the file containing the SQLite database which\n";
+     echo "                      has the data for all subject sessions.\n";
      echo " --test               Run in test mode. If present, the script will analyze\n";
      echo "                      the data dir and output the commands to required to insert\n";
      echo "                      the HR data, however nothing is actually inserted.\n";
@@ -39,6 +42,7 @@ if(isset($aArgs['h']) || isset($aArgs['help']) || $argc == 1) {
 
 $aPathToInsertScript = dirname(__FILE__) . DIRECTORY_SEPARATOR . 'hr2db.php';
 $aDataFolder = isset($aArgs['data-dir']) ? $aArgs['data-dir'] : '';
+$aDataFile = isset($aArgs['data-file']) ? $aArgs['data-file'] : '';
 $aTestMode = isset($aArgs['test']);
 
 if(empty($aDataFolder)) {
@@ -53,8 +57,17 @@ if(!file_exists($aDataFolder)) {
     exit(3);
 }
 
+if(!file_exists($aDataFile)) {
+    echo 'Unable to access data file: ' . $aDataFile . "\n";
+    exit(4);
+}
+
+echo 'General info:' . "\n";
+echo ' data dir: ' . $aDataFolder . "\n";
+echo ' data file: ' . $aDataFile . "\n";
+
 // Get ready to use the database
-$aDb = new PDO('sqlite:' . DB_FILE);
+$aDb = new PDO('sqlite:' . $aDataFile);
 $aDb->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 $aCmds = array();
@@ -62,10 +75,11 @@ $aSubjectDirectories = findSubjectFolders($aDataFolder);
 
 if(count($aSubjectDirectories) == 0) {
     echo 'No directories found within the data dir ('.$aDataFolder.'). Did you use a valid --data-dir?' . "\n";
-    exit(4);
+    exit(5);
 }
 
-echo 'Analyzing data dir "' . $aDataFolder .'"' . "\n";
+echo "\n";
+echo 'Analyzing data dir' . "\n";
 
 foreach($aSubjectDirectories as $aSubjectDir) {
     $aSubjectId = trim(basename($aSubjectDir));
@@ -77,14 +91,14 @@ foreach($aSubjectDirectories as $aSubjectDir) {
 
     if(empty($aCSVFilePath) || !file_exists($aCSVFilePath)) {
         echo 'No CSV file or multiple CSV files found in directory "' . $aSubjectDir . '".' . "\n";
-        exit(5);
+        exit(6);
     }
 
     $aSubjectData = getSubjectData($aDb, $aSubjectId);
 
     if(!isset($aSubjectData['games']) || count($aSubjectData['games']) == 0) {
         echo 'Subject has no data in the database. Is "'.$aSubjectId.'" a valid subject id?' . "\n";
-        exit(6);
+        exit(7);
     }
 
     if(subjectHasHRData($aSubjectData)) {
@@ -127,7 +141,7 @@ if(count($aCmds) > 0) {
 
 } else {
     echo 'Warning: all subjects analyzed have HR data already. There is nothing to insert here.' . "\n";
-    exit(7);
+    exit(8);
 }
 
 ?>
