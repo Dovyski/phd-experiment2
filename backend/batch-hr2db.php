@@ -110,7 +110,7 @@ foreach($aSubjectDirectories as $aSubjectDir) {
     if(subjectHasHRData($aSubjectData)) {
         echo 'IGNORED (already has HR data)' . "\n";
     } else {
-        $aImportCmd = 'php "'.$aPathToInsertScript.'" ' . $aSubjectId . ' "' . $aCSVFilePath. '"';
+        $aImportCmd = 'php "'.$aPathToInsertScript.'" ' . $aSubjectId . ' "' . $aCSVFilePath. '" "' . $aDataFile. '"';
         $aCmds[$aSubjectId] = array('dir' => $aSubjectDir, 'cmd' => $aImportCmd);
         echo 'OK' . "\n";
     }
@@ -132,7 +132,7 @@ if(count($aCmds) > 0) {
         if($aTestMode) {
             echo $aSubjectCmd . "\n";
         } else {
-            // TODO: call runAndExitIfFailed($aSubjectCmd, $aLogPath);
+            runAndExitIfFailed($aSubjectCmd, $aLogPath);
             echo 'DONE' . "\n";
         }
     }
