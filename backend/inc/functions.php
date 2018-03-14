@@ -75,7 +75,7 @@ function collectGameStats($theSubjectRawGameData, $theGames) {
                             $aStats['games'][] = array(
                                 'id' => $aRow['fk_game'],
                                 'name'=> $theGames[$aRow['fk_game']],
-                                'hr' => sanitizeHRValues($aHREntries, $theGames[$aRow['fk_game']]),
+                                'hr' => $aHREntries,
                                 'actions' => $aActionEntries,
                                 'start' => $aTimeStarted,
                                 'end' => (int)($aItem->t / 1000.0)
@@ -93,7 +93,7 @@ function collectGameStats($theSubjectRawGameData, $theGames) {
                         case 'experiment_game_start':
                             if($aInRest) {
                                 $aStats['rests'][] = array(
-                                    'hr' => sanitizeHRValues($aHREntries, 'Rest of a Subject'),
+                                    'hr' => $aHREntries,
                                     'start' => $aTimeStarted,
                                     'end' => $aRow['timestamp']
                                 );
@@ -120,7 +120,7 @@ function collectGameStats($theSubjectRawGameData, $theGames) {
 
                                 $aActionEntries[] = array(
                                     'action' => $aEntry->a,
-                                    'value' => getInGameActionValueFromLabel($aEntry->a),
+                                    'value' => $aEntry->a, // TODO: get some sort of value here
                                     'timestamp' => $aItem->t
                                 );
                             }
@@ -248,21 +248,6 @@ function getGameLabelByTimestamp($theSubjectData, $theTimestamp) {
     return $aRet;
 }
 
-// Checks for wrong values, such as zero, one-value spikes, etc.
-function sanitizeHRValues($theValues, $theWhere = '') {
-    $aRet = array();
-
-    foreach($theValues as $aHR) {
-        if($aHR <= 0 || $aHR == '') {
-            echo '  Warning: suspicious HR value ' . $aHR . " removed from set " . $theWhere . ".\n";
-        } else {
-            $aRet[] = $aHR;
-        }
-    }
-
-    return $aRet;
-}
-
 function calculateMeans($theValues, $theGroupingAmount = 15) {
     $aRet = array();
     $aSumAllValues = 0;
@@ -295,7 +280,7 @@ function calculateMeans($theValues, $theGroupingAmount = 15) {
 function crunchNumbers($theSubjectData, $theGroupingAmount = 15) {
     foreach($theSubjectData['games'] as $aKey => $aGame) {
         echo 'Analyzing game ' . $aGame['name'] . "\n";
-        $aMeans = calculateMeans(sanitizeHRValues($aGame['hr']), $theGroupingAmount);
+        $aMeans = calculateMeans($aGame['hr'], $theGroupingAmount);
 
         $theSubjectData['games'][$aKey]['hr-means'] = $aMeans['means'];
         $theSubjectData['games'][$aKey]['hr-mean'] = $aMeans['mean'];
@@ -303,7 +288,7 @@ function crunchNumbers($theSubjectData, $theGroupingAmount = 15) {
 
     foreach($theSubjectData['rests'] as $aKey => $aRest) {
         echo 'Analyzing rest #' . $aKey . "\n";
-        $aMeans = calculateMeans(sanitizeHRValues($aRest['hr']), $theGroupingAmount);
+        $aMeans = calculateMeans($aRest['hr'], $theGroupingAmount);
 
         $theSubjectData['rests'][$aKey]['hr-means'] = $aMeans['means'];
         $theSubjectData['rests'][$aKey]['hr-mean'] = $aMeans['mean'];
@@ -331,6 +316,7 @@ function calculateVariationsFromBaseline($theSubjectData, $theBaseline) {
 
 // Baseline is the average heart rate during the rest periods.
 function calculateBaseline($theSubjectData) {
+    // TODO: account for more rests here
     $aSum = $theSubjectData['rests'][0]['hr-mean'] + $theSubjectData['rests'][1]['hr-mean'];
     $aRet = $aSum / 2.0;
 
